@@ -125,4 +125,4 @@ Read the full [Terms & Conditions](/terms/).
 
 <a href="https://buymeacoffee.com/sweshinfosec" class="bmac-btn" target="_blank">☕ Buy Me a Coffee</a>
 &nbsp;&nbsp;
-<a href="https://patreon.com/sweshinfosec" target="_blank" style="font-family:monospace;font-size:13px;color:#ff9800;">Patreon →</a>
+<a href="https://www.patreon.com/c/SweshInfoSec" target="_blank" style="font-family:monospace;font-size:13px;color:#ff9800;">Patreon →</a>

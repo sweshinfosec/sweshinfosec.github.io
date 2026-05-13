@@ -108,7 +108,7 @@ author_profile: false
     <a class="support-btn bmac" href="https://buymeacoffee.com/sweshinfosec" target="_blank" rel="noopener">
       ☕ Buy Me a Coffee
     </a>
-    <a class="support-btn patreon" href="https://patreon.com/sweshinfosec" target="_blank" rel="noopener">
+    <a class="support-btn patreon" href="https://www.patreon.com/c/SweshInfoSec" target="_blank" rel="noopener">
       ⚑ Patreon
     </a>
   </div>
