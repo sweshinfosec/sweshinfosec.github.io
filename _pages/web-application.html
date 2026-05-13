@@ -6,9 +6,18 @@ title: "Web Application Pentest"
 
 <div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;">// Web Application Walkthroughs</div>
 
+{% assign web_tags = "web-application-pentest,web-application,web,dvwa,xss,reflected-xss,stored-xss,dom-xss,sql-injection,sqli,error-based-sqli,blind-sqli,rce,remote-code-execution,lfi,rfi,file-inclusion,file-upload,command-injection,csrf,ssrf,idor,broken-access-control,bac,open-redirect,cors-misconfiguration,clickjacking,jwt,oauth,session-hijack,path-traversal,xxe,ssti,deserialization,prototype-pollution,flask,django,php,nodejs,werkzeug,apache,nginx,burpsuite,sqlmap,nuclei,gobuster,owasp,owasp-a01,owasp-a02,owasp-a03,owasp-a04,owasp-a05,owasp-a06,owasp-a07,owasp-a08,owasp-a09,owasp-a10" | split: "," %}
+
 {% assign web_posts = "" | split: "," %}
 {% for post in site.posts %}
-  {% if post.tags contains 'web-application-pentest' %}
+  {% assign matched = false %}
+  {% for tag in post.tags %}
+    {% assign tag_lower = tag | downcase | replace: " ", "-" %}
+    {% if web_tags contains tag_lower %}
+      {% assign matched = true %}
+    {% endif %}
+  {% endfor %}
+  {% if matched %}
     {% assign web_posts = web_posts | push: post %}
   {% endif %}
 {% endfor %}

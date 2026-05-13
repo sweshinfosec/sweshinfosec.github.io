@@ -6,9 +6,18 @@ title: "Mobile Pentest"
 
 <div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;">// Mobile Walkthroughs</div>
 
+{% assign mobile_tags = "mobile-pentest,mobile,android,ios,apk,ipa,frida,objection,jadx,apktool,drozer,adb,mobsf,insecure-storage,ssl-pinning,certificate-pinning,deeplink,webview,intent,broadcast-receiver,content-provider,tapjacking,runtime-manipulation,smali,dex,reverse-engineering-mobile" | split: "," %}
+
 {% assign mobile_posts = "" | split: "," %}
 {% for post in site.posts %}
-  {% if post.tags contains 'mobile-pentest' %}
+  {% assign matched = false %}
+  {% for tag in post.tags %}
+    {% assign tag_lower = tag | downcase | replace: " ", "-" %}
+    {% if mobile_tags contains tag_lower %}
+      {% assign matched = true %}
+    {% endif %}
+  {% endfor %}
+  {% if matched %}
     {% assign mobile_posts = mobile_posts | push: post %}
   {% endif %}
 {% endfor %}

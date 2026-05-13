@@ -6,9 +6,18 @@ title: "IoT Pentest"
 
 <div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;">// IoT Walkthroughs</div>
 
+{% assign iot_tags = "iot-pentest,iot,firmware,embedded,hardware,uart,jtag,spi,i2c,binwalk,firmwalker,qemu,openocd,nfc,rfid,zigbee,zwave,bluetooth,ble,mqtt,modbus,can-bus,industrial,plc,scada,rtl-sdr,hackrf,radio,wireless,esp32,arduino,raspberry-pi" | split: "," %}
+
 {% assign iot_posts = "" | split: "," %}
 {% for post in site.posts %}
-  {% if post.tags contains 'iot-pentest' %}
+  {% assign matched = false %}
+  {% for tag in post.tags %}
+    {% assign tag_lower = tag | downcase | replace: " ", "-" %}
+    {% if iot_tags contains tag_lower %}
+      {% assign matched = true %}
+    {% endif %}
+  {% endfor %}
+  {% if matched %}
     {% assign iot_posts = iot_posts | push: post %}
   {% endif %}
 {% endfor %}

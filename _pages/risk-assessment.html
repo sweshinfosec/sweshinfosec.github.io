@@ -1,0 +1,29 @@
+---
+layout: archive
+permalink: /infosec/risk-assessment/
+title: "Risk Assessment"
+---
+
+<div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;">// Risk Assessment</div>
+
+{% assign ra_tags = "risk-assessment,risk,risk-management,cvss,cvss-score,risk-rating,iso-27001,nist,pci-dss,hipaa,gdpr,compliance,audit,gap-analysis,security-controls,control-framework,business-impact,risk-register,risk-treatment" | split: "," %}
+
+{% assign ra_posts = "" | split: "," %}
+{% for post in site.posts %}
+  {% assign matched = false %}
+  {% for tag in post.tags %}
+    {% assign tag_lower = tag | downcase | replace: " ", "-" %}
+    {% if ra_tags contains tag_lower %}
+      {% assign matched = true %}
+    {% endif %}
+  {% endfor %}
+  {% if matched %}
+    {% assign ra_posts = ra_posts | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% if ra_posts.size == 0 %}
+  <p style="color:#555;font-family:'Courier New',monospace;font-size:13px;">No risk assessment posts yet — check back soon.</p>
+{% else %}
+  {% for post in ra_posts %}{% include archive-single.html %}{% endfor %}
+{% endif %}

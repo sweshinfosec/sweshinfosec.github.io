@@ -6,9 +6,18 @@ title: "Cloud Pentest"
 
 <div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;">// Cloud Walkthroughs</div>
 
+{% assign cloud_tags = "cloud-pentest,cloud,aws,azure,gcp,google-cloud,amazon-web-services,s3,ec2,iam,lambda,cloudformation,terraform,kubernetes,k8s,docker,container,pacu,scoutsuite,prowler,cloud-misconfiguration,iam-misconfiguration,privilege-escalation,lateral-movement,cloudtrail,cloud-security" | split: "," %}
+
 {% assign cloud_posts = "" | split: "," %}
 {% for post in site.posts %}
-  {% if post.tags contains 'cloud-pentest' %}
+  {% assign matched = false %}
+  {% for tag in post.tags %}
+    {% assign tag_lower = tag | downcase | replace: " ", "-" %}
+    {% if cloud_tags contains tag_lower %}
+      {% assign matched = true %}
+    {% endif %}
+  {% endfor %}
+  {% if matched %}
     {% assign cloud_posts = cloud_posts | push: post %}
   {% endif %}
 {% endfor %}

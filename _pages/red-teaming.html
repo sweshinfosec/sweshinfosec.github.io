@@ -1,0 +1,29 @@
+---
+layout: archive
+permalink: /infosec/red-teaming/
+title: "Red Teaming"
+---
+
+<div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;">// Red Teaming</div>
+
+{% assign rt_tags = "red-teaming,red-team,adversary-simulation,threat-emulation,ttps,mitre-attack,c2,command-and-control,cobalt-strike,havoc,sliver,metasploit,lateral-movement,privilege-escalation,persistence,evasion,av-evasion,edr-evasion,phishing,spearphishing,social-engineering,active-directory,kerberoasting,pass-the-hash,dcsync,golden-ticket,silver-ticket,bloodhound,mimikatz,impacket,rubeus,powershell,living-off-the-land,lolbas" | split: "," %}
+
+{% assign rt_posts = "" | split: "," %}
+{% for post in site.posts %}
+  {% assign matched = false %}
+  {% for tag in post.tags %}
+    {% assign tag_lower = tag | downcase | replace: " ", "-" %}
+    {% if rt_tags contains tag_lower %}
+      {% assign matched = true %}
+    {% endif %}
+  {% endfor %}
+  {% if matched %}
+    {% assign rt_posts = rt_posts | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% if rt_posts.size == 0 %}
+  <p style="color:#555;font-family:'Courier New',monospace;font-size:13px;">No red teaming posts yet — check back soon.</p>
+{% else %}
+  {% for post in rt_posts %}{% include archive-single.html %}{% endfor %}
+{% endif %}

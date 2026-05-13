@@ -1,0 +1,29 @@
+---
+layout: archive
+permalink: /infosec/forensic-investigation/
+title: "Forensic Investigation"
+---
+
+<div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;">// Forensic Investigation</div>
+
+{% assign fi_tags = "forensic-investigation,forensics,digital-forensics,dfir,incident-response,memory-forensics,disk-forensics,network-forensics,volatility,autopsy,sleuthkit,wireshark,pcap,log-analysis,artifact,timeline,chain-of-custody,malware-forensics,threat-hunting,ioc,indicators-of-compromise,siem,splunk,elastic,evidence,acquisition,image" | split: "," %}
+
+{% assign fi_posts = "" | split: "," %}
+{% for post in site.posts %}
+  {% assign matched = false %}
+  {% for tag in post.tags %}
+    {% assign tag_lower = tag | downcase | replace: " ", "-" %}
+    {% if fi_tags contains tag_lower %}
+      {% assign matched = true %}
+    {% endif %}
+  {% endfor %}
+  {% if matched %}
+    {% assign fi_posts = fi_posts | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% if fi_posts.size == 0 %}
+  <p style="color:#555;font-family:'Courier New',monospace;font-size:13px;">No forensic investigation posts yet — check back soon.</p>
+{% else %}
+  {% for post in fi_posts %}{% include archive-single.html %}{% endfor %}
+{% endif %}
