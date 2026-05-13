@@ -3,32 +3,129 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
 <script>
-/* ── Move // CONNECT (social links) to BOTTOM of sidebar — after PENTEST + PHASES ── */
+/* ── Single listener: build PHASES first, then append CONNECT last ── */
 window.addEventListener('DOMContentLoaded', function () {
-  var sidebar   = document.querySelector('.sidebar');
-  var urlsWrap  = document.querySelector('.author__urls-wrapper');
+  var sidebar  = document.querySelector('.sidebar');
+  var urlsWrap = document.querySelector('.author__urls-wrapper');
+
+  /* ── STEP 1: Build PHASES (page TOC) if headings exist ── */
+  var content = document.querySelector('.page__content');
+  var navList  = document.querySelector('.sidebar .nav__list');
+
+  if (content && navList) {
+    var headings = Array.from(content.querySelectorAll('h2[id], h3[id]'));
+
+    if (headings.length) {
+      function styleLink(a, isSub) {
+        a.style.setProperty('color',           '#9fef00',    'important');
+        a.style.setProperty('background',      'transparent','important');
+        a.style.setProperty('text-decoration', 'none',       'important');
+        a.style.setProperty('display',         'block',      'important');
+        a.style.setProperty('font-family',     "'Courier New', monospace", 'important');
+        a.style.setProperty('font-size',       isSub ? '10px' : '11px', 'important');
+        a.style.setProperty('font-weight',     '700',        'important');
+        a.style.setProperty('padding',         isSub ? '3px 9px 3px 18px' : '4px 9px', 'important');
+        a.style.setProperty('margin-bottom',   '2px',        'important');
+        a.style.setProperty('border-left',     '2px solid transparent', 'important');
+        a.style.setProperty('border-top',      'none',       'important');
+        a.style.setProperty('border-right',    'none',       'important');
+        a.style.setProperty('border-bottom',   'none',       'important');
+        a.style.setProperty('border-radius',   '0',          'important');
+        a.style.setProperty('transition',      'background .12s, color .12s', 'important');
+        if (isSub) a.style.setProperty('color', '#aaaaaa', 'important');
+
+        a.addEventListener('mouseover', function () {
+          this.style.setProperty('background', '#ff0000', 'important');
+          this.style.setProperty('color',      '#000000', 'important');
+        });
+        a.addEventListener('mouseout', function () {
+          this.style.setProperty('background', 'transparent', 'important');
+          var active = this.classList.contains('bo-active');
+          this.style.setProperty('color', active ? '#ff4444' : (isSub ? '#aaaaaa' : '#9fef00'), 'important');
+        });
+      }
+
+      var wrap = document.createElement('div');
+      wrap.id  = 'bo-toc-wrap';
+      wrap.style.marginTop = '4px';
+
+      var titleEl = document.createElement('p');
+      titleEl.className = 'nav__title';
+      wrap.appendChild(titleEl);
+
+      var ul = document.createElement('ul');
+      ul.className = 'nav__items';
+      ul.style.setProperty('list-style', 'none', 'important');
+      ul.style.setProperty('padding',    '0',    'important');
+      ul.style.setProperty('margin',     '0',    'important');
+
+      headings.forEach(function (h) {
+        var clone = h.cloneNode(true);
+        clone.querySelectorAll('a.anchorjs-link, a.header-link, .anchor')
+             .forEach(function (el) { el.remove(); });
+
+        var isSub  = h.tagName === 'H3';
+        var prefix = isSub ? '↳ ' : '';
+        var label  = (prefix + clone.textContent.trim()).replace(/\s+/g, ' ').substring(0, 50);
+
+        var li = document.createElement('li');
+        li.style.setProperty('list-style', 'none', 'important');
+
+        var a = document.createElement('a');
+        a.href        = '#' + h.id;
+        a.textContent = label;
+        styleLink(a, isSub);
+
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+
+      wrap.appendChild(ul);
+      navList.parentNode.appendChild(wrap);
+
+      /* ── Scroll-spy ── */
+      function update () {
+        var scrollY = window.scrollY + 110;
+        var active  = headings[0];
+        headings.forEach(function (h) {
+          if (h.getBoundingClientRect().top + window.scrollY <= scrollY) active = h;
+        });
+        ul.querySelectorAll('a').forEach(function (a) {
+          var isActive = a.getAttribute('href') === '#' + active.id;
+          a.classList.toggle('bo-active', isActive);
+          if (isActive) {
+            a.style.setProperty('background', '#1a0000', 'important');
+            a.style.setProperty('color',      '#ff4444', 'important');
+          } else if (!a.matches(':hover')) {
+            var sub = a.textContent.startsWith('↳');
+            a.style.setProperty('background', 'transparent', 'important');
+            a.style.setProperty('color', sub ? '#aaaaaa' : '#9fef00', 'important');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    }
+  }
+
+  /* ── STEP 2: Move CONNECT to very bottom (always runs after PHASES) ── */
   if (!sidebar || !urlsWrap) return;
 
-  /* Build a wrapper div that goes at the very bottom */
   var connectSection = document.createElement('div');
   connectSection.id  = 'bo-connect-section';
   connectSection.style.setProperty('margin-top', '24px', 'important');
   connectSection.style.setProperty('border-top', '1px solid #1e1e1e', 'important');
   connectSection.style.setProperty('padding-top', '10px', 'important');
 
-  /* // CONNECT heading */
   var hdr = document.createElement('p');
   hdr.className = 'nav__title';
   hdr.textContent = 'Connect';
   connectSection.appendChild(hdr);
 
-  /* Move the existing urls-wrapper into our bottom section */
   connectSection.appendChild(urlsWrap);
-
-  /* Append at bottom of sidebar */
   sidebar.appendChild(connectSection);
 
-  /* Style social links via JS (MM global a{} overrides CSS) */
   urlsWrap.querySelectorAll('li a').forEach(function(a) {
     a.style.setProperty('color', '#9fef00', 'important');
     a.style.setProperty('font-family', "'Courier New', monospace", 'important');
@@ -37,107 +134,5 @@ window.addEventListener('DOMContentLoaded', function () {
     a.addEventListener('mouseover', function() { this.style.setProperty('color', '#ff0000', 'important'); });
     a.addEventListener('mouseout',  function() { this.style.setProperty('color', '#9fef00', 'important'); });
   });
-});
-
-window.addEventListener('DOMContentLoaded', function () {
-  var content = document.querySelector('.page__content');
-  var navList  = document.querySelector('.sidebar .nav__list');
-  if (!content || !navList) return;
-
-  var headings = Array.from(content.querySelectorAll('h2[id], h3[id]'));
-  if (!headings.length) return;
-
-  /* ── Shared link style helper ── */
-  function styleLink(a, isSub) {
-    a.style.setProperty('color',           '#9fef00',    'important');
-    a.style.setProperty('background',      'transparent','important');
-    a.style.setProperty('text-decoration', 'none',       'important');
-    a.style.setProperty('display',         'block',      'important');
-    a.style.setProperty('font-family',     "'Courier New', monospace", 'important');
-    a.style.setProperty('font-size',       isSub ? '10px' : '11px', 'important');
-    a.style.setProperty('font-weight',     '700',        'important');
-    a.style.setProperty('padding',         isSub ? '3px 9px 3px 18px' : '4px 9px', 'important');
-    a.style.setProperty('margin-bottom',   '2px',        'important');
-    a.style.setProperty('border-left',     '2px solid transparent', 'important');
-    a.style.setProperty('border-top',      'none',       'important');
-    a.style.setProperty('border-right',    'none',       'important');
-    a.style.setProperty('border-bottom',   'none',       'important');
-    a.style.setProperty('border-radius',   '0',          'important');
-    a.style.setProperty('transition',      'background .12s, color .12s', 'important');
-    if (isSub) a.style.setProperty('color', '#aaaaaa', 'important');
-
-    a.addEventListener('mouseover', function () {
-      this.style.setProperty('background', '#ff0000', 'important');
-      this.style.setProperty('color',      '#000000', 'important');
-    });
-    a.addEventListener('mouseout', function () {
-      this.style.setProperty('background', 'transparent', 'important');
-      var active = this.classList.contains('bo-active');
-      this.style.setProperty('color', active ? '#ff4444' : (isSub ? '#aaaaaa' : '#9fef00'), 'important');
-    });
-  }
-
-  /* ── Build Phases section ── */
-  var wrap = document.createElement('div');
-  wrap.id  = 'bo-toc-wrap';
-  wrap.style.marginTop = '4px';
-
-  var titleEl = document.createElement('p');
-  titleEl.className = 'nav__title';
-  wrap.appendChild(titleEl);
-
-  var ul = document.createElement('ul');
-  ul.className = 'nav__items';
-  ul.style.setProperty('list-style', 'none', 'important');
-  ul.style.setProperty('padding',    '0',    'important');
-  ul.style.setProperty('margin',     '0',    'important');
-
-  headings.forEach(function (h) {
-    var clone = h.cloneNode(true);
-    clone.querySelectorAll('a.anchorjs-link, a.header-link, .anchor')
-         .forEach(function (el) { el.remove(); });
-
-    var isSub  = h.tagName === 'H3';
-    var prefix = isSub ? '↳ ' : '';
-    var label  = (prefix + clone.textContent.trim()).replace(/\s+/g, ' ').substring(0, 50);
-
-    var li = document.createElement('li');
-    li.style.setProperty('list-style', 'none', 'important');
-
-    var a = document.createElement('a');
-    a.href        = '#' + h.id;
-    a.textContent = label;
-    styleLink(a, isSub);
-
-    li.appendChild(a);
-    ul.appendChild(li);
-  });
-
-  wrap.appendChild(ul);
-  navList.parentNode.appendChild(wrap);
-
-  /* ── Scroll-spy ── */
-  function update () {
-    var scrollY  = window.scrollY + 110;
-    var active   = headings[0];
-    headings.forEach(function (h) {
-      if (h.getBoundingClientRect().top + window.scrollY <= scrollY) active = h;
-    });
-    ul.querySelectorAll('a').forEach(function (a) {
-      var isActive = a.getAttribute('href') === '#' + active.id;
-      a.classList.toggle('bo-active', isActive);
-      if (isActive) {
-        a.style.setProperty('background', '#1a0000', 'important');
-        a.style.setProperty('color',      '#ff4444', 'important');
-      } else if (!a.matches(':hover')) {
-        var sub = a.textContent.startsWith('↳');
-        a.style.setProperty('background', 'transparent', 'important');
-        a.style.setProperty('color', sub ? '#aaaaaa' : '#9fef00', 'important');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', update, { passive: true });
-  update();
 });
 </script>
