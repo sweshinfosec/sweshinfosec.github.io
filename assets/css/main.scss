@@ -723,11 +723,53 @@ a.bo-flink:hover,
   opacity: 1 !important;
 }
 
-/* ── Fix: search box floating to corner on post pages ── */
-/* MM positions .search-content as fixed overlay — hide toggle, keep our strip only */
+/* ── Kill MM's floating search overlay completely ── */
 .search__toggle,
-.search-content { display: none !important; }
-.bo-search-wrap { display: flex !important; }
+.search-content,
+.search-content__form,
+.search-content__header,
+.search-input,
+#search-input { display: none !important; visibility: hidden !important; }
+.bo-search-wrap { display: flex !important; visibility: visible !important; }
+
+/* ── Search strip — sits directly in .masthead__inner-wrap, right-aligned ── */
+.masthead__inner-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.bo-search-wrap {
+  background: transparent !important;
+  border-top: 1px solid #1e1e1e !important;
+  padding: 4px 0 2px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  width: 100% !important;
+}
+
+/* ── Single post — center the title header block ── */
+.layout--single .page__hero,
+.layout--single header.page__header { text-align: center !important; }
+
+.layout--single .page__title {
+  text-align: center !important;
+  width: 100% !important;
+}
+.layout--single .page__lead {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 80% !important;
+}
+.layout--single .page__meta { text-align: center !important; }
+
+/* Center the entire pre-content header area */
+.layout--single .page__inner-wrap > header {
+  text-align: center !important;
+  padding: 20px 0 16px !important;
+  border-bottom: 1px solid #1e1e1e !important;
+  margin-bottom: 20px !important;
+}
 
 /* ── Buy Me a Coffee button ── */
 .bmac-btn {
