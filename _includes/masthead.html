@@ -1,59 +1,98 @@
 {% capture logo_path %}{{ site.logo }}{% endcapture %}
 
+<style>
+/* ── Logo split colours ── */
+.site-title { text-decoration: none !important; font-family: 'Courier New', monospace !important; font-weight: 700 !important; letter-spacing: 1px; }
+.title-swesh { color: #9fef00 !important; }
+.title-info  { color: #cccccc !important; }
+.title-sec   { color: #ff0000 !important; }
+
+/* ── Dropdown nav ── */
+.bo-nav { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
+.bo-nav-item { position: relative; }
+.bo-nav-item > a {
+  color: #eeeeee;
+  text-decoration: none;
+  padding: 0 16px;
+  font-size: 14px;
+  line-height: 60px;
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
+}
+.bo-nav-item > a:hover { color: #9fef00; }
+.bo-caret { font-size: 9px; margin-left: 4px; color: #555; }
+
+.bo-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #111111;
+  border: 1px solid #1e1e1e;
+  border-radius: 6px;
+  min-width: 230px;
+  z-index: 9999;
+  padding: 6px 0;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.7);
+}
+.bo-dropdown li { list-style: none; }
+.bo-dropdown li a {
+  display: block;
+  padding: 9px 18px;
+  color: #aaaaaa;
+  text-decoration: none;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.bo-dropdown li a:hover {
+  color: #9fef00;
+  background: #0d0d0d;
+  border-left-color: #9fef00;
+}
+.bo-nav-item:hover .bo-dropdown,
+.bo-nav-item:focus-within .bo-dropdown { display: block; }
+</style>
+
 <div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
-      <nav id="site-nav" class="greedy-nav">
+      <nav id="site-nav" style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+
         {% unless logo_path == empty %}
           <a class="site-logo" href="{{ '/' | relative_url }}">
             <img src="{{ site.logo | relative_url }}" alt="{{ site.title }}">
           </a>
         {% endunless %}
 
-        <a class="site-title" href="{{ '/' | relative_url }}">
-          <span class="title-swesh">Swesh</span><span class="title-infosec">Info</span><span class="title-sec">Sec</span>
-          {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
+        <a class="site-title" href="{{ '/' | relative_url }}" style="flex-shrink:0; margin-right:auto;">
+          <span class="title-swesh">Swesh</span><span class="title-info">Info</span><span class="title-sec">Sec</span>
         </a>
 
-        <ul class="visible-links">
+        <ul class="bo-nav">
           {%- for link in site.data.navigation.main -%}
-            <li class="masthead__menu-item">
+            <li class="bo-nav-item">
               {%- if link.children -%}
-                <button class="dropdown__toggle" aria-label="Toggle dropdown for {{ link.title }}">
-                  <a href="{{ link.url | relative_url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>
-                    {{ link.title }}
-                  </a>
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown">
+                <a href="{{ link.url | relative_url }}">{{ link.title }}<span class="bo-caret">▾</span></a>
+                <ul class="bo-dropdown">
                   {%- for child in link.children -%}
-                    <li class="dropdown__item">
-                      <a href="{{ child.url | relative_url }}">{{ child.title }}</a>
-                    </li>
+                    <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
                   {%- endfor -%}
                 </ul>
               {%- else -%}
-                <a href="{{ link.url | relative_url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>
-                  {{ link.title }}
-                </a>
+                <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
               {%- endif -%}
             </li>
           {%- endfor -%}
         </ul>
 
-        {% if site.search == true %}
-          <button class="search__toggle" type="button">
-            <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
-            <i class="fas fa-search"></i>
-          </button>
-        {% endif %}
-
         <button class="greedy-nav__toggle hidden" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
+          <span class="visually-hidden">Toggle menu</span>
           <div class="navicon"></div>
         </button>
 
-        <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
   </div>
