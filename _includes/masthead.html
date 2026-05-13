@@ -157,13 +157,15 @@
         </button>
 
       </nav>
+
+      <!-- ── Search strip — inside inner-wrap, right edge aligns with nav ── -->
+      <div class="bo-search-wrap">
+        <form class="bo-strip-search" action="{{ '/search/' | relative_url }}" method="get" role="search">
+          <input class="bo-search-input" type="search" name="q" autocomplete="off" spellcheck="false" placeholder="search…">
+          <button class="bo-search-btn" type="submit">&#128269;</button>
+        </form>
+      </div>
+
     </div>
-  </div>
-  <!-- ── Search bar strip only — compact, left-aligned ── -->
-  <div class="bo-search-wrap">
-    <form class="bo-strip-search" action="{{ '/search/' | relative_url }}" method="get" role="search">
-      <input class="bo-search-input" type="search" name="q" autocomplete="off" spellcheck="false" placeholder="search…">
-      <button class="bo-search-btn" type="submit">&#128269;</button>
-    </form>
   </div>
 </div>
