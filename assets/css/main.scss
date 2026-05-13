@@ -24,6 +24,11 @@
 
 body { background: #0d0d0d !important; color: #cccccc; }
 
+/* ── Remove MM home-layout top gap ── */
+.layout--home #main,
+.layout--home .page { padding-top: 0 !important; margin-top: 0 !important; }
+.layout--home .page__hero { display: none !important; }  /* hide empty overlay */
+
 /* ── Increase overall page width ── */
 /* Only widen the outer containers — never force article/content to 100% width
    because that overlaps the author sidebar in Minimal Mistakes' flex layout */

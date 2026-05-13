@@ -1,11 +1,6 @@
 ---
 layout: home
 author_profile: true
-header:
-  overlay_color: "#0d0d0d"
-  overlay_filter: 0.95
-  caption: "Authorized security research only"
-excerpt: " "
 ---
 
 <style>
@@ -20,10 +15,10 @@ excerpt: " "
 .exp-pill.r{border-color:#ff444433;color:#ff4444;}
 .exp-pill.b{border-color:#4488ff33;color:#4488ff;}
 .exp-pill.y{border-color:#ffeb3b33;color:#ffeb3b;}
-.stat-strip{display:flex;gap:8px;flex-wrap:wrap;}
-.stat-item{background:#111;border:1px solid #1e1e1e;border-radius:6px;padding:8px 14px;text-align:center;flex:1;min-width:70px;}
-.stat-n{font-size:18px;font-weight:700;color:#9fef00;}
-.stat-l{font-size:9px;color:#444;letter-spacing:1px;text-transform:uppercase;}
+.stat-strip{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.stat-item{background:#111;border:1px solid #1e1e1e;border-radius:6px;padding:10px 18px;text-align:center;min-width:90px;max-width:130px;}
+.stat-n{font-size:20px;font-weight:700;color:#9fef00;}
+.stat-l{font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
 .divider{border:none;border-top:1px solid #1e1e1e;margin:24px 0;}
 .section-lbl{font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;font-family:'Courier New',monospace;margin-bottom:12px;}
 </style>
