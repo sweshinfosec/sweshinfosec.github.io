@@ -13,13 +13,13 @@ title: "Mobile Pentest"
   {% assign matched = false %}
   {% for tag in post.tags %}
     {% assign tag_lower = tag | downcase | replace: " ", "-" %}
-    {% if mobile_tags contains tag_lower %}
-      {% assign matched = true %}
-    {% endif %}
+    {% if mobile_tags contains tag_lower %}{% assign matched = true %}{% endif %}
   {% endfor %}
-  {% if matched %}
-    {% assign mobile_posts = mobile_posts | push: post %}
-  {% endif %}
+  {% for cat in post.categories %}
+    {% assign cat_lower = cat | downcase | replace: " ", "-" %}
+    {% if mobile_tags contains cat_lower %}{% assign matched = true %}{% endif %}
+  {% endfor %}
+  {% if matched %}{% assign mobile_posts = mobile_posts | push: post %}{% endif %}
 {% endfor %}
 
 {% if mobile_posts.size == 0 %}

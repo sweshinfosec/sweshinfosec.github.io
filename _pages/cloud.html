@@ -13,13 +13,13 @@ title: "Cloud Pentest"
   {% assign matched = false %}
   {% for tag in post.tags %}
     {% assign tag_lower = tag | downcase | replace: " ", "-" %}
-    {% if cloud_tags contains tag_lower %}
-      {% assign matched = true %}
-    {% endif %}
+    {% if cloud_tags contains tag_lower %}{% assign matched = true %}{% endif %}
   {% endfor %}
-  {% if matched %}
-    {% assign cloud_posts = cloud_posts | push: post %}
-  {% endif %}
+  {% for cat in post.categories %}
+    {% assign cat_lower = cat | downcase | replace: " ", "-" %}
+    {% if cloud_tags contains cat_lower %}{% assign matched = true %}{% endif %}
+  {% endfor %}
+  {% if matched %}{% assign cloud_posts = cloud_posts | push: post %}{% endif %}
 {% endfor %}
 
 {% if cloud_posts.size == 0 %}

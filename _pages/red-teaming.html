@@ -13,13 +13,13 @@ title: "Red Teaming"
   {% assign matched = false %}
   {% for tag in post.tags %}
     {% assign tag_lower = tag | downcase | replace: " ", "-" %}
-    {% if rt_tags contains tag_lower %}
-      {% assign matched = true %}
-    {% endif %}
+    {% if rt_tags contains tag_lower %}{% assign matched = true %}{% endif %}
   {% endfor %}
-  {% if matched %}
-    {% assign rt_posts = rt_posts | push: post %}
-  {% endif %}
+  {% for cat in post.categories %}
+    {% assign cat_lower = cat | downcase | replace: " ", "-" %}
+    {% if rt_tags contains cat_lower %}{% assign matched = true %}{% endif %}
+  {% endfor %}
+  {% if matched %}{% assign rt_posts = rt_posts | push: post %}{% endif %}
 {% endfor %}
 
 {% if rt_posts.size == 0 %}

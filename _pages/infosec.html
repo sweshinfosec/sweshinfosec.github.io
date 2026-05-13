@@ -73,13 +73,13 @@ title: "Info Sec"
     {% assign matched = false %}
     {% for tag in post.tags %}
       {% assign tag_lower = tag | downcase | replace: " ", "-" %}
-      {% if s_tags contains tag_lower %}
-        {% assign matched = true %}
-      {% endif %}
+      {% if s_tags contains tag_lower %}{% assign matched = true %}{% endif %}
     {% endfor %}
-    {% if matched %}
-      {% assign s_posts = s_posts | push: post %}
-    {% endif %}
+    {% for cat in post.categories %}
+      {% assign cat_lower = cat | downcase | replace: " ", "-" %}
+      {% if s_tags contains cat_lower %}{% assign matched = true %}{% endif %}
+    {% endfor %}
+    {% if matched %}{% assign s_posts = s_posts | push: post %}{% endif %}
   {% endfor %}
 
   {% if s_posts.size > 0 %}
@@ -97,9 +97,11 @@ title: "Info Sec"
   {% for post in site.posts %}
     {% for tag in post.tags %}
       {% assign tag_lower = tag | downcase | replace: " ", "-" %}
-      {% if s_tags contains tag_lower %}
-        {% assign total = total | plus: 1 %}
-      {% endif %}
+      {% if s_tags contains tag_lower %}{% assign total = total | plus: 1 %}{% endif %}
+    {% endfor %}
+    {% for cat in post.categories %}
+      {% assign cat_lower = cat | downcase | replace: " ", "-" %}
+      {% if s_tags contains cat_lower %}{% assign total = total | plus: 1 %}{% endif %}
     {% endfor %}
   {% endfor %}
 {% endfor %}

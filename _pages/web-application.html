@@ -13,13 +13,13 @@ title: "Web Application Pentest"
   {% assign matched = false %}
   {% for tag in post.tags %}
     {% assign tag_lower = tag | downcase | replace: " ", "-" %}
-    {% if web_tags contains tag_lower %}
-      {% assign matched = true %}
-    {% endif %}
+    {% if web_tags contains tag_lower %}{% assign matched = true %}{% endif %}
   {% endfor %}
-  {% if matched %}
-    {% assign web_posts = web_posts | push: post %}
-  {% endif %}
+  {% for cat in post.categories %}
+    {% assign cat_lower = cat | downcase | replace: " ", "-" %}
+    {% if web_tags contains cat_lower %}{% assign matched = true %}{% endif %}
+  {% endfor %}
+  {% if matched %}{% assign web_posts = web_posts | push: post %}{% endif %}
 {% endfor %}
 
 {% if web_posts.size == 0 %}

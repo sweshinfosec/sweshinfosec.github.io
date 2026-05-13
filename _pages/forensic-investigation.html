@@ -13,13 +13,13 @@ title: "Forensic Investigation"
   {% assign matched = false %}
   {% for tag in post.tags %}
     {% assign tag_lower = tag | downcase | replace: " ", "-" %}
-    {% if fi_tags contains tag_lower %}
-      {% assign matched = true %}
-    {% endif %}
+    {% if fi_tags contains tag_lower %}{% assign matched = true %}{% endif %}
   {% endfor %}
-  {% if matched %}
-    {% assign fi_posts = fi_posts | push: post %}
-  {% endif %}
+  {% for cat in post.categories %}
+    {% assign cat_lower = cat | downcase | replace: " ", "-" %}
+    {% if fi_tags contains cat_lower %}{% assign matched = true %}{% endif %}
+  {% endfor %}
+  {% if matched %}{% assign fi_posts = fi_posts | push: post %}{% endif %}
 {% endfor %}
 
 {% if fi_posts.size == 0 %}

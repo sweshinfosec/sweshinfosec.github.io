@@ -13,13 +13,13 @@ title: "Threat Modeling"
   {% assign matched = false %}
   {% for tag in post.tags %}
     {% assign tag_lower = tag | downcase | replace: " ", "-" %}
-    {% if tm_tags contains tag_lower %}
-      {% assign matched = true %}
-    {% endif %}
+    {% if tm_tags contains tag_lower %}{% assign matched = true %}{% endif %}
   {% endfor %}
-  {% if matched %}
-    {% assign tm_posts = tm_posts | push: post %}
-  {% endif %}
+  {% for cat in post.categories %}
+    {% assign cat_lower = cat | downcase | replace: " ", "-" %}
+    {% if tm_tags contains cat_lower %}{% assign matched = true %}{% endif %}
+  {% endfor %}
+  {% if matched %}{% assign tm_posts = tm_posts | push: post %}{% endif %}
 {% endfor %}
 
 {% if tm_posts.size == 0 %}
