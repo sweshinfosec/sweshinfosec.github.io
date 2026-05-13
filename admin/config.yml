@@ -2,7 +2,7 @@ backend:
   name: github
   repo: sweshinfosec/sweshinfosec.github.io
   branch: main
-  base_url: https://sweshinfosec.netlify.app   # ← replace with your Netlify site URL after setup (Step 2 below)
+  base_url: https://lustrous-madeleine-da7ad5.netlify.app   # ← replace with your Netlify site URL after setup (Step 2 below)
   auth_endpoint: auth
 
 media_folder: "assets/images/uploads"
