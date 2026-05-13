@@ -55,6 +55,14 @@ paginate: 12
 paginate_path: /page:num/
 
 defaults:
+  # ── All pages (categories, archives, static) — always show author sidebar ──
+  - scope:
+      path: ""
+      type: pages
+    values:
+      author_profile: true
+
+  # ── All posts ──
   - scope:
       path: ""
       type: posts
