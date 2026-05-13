@@ -272,7 +272,12 @@ h4,
   border-left-color: #ff4444 !important;
 }
 
-/* Dynamic phases section (JS-generated, outside .nav__list) */
+/* Dynamic phases section (JS-generated) */
+#bo-toc-wrap ul, #bo-toc-wrap li {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 #bo-toc-wrap .nav__items a {
   display: block !important;
   color: #9fef00 !important;
