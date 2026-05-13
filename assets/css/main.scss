@@ -55,14 +55,14 @@ body { background: #0d0d0d !important; color: #cccccc; }
 /* ── Hide MM's built-in Lunr search toggle (we use our own strip) ── */
 .search__toggle { display: none !important; }
 
-/* ── Search strip — compact, left-aligned, below nav ── */
+/* ── Search strip — compact, right-aligned below About ── */
 .bo-search-wrap {
   background: #080808;
   border-bottom: 1px solid #1e1e1e;
   padding: 3px 2em;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 .bo-strip-search {
   display: flex;
