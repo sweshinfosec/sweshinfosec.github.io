@@ -1,9 +1,42 @@
 main:
-  - title: "Walkthroughs"
-    url: /categories/vapt/
-  - title: "Bug Bounty"
-    url: /categories/bug-bounty/
-  - title: "Tags"
-    url: /tags/
+  - title: "Home"
+    url: /
+
+  - title: "InfoSec"
+    url: /infosec/
+    children:
+      - title: "Pentest"
+        url: /infosec/pentest/
+      - title: "Vulnerability Assessment"
+        url: /infosec/vulnerability-assessment/
+      - title: "Malware Analysis"
+        url: /infosec/malware-analysis/
+      - title: "Forensic Investigation"
+        url: /infosec/forensic-investigation/
+      - title: "Smart Contracts"
+        url: /infosec/smart-contracts/
+      - title: "Red Teaming"
+        url: /infosec/red-teaming/
+      - title: "Threat Modeling"
+        url: /infosec/threat-modeling/
+      - title: "Risk Assessment"
+        url: /infosec/risk-assessment/
+
+  - title: "Terms & Conditions"
+    url: /terms/
+
   - title: "About"
     url: /about/
+
+# Sidebar — Pentest sub-categories
+pentest_sidebar:
+  - title: "Pentest"
+    children:
+      - title: "Web Application"
+        url: /infosec/pentest/web/
+      - title: "Mobile"
+        url: /infosec/pentest/mobile/
+      - title: "Cloud"
+        url: /infosec/pentest/cloud/
+      - title: "IoT"
+        url: /infosec/pentest/iot/
