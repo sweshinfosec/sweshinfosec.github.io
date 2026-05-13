@@ -1,0 +1,153 @@
+backend:
+  name: github
+  repo: sweshinfosec/sweshinfosec.github.io
+  branch: main
+  base_url: https://sweshinfosec.netlify.app   # ← replace with your Netlify site URL after setup (Step 2 below)
+  auth_endpoint: auth
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+# ── Slug format: YYYY-MM-DD-title ──
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+
+  # ──────────────────────────────────────────
+  # BLOG POSTS
+  # ──────────────────────────────────────────
+  - name: "posts"
+    label: "Blog Posts"
+    label_singular: "Post"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: false
+    fields:
+
+      - label: "Layout"
+        name: "layout"
+        widget: "hidden"
+        default: "single"
+
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        hint: "Post headline — shown at top of the page"
+
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+
+      - label: "Excerpt / Subtitle"
+        name: "excerpt"
+        widget: "text"
+        hint: "Short description shown under the title and in post listings"
+        required: false
+
+      - label: "Category"
+        name: "categories"
+        widget: "select"
+        multiple: true
+        options:
+          - { label: "Web Application Pentest", value: "web-application-pentest" }
+          - { label: "Cloud Pentest", value: "cloud-pentest" }
+          - { label: "Mobile Pentest", value: "mobile-pentest" }
+          - { label: "IoT Pentest", value: "iot-pentest" }
+          - { label: "Vulnerability Assessment", value: "vulnerability-assessment" }
+          - { label: "Malware Analysis", value: "malware-analysis" }
+          - { label: "Forensic Investigation", value: "forensic-investigation" }
+          - { label: "Smart Contracts", value: "smart-contracts" }
+          - { label: "Red Teaming", value: "red-teaming" }
+          - { label: "Threat Modeling", value: "threat-modeling" }
+          - { label: "Risk Assessment", value: "risk-assessment" }
+          - { label: "Bug Bounty", value: "bug-bounty" }
+          - { label: "CTF", value: "ctf" }
+          - { label: "Walkthroughs", value: "Walkthroughs" }
+        hint: "Pick all that apply — post will appear under each selected category page"
+
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        hint: "Comma-separated tags. Use lowercase-hyphenated. e.g. xss, sql-injection, dvwa, rce"
+
+      - label: "Header Style"
+        name: "header"
+        widget: "object"
+        collapsed: true
+        hint: "Controls the header banner on the post"
+        fields:
+          - label: "Overlay colour"
+            name: "overlay_color"
+            widget: "string"
+            default: "#0d0d0d"
+            required: false
+          - label: "Overlay filter (0–1 darkness)"
+            name: "overlay_filter"
+            widget: "number"
+            default: 0.9
+            value_type: float
+            min: 0
+            max: 1
+            step: 0.1
+            required: false
+          - label: "Teaser image (optional — for post cards)"
+            name: "teaser"
+            widget: "image"
+            required: false
+            allow_multiple: false
+
+      - label: "Author Profile Sidebar"
+        name: "author_profile"
+        widget: "boolean"
+        default: true
+
+      - label: "Table of Contents"
+        name: "toc"
+        widget: "boolean"
+        default: true
+
+      - label: "TOC Label"
+        name: "toc_label"
+        widget: "string"
+        default: "Phases"
+        required: false
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        hint: "Full post content. Supports Markdown and inline HTML for BlackOps-styled cards."
+
+  # ──────────────────────────────────────────
+  # PAGES (About, Privacy Policy, etc.)
+  # ──────────────────────────────────────────
+  - name: "pages"
+    label: "Pages"
+    label_singular: "Page"
+    files:
+
+      - label: "About"
+        name: "about"
+        file: "about.md"
+        fields:
+          - { label: "Layout", name: "layout", widget: "hidden", default: "single" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Author Profile", name: "author_profile", widget: "boolean", default: true }
+          - { label: "TOC", name: "toc", widget: "boolean", default: true }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - label: "Privacy Policy"
+        name: "privacy"
+        file: "_pages/privacy-policy.md"
+        fields:
+          - { label: "Layout", name: "layout", widget: "hidden", default: "single" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
