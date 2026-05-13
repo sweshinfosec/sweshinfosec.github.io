@@ -3,18 +3,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
 <script>
-/* ── Inject // CONNECT heading above author social links ── */
+/* ── Move // CONNECT (social links) to BOTTOM of sidebar — after PENTEST + PHASES ── */
 window.addEventListener('DOMContentLoaded', function () {
-  var urlsWrap = document.querySelector('.author__urls-wrapper');
-  if (urlsWrap) {
-    var hdr = document.createElement('p');
-    hdr.className = 'bo-connect-hdr';
-    hdr.textContent = '// Connect';
-    urlsWrap.parentNode.insertBefore(hdr, urlsWrap);
-  }
-  /* Style social link items via JS (MM's global a{} wins CSS) */
-  var links = document.querySelectorAll('.author__urls li a');
-  links.forEach(function(a) {
+  var sidebar   = document.querySelector('.sidebar');
+  var urlsWrap  = document.querySelector('.author__urls-wrapper');
+  if (!sidebar || !urlsWrap) return;
+
+  /* Build a wrapper div that goes at the very bottom */
+  var connectSection = document.createElement('div');
+  connectSection.id  = 'bo-connect-section';
+  connectSection.style.setProperty('margin-top', '24px', 'important');
+  connectSection.style.setProperty('border-top', '1px solid #1e1e1e', 'important');
+  connectSection.style.setProperty('padding-top', '10px', 'important');
+
+  /* // CONNECT heading */
+  var hdr = document.createElement('p');
+  hdr.className = 'nav__title';
+  hdr.textContent = 'Connect';
+  connectSection.appendChild(hdr);
+
+  /* Move the existing urls-wrapper into our bottom section */
+  connectSection.appendChild(urlsWrap);
+
+  /* Append at bottom of sidebar */
+  sidebar.appendChild(connectSection);
+
+  /* Style social links via JS (MM global a{} overrides CSS) */
+  urlsWrap.querySelectorAll('li a').forEach(function(a) {
     a.style.setProperty('color', '#9fef00', 'important');
     a.style.setProperty('font-family', "'Courier New', monospace", 'important');
     a.style.setProperty('font-size', '12px', 'important');

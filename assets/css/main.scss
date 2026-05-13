@@ -136,18 +136,20 @@ body { background: #0d0d0d !important; color: #cccccc; }
 .author__urls li a:hover { color: #ff0000 !important; }
 .author__urls li a svg { fill: #9fef00 !important; }
 
-/* // CONNECT section heading — pushed to bottom of sidebar */
-.bo-connect-hdr {
-  color: #9fef00;
-  font-family: 'Courier New', monospace;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  border-bottom: 1px solid #9fef0033;
-  padding-bottom: 5px;
-  margin: 48px 0 8px;  /* large top margin pushes it to bottom */
+/* // CONNECT section — moved to sidebar bottom by JS */
+#bo-connect-section .nav__title {
+  color: #9fef00 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  border-bottom: 1px solid #9fef0033 !important;
+  padding-bottom: 5px !important;
+  margin: 0 0 8px !important;
 }
+/* Hide the old Follow button that MM renders inside author__urls-wrapper */
+.author__urls-wrapper button { display: none !important; }
 
 /* ── Width consistency — all pages same container ── */
 .layout--archive #main,
