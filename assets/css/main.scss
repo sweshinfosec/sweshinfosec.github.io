@@ -217,8 +217,9 @@ h4,
   line-height:1.9; white-space:pre-wrap;
 }
 
-/* ── Left sidebar nav — BlackOps theme ── */
-/* Section headers (Pentest / Phases) */
+/* ── Left sidebar nav — BlackOps theme (green box style matching masthead) ── */
+
+/* Section headers (PENTEST / PHASES) */
 .nav__title {
   color: #9fef00 !important;
   font-family: 'Courier New', monospace !important;
@@ -226,39 +227,61 @@ h4,
   font-weight: 700 !important;
   letter-spacing: 2px !important;
   text-transform: uppercase !important;
-  border-bottom: 1px solid #1e1e1e !important;
-  padding-bottom: 4px !important;
-  margin-top: 14px !important;
+  border-bottom: 1px solid #9fef0044 !important;
+  padding-bottom: 5px !important;
+  margin-top: 16px !important;
+  margin-bottom: 6px !important;
 }
-/* Nav links */
+
+/* Every nav link — green border box */
 .nav__list .nav__items a {
-  color: #cccccc !important;
-  font-family: 'Courier New', monospace !important;
-  font-size: 12px !important;
-  padding: 3px 0 !important;
-  border-left: 2px solid transparent;
-  padding-left: 6px !important;
-  transition: color 0.12s, border-color 0.12s;
-  display: block;
-}
-.nav__list .nav__items a:hover {
+  display: block !important;
   color: #9fef00 !important;
-  border-left-color: #9fef00 !important;
-  background: transparent !important;
-}
-/* Phase sub-items (↳ findings) */
-.nav__list .nav__items a[href^="#f-0"] {
-  color: #ff4444 !important;
+  background: #000000 !important;
+  border: 1px solid #9fef00 !important;
+  border-radius: 3px !important;
+  font-family: 'Courier New', monospace !important;
   font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 9px !important;
+  margin-bottom: 3px !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  transition: background 0.12s, color 0.12s, border-color 0.12s !important;
+}
+
+/* Hover — red fill (same as masthead) */
+.nav__list .nav__items a:hover {
+  background: #ff0000 !important;
+  color: #000000 !important;
+  border-color: #ff0000 !important;
+}
+
+/* Active / current section — red background + red text */
+.nav__list .nav__items a.bo-active {
+  background: #1a0000 !important;
+  color: #ff4444 !important;
+  border-color: #ff4444 !important;
+}
+
+/* ↳ finding sub-items — slightly indented, red tint border */
+.nav__list .nav__items a[href^="#f-0"] {
+  border-color: #ff444488 !important;
+  color: #ff8888 !important;
+  font-size: 10px !important;
   padding-left: 14px !important;
 }
 .nav__list .nav__items a[href^="#f-0"]:hover {
-  color: #ff9800 !important;
-  border-left-color: #ff9800 !important;
+  background: #ff0000 !important;
+  color: #000000 !important;
+  border-color: #ff0000 !important;
 }
-/* Kill chain highlight */
-.nav__list .nav__items a[href="#kill-chain"] {
-  color: #ff9800 !important;
+.nav__list .nav__items a[href^="#f-0"].bo-active {
+  background: #1a0000 !important;
+  color: #ff4444 !important;
+  border-color: #ff4444 !important;
 }
 
 /* ── Buy Me a Coffee button ── */
