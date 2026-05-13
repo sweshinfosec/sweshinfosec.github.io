@@ -416,6 +416,29 @@ h1.page__title,
   font-size: 1em !important;
 }
 
+/* ── Archive list hover — green box on ALL listing/category pages ── */
+.layout--archive .list__item,
+.layout--archive .list__item .archive__item {
+  transition: background 0.12s, border-color 0.12s, box-shadow 0.12s !important;
+}
+
+.layout--archive .list__item:hover,
+.layout--archive .list__item:hover .archive__item {
+  background: #050f00 !important;
+  outline: 1px solid #9fef00 !important;
+  box-shadow: 0 0 16px rgba(159,239,0,0.10), inset 0 0 0 1px #9fef0033 !important;
+  border-radius: 4px !important;
+}
+
+.layout--archive .list__item:hover .archive__item-title a {
+  color: #9fef00 !important;
+}
+
+.layout--archive .list__item:hover .page__meta,
+.layout--archive .list__item:hover .archive__item-excerpt {
+  color: #9fef0077 !important;
+}
+
 /* Section headings inside posts — ALL h2 same size everywhere */
 h2,
 .page__content h2,
