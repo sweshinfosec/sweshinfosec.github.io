@@ -455,12 +455,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ── Post & archive titles — Orbitron futuristic font ── */
-.page__title,
-.archive__item-title a,
-.archive__item-title,
+/* Single post page title — white */
 h1.page__title,
-.layout--single .page__title,
-.layout--archive .page__title {
+.layout--single .page__title {
+  font-family: 'Orbitron', 'Courier New', monospace !important;
+  font-weight: 900 !important;
+  color: #ffffff !important;
+  letter-spacing: 1px !important;
+}
+
+/* Archive/category page titles and post card titles — green */
+.layout--archive .page__title,
+.archive__item-title a,
+.archive__item-title {
   font-family: 'Orbitron', 'Courier New', monospace !important;
   font-weight: 900 !important;
   color: #9fef00 !important;
