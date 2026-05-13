@@ -25,10 +25,8 @@
 body { background: #0d0d0d !important; color: #cccccc; }
 
 /* ── Increase overall page width ── */
-.page { width: 100% !important; }
-.page__inner-wrap { width: 100% !important; }
-
-/* Widen the main content + sidebar container */
+/* Only widen the outer containers — never force article/content to 100% width
+   because that overlaps the author sidebar in Minimal Mistakes' flex layout */
 #main { max-width: 100% !important; padding-left: 2em; padding-right: 2em; }
 
 /* Widen masthead */
@@ -37,14 +35,10 @@ body { background: #0d0d0d !important; color: #cccccc; }
 /* Widen archive/home grid */
 .archive { width: 100% !important; }
 
-/* Widen content column inside single layout */
-.page__content { width: 100% !important; max-width: 100% !important; }
-
 /* Sidebar + content row */
 .sidebar { opacity: 1 !important; }
 
 @media (min-width: 80em) {
-  .page { padding-right: 0 !important; }
   #main { max-width: 1600px !important; margin: 0 auto; }
   .masthead__inner-wrap { max-width: 1600px !important; margin: 0 auto; }
 }
