@@ -1,9 +1,6 @@
 backend:
-  name: github
-  repo: sweshinfosec/sweshinfosec.github.io
+  name: git-gateway
   branch: main
-  base_url: https://lustrous-madeleine-da7ad5.netlify.app   # ← replace with your Netlify site URL after setup (Step 2 below)
-  auth_endpoint: auth
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
