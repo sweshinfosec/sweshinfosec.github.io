@@ -756,10 +756,12 @@ a.bo-flink:hover,
   width: 100% !important;
 }
 .layout--single .page__lead {
-  text-align: left !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  max-width: 100% !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 80% !important;
+  border-left: none !important;
+  padding-left: 0 !important;
 }
 .layout--single .page__meta { text-align: center !important; }
 
