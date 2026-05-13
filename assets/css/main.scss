@@ -31,7 +31,25 @@ body { background: #0d0d0d !important; color: #cccccc; }
 }
 
 .masthead { background: #0a0a0a !important; border-bottom: 1px solid #1e1e1e; }
-.site-title { color: #00e676 !important; font-family: 'Courier New', monospace; font-weight: 700; letter-spacing: 2px; }
+/* Site title — split colour branding */
+.site-title {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-decoration: none !important;
+}
+
+.title-swesh {
+  color: #9fef00 !important;  /* hacker green */
+}
+
+.title-infosec {
+  color: #cccccc !important;  /* neutral white */
+}
+
+.title-sec {
+  color: #ff0000 !important;  /* red */
+}
 .author__name { color: #00e676 !important; font-family: 'Courier New', monospace; }
 .author__bio { color: #888888; font-size: 12px; }
 
