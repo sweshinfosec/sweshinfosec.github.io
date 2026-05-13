@@ -42,10 +42,10 @@ body { background: #0d0d0d !important; color: #cccccc; }
 .layout--home .sidebar { padding-top: 28px !important; }
 .layout--home .author__content { margin-top: 8px !important; }
 
-/* ── Logo — force proper size, override any MM constraints ── */
+/* ── Logo — 150px, override any MM constraints ── */
 .masthead .site-logo img,
 .site-logo img {
-  height: 72px !important;
+  height: 150px !important;
   width: auto !important;
   max-height: none !important;
   max-width: none !important;
