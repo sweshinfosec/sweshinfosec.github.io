@@ -6,6 +6,14 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>SweshInfoSec — Admin</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    // Site is on GitHub Pages — tell the Identity widget where the Netlify Identity API lives
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.init({
+        APIUrl: "https://lustrous-madeleine-da7ad5.netlify.app/.netlify/identity"
+      });
+    }
+  </script>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
