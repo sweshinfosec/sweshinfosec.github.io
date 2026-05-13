@@ -51,6 +51,9 @@ analytics:
     tracking_id: "UA-XXXXXXXXX-X"
     anonymize_ip: false
 
+include:
+  - _pages
+
 exclude:
   - "*.sh"
   - "Gemfile.lock"
