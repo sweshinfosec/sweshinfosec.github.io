@@ -51,7 +51,7 @@ plugins:
 
 permalink: /:categories/:title/
 
-paginate: 10
+paginate: 12
 paginate_path: /page:num/
 
 defaults:

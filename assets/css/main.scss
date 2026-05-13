@@ -202,8 +202,11 @@ body { background: #0d0d0d !important; color: #cccccc; }
 .author__name { color: #00e676 !important; font-family: 'Courier New', monospace; }
 .author__bio { color: #888888; font-size: 12px; }
 
-/* ── Recent Posts — card grid ── */
-/* Turn the list into a responsive grid */
+/* ══════════════════════════════════════════
+   Recent Posts — 4-col × 3-row card grid
+   ══════════════════════════════════════════ */
+
+/* Reset list items */
 .layout--home .list__item,
 .layout--home .entries-list .list__item {
   width: 100% !important;
@@ -211,64 +214,92 @@ body { background: #0d0d0d !important; color: #cccccc; }
   margin: 0 !important;
   float: none !important;
 }
+
+/* 4-column grid */
 .layout--home .entries-list {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 14px;
-  margin-top: 10px;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 12px !important;
+  margin-top: 10px !important;
 }
-/* Card box */
+@media (max-width: 1100px) {
+  .layout--home .entries-list { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 720px) {
+  .layout--home .entries-list { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 480px) {
+  .layout--home .entries-list { grid-template-columns: 1fr !important; }
+}
+
+/* Card — resting state: dark, no glow */
+.layout--home .list__item {
+  display: flex !important;
+  flex-direction: column !important;
+}
 .layout--home .archive__item {
-  background: #0d0d0d !important;
+  background: #0a0a0a !important;
   border: 1px solid #1e1e1e !important;
-  border-top: 2px solid #1e1e1e !important;
+  border-top: 2px solid #222 !important;
   border-radius: 6px !important;
-  padding: 14px 16px !important;
-  height: 100%;
-  transition: border-color 0.15s, background 0.15s !important;
+  padding: 14px 15px 12px !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s !important;
   cursor: pointer;
 }
-/* Hover — border goes green, bg lifts slightly */
+
+/* Hover — green border + subtle glow, no other change */
 .layout--home .archive__item:hover {
   border-color: #9fef00 !important;
   border-top-color: #9fef00 !important;
-  background: #111111 !important;
+  background: #0d0d0d !important;
+  box-shadow: 0 0 14px rgba(159,239,0,0.08) !important;
 }
-/* Title inside card */
+
+/* Title */
 .layout--home .archive__item-title {
-  margin: 0 0 6px !important;
-  font-size: 0.8em !important;
+  margin: 0 0 5px !important;
+  line-height: 1.3 !important;
 }
+.layout--home .archive__item-title a,
 .archive__item-title a {
   color: #9fef00 !important;
-  font-family: 'Courier New', monospace;
-  font-size: 0.82em !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
   text-decoration: none !important;
-  transition: color 0.12s;
+  transition: color 0.12s !important;
 }
 .layout--home .archive__item:hover .archive__item-title a {
   color: #ff9800 !important;
 }
-/* Excerpt */
+
+/* Excerpt — clamped 3 lines */
 .layout--home .archive__item-excerpt {
-  font-size: 11px !important;
-  color: #555 !important;
-  line-height: 1.6 !important;
-  margin: 0 0 8px !important;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-/* Meta (date, read time) */
-.layout--home .page__meta {
   font-size: 10px !important;
-  color: #333 !important;
-  margin: 0 !important;
+  color: #444 !important;
+  line-height: 1.55 !important;
+  margin: 0 0 8px !important;
+  flex: 1 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
 }
-/* Hide the "Recent Posts" h2 heading MM auto-generates — we have our own label */
+
+/* Meta (date · read time) */
+.layout--home .page__meta {
+  font-size: 9px !important;
+  color: #2a2a2a !important;
+  margin: auto 0 0 !important;
+}
+
+/* "Recent Posts" subtitle — style down to match site labels */
 .layout--home h2.archive__subtitle {
-  font-size: 11px !important;
+  font-size: 10px !important;
   color: #444 !important;
   letter-spacing: 2px !important;
   text-transform: uppercase !important;
@@ -276,7 +307,44 @@ body { background: #0d0d0d !important; color: #cccccc; }
   font-weight: 700 !important;
   border-bottom: 1px solid #1e1e1e !important;
   padding-bottom: 6px !important;
-  margin-bottom: 10px !important;
+  margin: 0 0 10px !important;
+}
+
+/* ══════════════════════════════════════════
+   Pagination — Prev / Next buttons
+   ══════════════════════════════════════════ */
+.pagination {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 28px 0 10px !important;
+  font-family: 'Courier New', monospace !important;
+}
+.pagination--pager {
+  background: #0a0a0a !important;
+  border: 2px solid #9fef0033 !important;
+  color: #9fef00 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 7px 22px !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  letter-spacing: 1px !important;
+  transition: background 0.15s, border-color 0.15s, color 0.15s !important;
+  min-width: 110px !important;
+  text-align: center !important;
+}
+.pagination--pager:hover {
+  background: #ff0000 !important;
+  border-color: #ff0000 !important;
+  color: #000 !important;
+}
+.pagination--pager.disabled {
+  opacity: 0.2 !important;
+  pointer-events: none !important;
+  cursor: default !important;
 }
 
 .page__taxonomy-item {
