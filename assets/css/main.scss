@@ -52,21 +52,50 @@ body { background: #0d0d0d !important; color: #cccccc; }
   display: block !important;
 }
 
-/* ── Search bar strip — compact, left-aligned, no placeholder text ── */
-.bo-search-wrap {
+/* ── Hide MM's built-in Lunr search toggle (we use our own strip) ── */
+.search__toggle { display: none !important; }
+
+/* ── Social + Search strip — shows on EVERY page ── */
+.bo-strip {
   background: #080808;
   border-bottom: 1px solid #1e1e1e;
-  padding: 3px 2em;
+  padding: 4px 2em;
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
 }
-.bo-search-inner {
+.bo-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+.bo-strip-lbl {
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  color: #444;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-right: 2px;
+  white-space: nowrap;
+}
+.bo-slink {
+  color: #9fef00 !important;
+  font-size: 13px;
+  text-decoration: none !important;
+  opacity: 0.75;
+  transition: color 0.12s, opacity 0.12s;
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
+}
+.bo-slink:hover { color: #ff0000 !important; opacity: 1; }
+.bo-strip-search {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 .bo-search-input {
-  width: 160px;
+  width: 150px;
   background: #0d0d0d;
   border: 1px solid #9fef0033;
   color: #cccccc;

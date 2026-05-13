@@ -159,9 +159,20 @@
       </nav>
     </div>
   </div>
-  <!-- ── Search bar strip — compact, right-aligned ── -->
-  <div class="bo-search-wrap">
-    <form class="bo-search-inner" action="{{ '/search/' | relative_url }}" method="get" role="search">
+  <!-- ── Social + Search strip — visible on every page ── -->
+  <div class="bo-strip">
+    <div class="bo-strip-left">
+      <span class="bo-strip-lbl">// Connect:</span>
+      <a href="mailto:sweshinfosec@gmail.com"    title="Email"     class="bo-slink">✉</a>
+      <a href="https://twitter.com/SweshInfoSec" title="Twitter/X" class="bo-slink">𝕏</a>
+      <a href="https://github.com/sweshinfosec"  title="GitHub"    class="bo-slink">⌥ GitHub</a>
+      <a href="https://linkedin.com/in/sweshinfosec" title="LinkedIn"  class="bo-slink">in</a>
+      <a href="https://youtube.com/@SweshInfoSec"    title="YouTube"   class="bo-slink">▶</a>
+      <a href="https://instagram.com/sweshinfosec"   title="Instagram" class="bo-slink">◈</a>
+      <a href="https://facebook.com/sweshinfosec"    title="Facebook"  class="bo-slink">f</a>
+      <a href="https://discord.gg/sweshinfosec"      title="Discord"   class="bo-slink">⬡</a>
+    </div>
+    <form class="bo-strip-search" action="{{ '/search/' | relative_url }}" method="get" role="search">
       <input class="bo-search-input" type="search" name="q" autocomplete="off" spellcheck="false">
       <button class="bo-search-btn" type="submit">&#128269;</button>
     </form>
