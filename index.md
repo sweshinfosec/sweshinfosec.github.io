@@ -4,23 +4,25 @@ author_profile: false
 ---
 
 <style>
-/* ── Hero card — full content width, centered ── */
-.hero-wrap{background:#0d0d0d;border:1px solid #1e1e1e;border-top:2px solid #9fef00;border-radius:8px;padding:28px 32px;margin:0 auto 28px;font-family:'Courier New',monospace;max-width:900px;}
+/* ── Hero card — fills content width ── */
+.hero-wrap{background:#0d0d0d;border:1px solid #1e1e1e;border-top:2px solid #9fef00;border-radius:8px;padding:24px 28px;margin:0 0 24px;font-family:'Courier New',monospace;}
+
+/* Role line — centered, top of page */
+.hero-role-top{font-size:12px;color:#9fef00;letter-spacing:2.5px;text-transform:uppercase;text-align:center;margin:0 0 22px;padding-bottom:16px;border-bottom:1px solid #1e1e1e;}
 
 /* Author identity row */
-.hero-top{display:flex;align-items:center;gap:18px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid #1e1e1e;}
-.hero-avatar{width:72px;height:72px;border-radius:50%;border:2px solid #9fef0066;flex-shrink:0;object-fit:cover;}
+.hero-top{display:flex;align-items:center;gap:18px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #1e1e1e;}
+.hero-avatar{width:68px;height:68px;border-radius:50%;border:2px solid #9fef0066;flex-shrink:0;object-fit:cover;}
 .hero-ident{flex:1;}
-.hero-name{font-size:20px;font-weight:900;color:#9fef00;font-family:'Orbitron','Courier New',monospace;letter-spacing:1px;margin:0 0 4px;}
-.hero-tagline{font-size:10px;color:#555;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.hero-name{font-size:18px;font-weight:900;color:#9fef00;font-family:'Orbitron','Courier New',monospace;letter-spacing:1px;margin:0 0 4px;}
+.hero-tagline{font-size:10px;color:#555;letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;}
 .hero-social{display:flex;flex-wrap:wrap;gap:5px;}
 .hero-social a{color:#9fef00;font-size:10px;font-family:'Courier New',monospace;text-decoration:none;padding:2px 8px;border:1px solid #9fef0033;border-radius:3px;white-space:nowrap;}
 .hero-social a:hover{color:#000 !important;background:#ff0000;border-color:#ff0000;}
 
 /* Bio + skills */
-.hero-role{font-size:11px;color:#9fef00;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
 .hero-bio{font-size:13px;color:#888;line-height:1.8;margin-bottom:16px;}
-.expertise-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+.expertise-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
 .exp-pill{background:#111;border:1px solid #1e1e1e;border-radius:20px;padding:4px 12px;font-size:11px;font-family:'Courier New',monospace;}
 .exp-pill.g{border-color:#9fef0033;color:#9fef00;}
 .exp-pill.o{border-color:#ff980033;color:#ff9800;}
@@ -34,12 +36,15 @@ author_profile: false
 .stat-n{font-size:20px;font-weight:700;color:#9fef00;}
 .stat-l{font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
 
-.section-lbl{font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;font-family:'Courier New',monospace;margin-bottom:12px;max-width:900px;margin-left:auto;margin-right:auto;}
+.section-lbl{font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;font-family:'Courier New',monospace;margin-bottom:12px;}
 </style>
 
 <div class="hero-wrap">
 
-  <!-- Author identity — FIRST, at top -->
+  <!-- Role — centered at top -->
+  <div class="hero-role-top">// Cybersecurity Researcher &nbsp;·&nbsp; Offensive Security</div>
+
+  <!-- Author identity -->
   <div class="hero-top">
     <img class="hero-avatar" src="/assets/images/Logo.png" alt="SweshInfoSec">
     <div class="hero-ident">
@@ -52,18 +57,20 @@ author_profile: false
         <a href="https://linkedin.com/in/sweshinfosec">in LinkedIn</a>
         <a href="https://youtube.com/@SweshInfoSec">▶ YouTube</a>
         <a href="https://instagram.com/sweshinfosec">◈ Instagram</a>
+        <a href="https://facebook.com/sweshinfosec">f Facebook</a>
         <a href="https://discord.gg/sweshinfosec">⬡ Discord</a>
       </div>
     </div>
   </div>
 
-  <!-- Bio — below identity -->
-  <div class="hero-role">// Cybersecurity Researcher · Offensive Security</div>
+  <!-- Bio -->
   <div class="hero-bio">
     10+ years in offensive security, vulnerability research, and enterprise security assessments.
     Identifying real-world weaknesses across web applications, infrastructure, cloud environments,
     mobile apps, and smart contracts.
   </div>
+
+  <!-- Skills -->
   <div class="expertise-row">
     <span class="exp-pill g">Web AppSec</span>
     <span class="exp-pill g">Network Pentest</span>
@@ -77,6 +84,8 @@ author_profile: false
     <span class="exp-pill o">Risk Assessment</span>
     <span class="exp-pill y">Exploit Development</span>
   </div>
+
+  <!-- Stats -->
   <div class="stat-strip">
     <div class="stat-item"><div class="stat-n">10+</div><div class="stat-l">Years</div></div>
     <div class="stat-item"><div class="stat-n">12</div><div class="stat-l">Domains</div></div>

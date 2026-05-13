@@ -107,7 +107,7 @@ body { background: #0d0d0d !important; color: #cccccc; }
 .author__urls li a:hover { color: #ff0000 !important; }
 .author__urls li a svg { fill: #9fef00 !important; }
 
-/* // CONNECT section heading — injected by JS before .author__urls-wrapper */
+/* // CONNECT section heading — pushed to bottom of sidebar */
 .bo-connect-hdr {
   color: #9fef00;
   font-family: 'Courier New', monospace;
@@ -117,7 +117,33 @@ body { background: #0d0d0d !important; color: #cccccc; }
   text-transform: uppercase;
   border-bottom: 1px solid #9fef0033;
   padding-bottom: 5px;
-  margin: 16px 0 8px;
+  margin: 48px 0 8px;  /* large top margin pushes it to bottom */
+}
+
+/* ── Width consistency — all pages same container ── */
+.layout--archive #main,
+.layout--tags #main,
+.layout--categories #main,
+.layout--search #main {
+  max-width: 100% !important;
+  padding-left: 2em !important;
+  padding-right: 2em !important;
+}
+@media (min-width: 80em) {
+  .layout--archive #main,
+  .layout--tags #main,
+  .layout--categories #main,
+  .layout--search #main {
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+  }
+}
+/* Archive/tag content fills full width on no-sidebar pages */
+.layout--tags .archive,
+.layout--categories .archive,
+.layout--archive .archive,
+.layout--search .archive {
+  width: 100% !important;
 }
 
 /* ── Increase overall page width ── */

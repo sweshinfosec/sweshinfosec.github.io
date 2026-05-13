@@ -5,11 +5,11 @@ description: "Real-world web application security research, VAPT walkthroughs, a
 url: "https://sweshinfosec.github.io"
 baseurl: ""
 
+twitter:
+  username: SweshInfoSec
+
 author:
   name: "SweshInfoSec"
-  email: "sweshinfosec@gmail.com"
-  twitter: "SweshInfoSec"
-  github: "sweshinfosec"
   bio: "Security researcher | VAPT | Bug bounty | Penetration Testing"
   avatar: "/assets/images/Logo.png"
   links:
