@@ -146,10 +146,10 @@ body { background: #0d0d0d !important; color: #cccccc; }
     margin: 0 auto !important;
   }
 }
-/* ── Sidebar + content side-by-side on ALL non-home layouts ── */
+/* ── Sidebar + content side-by-side on archive/category/search layouts ──
+   NOTE: layout--single is intentionally excluded — MM handles single post
+   layout natively with its own grid system for TOC + author sidebar. ── */
 .layout--archive #main,
-.layout--single #main,
-.layout--splash #main,
 .layout--tags #main,
 .layout--categories #main,
 .layout--search #main {
@@ -159,10 +159,8 @@ body { background: #0d0d0d !important; color: #cccccc; }
   gap: 2em !important;
 }
 
-/* Sidebar: fixed width, sticky scroll */
+/* Sidebar: fixed width, sticky scroll (archive/category pages only) */
 .layout--archive #main .sidebar,
-.layout--single #main .sidebar,
-.layout--splash #main .sidebar,
 .layout--tags #main .sidebar,
 .layout--categories #main .sidebar,
 .layout--search #main .sidebar {
@@ -176,8 +174,6 @@ body { background: #0d0d0d !important; color: #cccccc; }
 
 /* Main content column: takes all remaining width */
 .layout--archive #main .archive,
-.layout--single #main article.page,
-.layout--splash #main article.page,
 .layout--tags #main .archive,
 .layout--categories #main .archive,
 .layout--search #main .archive {
