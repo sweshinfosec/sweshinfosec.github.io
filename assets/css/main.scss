@@ -771,6 +771,26 @@ a.bo-flink:hover,
   margin-bottom: 20px !important;
 }
 
+/* ── Footer legal bar (Privacy · Terms · Manage Consent) ── */
+.bo-footer-legal {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 6px !important;
+  flex-wrap: wrap !important;
+}
+.bo-legal-link {
+  font-family: 'Courier New', monospace !important;
+  font-size: 9px !important;
+  color: #9fef0055 !important;
+  text-decoration: none !important;
+  letter-spacing: 1px !important;
+  transition: color 0.12s !important;
+}
+.bo-legal-link:hover { color: #9fef00 !important; }
+.bo-legal-sep { color: #222 !important; font-size: 9px !important; }
+
 /* ── Buy Me a Coffee button ── */
 .bmac-btn {
   display:inline-block; background:#ff9800; color:#000 !important;

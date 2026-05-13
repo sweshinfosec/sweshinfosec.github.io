@@ -2,7 +2,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
-<!-- Google AdSense -->
+<!-- Google Consent Mode v2 — MUST load before AdSense/Analytics -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Default: all consent denied until user responds to CMP banner
+  gtag('consent', 'default', {
+    'ad_storage':              'denied',
+    'ad_user_data':            'denied',
+    'ad_personalization':      'denied',
+    'analytics_storage':       'denied',
+    'functionality_storage':   'denied',
+    'personalization_storage': 'denied',
+    'security_storage':        'granted',
+    'wait_for_update':         500
+  });
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough',    true);
+</script>
+
+<!-- Google AdSense (loads after consent defaults are set) -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6011990314535755" crossorigin="anonymous"></script>
 
 <script>
