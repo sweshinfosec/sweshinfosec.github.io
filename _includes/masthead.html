@@ -159,4 +159,11 @@
       </nav>
     </div>
   </div>
+  <!-- ── Search bar strip ── -->
+  <div class="bo-search-wrap">
+    <form class="bo-search-inner" action="{{ '/search/' | relative_url }}" method="get" role="search">
+      <input class="bo-search-input" type="search" name="q" placeholder="🔍  Search CVEs · tools · findings · walkthroughs…" autocomplete="off" spellcheck="false">
+      <button class="bo-search-btn" type="submit">SEARCH</button>
+    </form>
+  </div>
 </div>

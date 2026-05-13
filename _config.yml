@@ -16,6 +16,9 @@ author:
 remote_theme: "mmistakes/minimal-mistakes@4.26.2"
 minimal_mistakes_skin: "dark"
 
+search: true
+search_provider: lunr
+
 plugins:
   - jekyll-feed
   - jekyll-sitemap

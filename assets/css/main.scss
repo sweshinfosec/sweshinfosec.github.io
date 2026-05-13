@@ -29,6 +29,60 @@ body { background: #0d0d0d !important; color: #cccccc; }
 .layout--home .page { padding-top: 0 !important; margin-top: 0 !important; }
 .layout--home .page__hero { display: none !important; }  /* hide empty overlay */
 
+/* ── Hide MM's empty auto-generated page title on home ── */
+.layout--home #page-title,
+.layout--home h1.page__title,
+.layout--home .page__title { display: none !important; margin: 0 !important; padding: 0 !important; }
+
+/* ── Remove top padding on archive grid so hero card starts flush ── */
+.layout--home .archive { padding-top: 0 !important; margin-top: 0 !important; }
+
+/* ── Author sidebar — push content down so it sits in the vertical middle ── */
+.layout--home .sidebar .author__avatar { margin-top: 24px !important; }
+.layout--home .sidebar { padding-top: 28px !important; }
+.layout--home .author__content { margin-top: 8px !important; }
+
+/* ── Search bar strip below masthead ── */
+.bo-search-wrap {
+  background: #080808;
+  border-bottom: 1px solid #1e1e1e;
+  padding: 6px 2em;
+}
+.bo-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 660px;
+}
+.bo-search-input {
+  flex: 1;
+  background: #0d0d0d;
+  border: 1px solid #9fef0044;
+  color: #cccccc;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.bo-search-input:focus { border-color: #9fef00; }
+.bo-search-input::placeholder { color: #444; }
+.bo-search-btn {
+  background: #9fef00;
+  color: #000;
+  border: none;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 7px 18px;
+  border-radius: 3px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.15s;
+}
+.bo-search-btn:hover { background: #ff0000; color: #000; }
+
 /* ── Increase overall page width ── */
 /* Only widen the outer containers — never force article/content to 100% width
    because that overlaps the author sidebar in Minimal Mistakes' flex layout */

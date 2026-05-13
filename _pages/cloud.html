@@ -1,0 +1,14 @@
+---
+layout: archive
+permalink: /infosec/pentest/cloud/
+title: "Cloud Pentest"
+---
+
+<div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;">// Cloud Walkthroughs</div>
+
+{% assign posts = site.posts | where_exp:"post", "post.tags contains 'cloud-pentest'" %}
+{% if posts.size == 0 %}
+  <p style="color:#555;font-family:'Courier New',monospace;font-size:13px;">No cloud posts yet — check back soon.</p>
+{% else %}
+  {% for post in posts %}{% include archive-single.html %}{% endfor %}
+{% endif %}
