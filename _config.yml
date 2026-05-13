@@ -1,5 +1,5 @@
 title: "SweshInfoSec"
-logo: "/assets/images/Logo.svg"
+logo: "/assets/images/Logo.png"
 tagline: "Pentesting · Bug Bounty · CVE Research"
 description: "Real-world web application security research, VAPT walkthroughs, and bug bounty findings by SweshInfoSec."
 url: "https://sweshinfosec.github.io"
@@ -11,7 +11,7 @@ author:
   twitter: "SweshInfoSec"
   github: "sweshinfosec"
   bio: "Security researcher | VAPT | Bug bounty | Penetration Testing"
-  avatar: "/assets/images/Logo.svg"
+  avatar: "/assets/images/Logo.png"
 
 remote_theme: "mmistakes/minimal-mistakes@4.26.2"
 minimal_mistakes_skin: "dark"
