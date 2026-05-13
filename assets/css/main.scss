@@ -266,19 +266,19 @@ h4,
   border-color: #ff4444 !important;
 }
 
-/* ↳ finding sub-items — slightly indented, red tint border */
-.nav__list .nav__items a[href^="#f-0"] {
-  border-color: #ff444488 !important;
-  color: #ff8888 !important;
+/* ↳ h3 sub-items — indented, dimmer border (JS sets data-sub="1") */
+#bo-toc-wrap .nav__items a[data-sub="1"] {
+  border-color: #9fef0055 !important;
+  color: #aaaaaa !important;
   font-size: 10px !important;
   padding-left: 14px !important;
 }
-.nav__list .nav__items a[href^="#f-0"]:hover {
+#bo-toc-wrap .nav__items a[data-sub="1"]:hover {
   background: #ff0000 !important;
   color: #000000 !important;
   border-color: #ff0000 !important;
 }
-.nav__list .nav__items a[href^="#f-0"].bo-active {
+#bo-toc-wrap .nav__items a[data-sub="1"].bo-active {
   background: #1a0000 !important;
   color: #ff4444 !important;
   border-color: #ff4444 !important;

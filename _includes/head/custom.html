@@ -1,3 +1,71 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+<script>
+/* BlackOps — Dynamic sidebar TOC + scroll-spy
+   Runs on every post. Reads the article's h2/h3 headings at DOM-ready,
+   builds a "Phases" section in the left sidebar, and highlights the
+   active section as the user scrolls. Works automatically for any new post. */
+window.addEventListener('DOMContentLoaded', function () {
+  var content  = document.querySelector('.page__content');
+  var navList  = document.querySelector('.sidebar .nav__list');
+  if (!content || !navList) return;
+
+  var headings = Array.from(content.querySelectorAll('h2[id], h3[id]'));
+  if (!headings.length) return;
+
+  /* ── Build "Phases" section ── */
+  var wrap = document.createElement('div');
+  wrap.id  = 'bo-toc-wrap';
+
+  var titleEl = document.createElement('p');
+  titleEl.className   = 'nav__title';
+  titleEl.textContent = 'Phases';
+  wrap.appendChild(titleEl);
+
+  var ul = document.createElement('ul');
+  ul.className = 'nav__items';
+
+  headings.forEach(function (h) {
+    /* Strip any injected anchor-link elements MM adds */
+    var clone = h.cloneNode(true);
+    clone.querySelectorAll('a.anchorjs-link, a.header-link, .anchor')
+         .forEach(function (el) { el.remove(); });
+
+    var prefix = h.tagName === 'H3' ? '↳ ' : '';
+    var label  = (prefix + clone.textContent.trim())
+                   .replace(/\s+/g, ' ')
+                   .substring(0, 48);          /* cap length for sidebar */
+
+    var li = document.createElement('li');
+    var a  = document.createElement('a');
+    a.href        = '#' + h.id;
+    a.textContent = label;
+    if (h.tagName === 'H3') a.dataset.sub = '1';  /* used by CSS selector */
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+
+  wrap.appendChild(ul);
+  /* Append below the existing nav list (Pentest categories stay above) */
+  navList.parentNode.appendChild(wrap);
+
+  /* ── Scroll-spy ── */
+  function update () {
+    var scrollY = window.scrollY + 110;
+    var active  = headings[0];
+    headings.forEach(function (h) {
+      if (h.getBoundingClientRect().top + window.scrollY <= scrollY) {
+        active = h;
+      }
+    });
+    ul.querySelectorAll('a').forEach(function (a) {
+      a.classList.toggle('bo-active', a.getAttribute('href') === '#' + active.id);
+    });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+});
+</script>
