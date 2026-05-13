@@ -445,6 +445,34 @@ h4,
   color: #ff4444 !important;
 }
 
+/* ── Footer // CONNECT bar ── */
+.bo-footer-connect {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 10px 0 6px;
+  border-top: 1px solid #1e1e1e;
+  margin-bottom: 6px;
+  font-family: 'Courier New', monospace;
+}
+.bo-footer-lbl {
+  font-size: 10px;
+  color: #444;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.bo-flink {
+  color: #9fef00 !important;
+  font-size: 14px;
+  text-decoration: none !important;
+  opacity: 0.8;
+  transition: color 0.12s, opacity 0.12s;
+  white-space: nowrap;
+}
+.bo-flink:hover { color: #ff0000 !important; opacity: 1; }
+
 /* ── Buy Me a Coffee button ── */
 .bmac-btn {
   display:inline-block; background:#ff9800; color:#000 !important;
