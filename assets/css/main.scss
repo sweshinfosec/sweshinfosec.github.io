@@ -52,13 +52,13 @@ body { background: #0d0d0d !important; color: #cccccc; }
   display: block !important;
 }
 
-/* ── Search bar strip — compact, right-aligned, no placeholder text ── */
+/* ── Search bar strip — compact, left-aligned, no placeholder text ── */
 .bo-search-wrap {
   background: #080808;
   border-bottom: 1px solid #1e1e1e;
   padding: 3px 2em;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .bo-search-inner {
   display: flex;
