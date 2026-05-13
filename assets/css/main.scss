@@ -589,33 +589,61 @@ h4,
   color: #ff4444 !important;
 }
 
-/* ── Footer // CONNECT bar ── */
+/* ── Footer — full override ── */
+.page__footer {
+  background: #080808 !important;
+  border-top: 1px solid #1e1e1e !important;
+  text-align: center !important;
+  padding: 16px 2em 12px !important;
+}
+/* MM's copyright + feed line */
+.page__footer-copyright,
+.page__footer footer,
+.page__footer p,
+.page__footer a {
+  font-family: 'Courier New', monospace !important;
+  font-size: 10px !important;
+  color: #333 !important;
+  text-align: center !important;
+}
+.page__footer a:hover { color: #9fef00 !important; }
+
+/* Hide the RSS feed icon/link MM adds — keeps footer clean */
+.page__footer .page__footer-follow { display: none !important; }
+
+/* ── // CONNECT bar ── */
 .bo-footer-connect {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  padding: 10px 0 6px;
-  border-top: 1px solid #1e1e1e;
-  margin-bottom: 6px;
-  font-family: 'Courier New', monospace;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  padding: 0 0 10px !important;
+  margin-bottom: 8px !important;
+  border-bottom: 1px solid #1e1e1e !important;
+  font-family: 'Courier New', monospace !important;
 }
 .bo-footer-lbl {
-  font-size: 10px;
-  color: #444;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  white-space: nowrap;
+  font-size: 9px !important;
+  color: #9fef0066 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  font-weight: 700 !important;
 }
 .bo-flink {
   color: #9fef00 !important;
-  font-size: 14px;
+  font-size: 11px !important;
+  font-family: 'Courier New', monospace !important;
   text-decoration: none !important;
-  opacity: 0.8;
-  transition: color 0.12s, opacity 0.12s;
-  white-space: nowrap;
+  opacity: 0.7 !important;
+  transition: color 0.12s, opacity 0.12s !important;
+  white-space: nowrap !important;
 }
-.bo-flink:hover { color: #ff0000 !important; opacity: 1; }
+.bo-flink:hover {
+  color: #ff0000 !important;
+  opacity: 1 !important;
+}
 
 /* ── Buy Me a Coffee button ── */
 .bmac-btn {
