@@ -146,12 +146,29 @@ body { background: #0d0d0d !important; color: #cccccc; }
     margin: 0 auto !important;
   }
 }
-/* Archive/tag content fills full width on no-sidebar pages */
+/* Archive/tag/search content — fill remaining width beside sidebar, not below it */
 .layout--tags .archive,
 .layout--categories .archive,
-.layout--archive .archive,
 .layout--search .archive {
   width: 100% !important;
+}
+/* layout--archive: use flex so sidebar sits LEFT and content RIGHT */
+.layout--archive #main {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 2em !important;
+}
+.layout--archive #main .sidebar {
+  flex-shrink: 0 !important;
+  width: 220px !important;
+  min-width: 180px !important;
+  position: sticky !important;
+  top: 2em !important;
+}
+.layout--archive #main .archive {
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  width: auto !important;
 }
 
 /* ── Increase overall page width ── */
@@ -416,27 +433,31 @@ h1.page__title,
   font-size: 1em !important;
 }
 
-/* ── Archive list hover — green box on ALL listing/category pages ── */
-.layout--archive .list__item,
-.layout--archive .list__item .archive__item {
-  transition: background 0.12s, border-color 0.12s, box-shadow 0.12s !important;
+/* ── Archive list hover — green border box on ALL listing/category pages ── */
+.layout--archive .list__item {
+  padding: 6px 8px !important;
+  border-radius: 5px !important;
+  transition: background 0.13s, box-shadow 0.13s !important;
+  cursor: pointer !important;
 }
 
-.layout--archive .list__item:hover,
-.layout--archive .list__item:hover .archive__item {
-  background: #050f00 !important;
-  outline: 1px solid #9fef00 !important;
-  box-shadow: 0 0 16px rgba(159,239,0,0.10), inset 0 0 0 1px #9fef0033 !important;
-  border-radius: 4px !important;
+.layout--archive .list__item:hover {
+  background: #031000 !important;
+  box-shadow: 0 0 0 1px #9fef00, 0 0 18px rgba(159,239,0,0.10) !important;
+  border-radius: 5px !important;
 }
 
 .layout--archive .list__item:hover .archive__item-title a {
   color: #9fef00 !important;
+  text-decoration: none !important;
 }
 
-.layout--archive .list__item:hover .page__meta,
+.layout--archive .list__item:hover .page__meta {
+  color: #9fef0066 !important;
+}
+
 .layout--archive .list__item:hover .archive__item-excerpt {
-  color: #9fef0077 !important;
+  color: #9fef0055 !important;
 }
 
 /* Section headings inside posts — ALL h2 same size everywhere */
