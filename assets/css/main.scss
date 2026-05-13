@@ -85,23 +85,36 @@ h1, h2, h3, h4, h5, h6,
   font-family: 'Courier New', monospace !important;
 }
 
-/* Post page title — smaller, tighter */
+/* ── Post & archive titles — Orbitron futuristic font ── */
+.page__title,
+.archive__item-title a,
+.archive__item-title,
+h1.page__title,
+.layout--single .page__title,
+.layout--archive .page__title {
+  font-family: 'Orbitron', 'Courier New', monospace !important;
+  font-weight: 900 !important;
+  color: #9fef00 !important;
+  letter-spacing: 1px !important;
+}
+
+/* Post page title — size and spacing */
 .page__title {
   font-size: 1.4em !important;
   line-height: 1.3 !important;
-  letter-spacing: -0.5px;
   border-bottom: 1px solid #1e1e1e;
   padding-bottom: 10px;
   margin-bottom: 8px !important;
 }
 
-/* Post subtitle / excerpt — red like a vuln severity label */
+/* Post subtitle — Orbitron lighter */
 .page__lead {
+  font-family: 'Orbitron', 'Courier New', monospace !important;
   color: #ff4444 !important;
-  font-family: 'Courier New', monospace !important;
-  font-size: 13px !important;
+  font-size: 11px !important;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
   border-left: 2px solid #ff444466;
   padding-left: 10px;
   margin-bottom: 14px !important;
