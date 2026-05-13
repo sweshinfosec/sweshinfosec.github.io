@@ -596,22 +596,32 @@ h4,
   text-align: center !important;
   padding: 16px 2em 12px !important;
 }
-/* MM's copyright + feed line */
+
+/* MM copyright text — dim, centered */
 .page__footer-copyright,
 .page__footer footer,
-.page__footer p,
-.page__footer a {
+.page__footer p {
   font-family: 'Courier New', monospace !important;
   font-size: 10px !important;
   color: #333 !important;
   text-align: center !important;
 }
-.page__footer a:hover { color: #9fef00 !important; }
 
-/* Hide the RSS feed icon/link MM adds — keeps footer clean */
+/* Copyright links (Jekyll, Minimal Mistakes, site name) — subtle green */
+.page__footer-copyright a,
+.page__footer footer a {
+  font-family: 'Courier New', monospace !important;
+  font-size: 10px !important;
+  color: #9fef0055 !important;
+  text-decoration: none !important;
+}
+.page__footer-copyright a:hover,
+.page__footer footer a:hover { color: #9fef00 !important; }
+
+/* Hide the RSS feed block MM auto-adds */
 .page__footer .page__footer-follow { display: none !important; }
 
-/* ── // CONNECT bar ── */
+/* ── // CONNECT bar — centered, all links green ── */
 .bo-footer-connect {
   display: flex !important;
   align-items: center !important;
@@ -631,19 +641,31 @@ h4,
   white-space: nowrap !important;
   font-weight: 700 !important;
 }
-.bo-flink {
+
+/* Force green on all .bo-flink — beats .page__footer a{color:#333} */
+a.bo-flink,
+.page__footer a.bo-flink,
+.bo-footer-connect a.bo-flink {
   color: #9fef00 !important;
   font-size: 11px !important;
   font-family: 'Courier New', monospace !important;
   text-decoration: none !important;
-  opacity: 0.7 !important;
+  opacity: 0.8 !important;
   transition: color 0.12s, opacity 0.12s !important;
   white-space: nowrap !important;
 }
-.bo-flink:hover {
+a.bo-flink:hover,
+.page__footer a.bo-flink:hover,
+.bo-footer-connect a.bo-flink:hover {
   color: #ff0000 !important;
   opacity: 1 !important;
 }
+
+/* ── Fix: search box floating to corner on post pages ── */
+/* MM positions .search-content as fixed overlay — hide toggle, keep our strip only */
+.search__toggle,
+.search-content { display: none !important; }
+.bo-search-wrap { display: flex !important; }
 
 /* ── Buy Me a Coffee button ── */
 .bmac-btn {
