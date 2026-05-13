@@ -272,22 +272,49 @@ h4,
   border-left-color: #ff4444 !important;
 }
 
-/* ↳ h3 sub-items — indented, dimmer */
-#bo-toc-wrap .nav__items a[data-sub="1"] {
-  border-left-color: transparent !important;
-  color: #aaaaaa !important;
-  font-size: 10px !important;
-  padding-left: 14px !important;
+/* Dynamic phases section (JS-generated, outside .nav__list) */
+#bo-toc-wrap .nav__items a {
+  display: block !important;
+  color: #9fef00 !important;
+  background: transparent !important;
+  border: none !important;
+  border-left: 2px solid transparent !important;
+  border-radius: 0 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 9px !important;
+  margin-bottom: 2px !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  transition: background 0.12s, color 0.12s, border-color 0.12s !important;
 }
-#bo-toc-wrap .nav__items a[data-sub="1"]:hover {
+#bo-toc-wrap .nav__items a:hover {
   background: #ff0000 !important;
   color: #000000 !important;
   border-left-color: #ff0000 !important;
 }
-#bo-toc-wrap .nav__items a[data-sub="1"].bo-active {
+#bo-toc-wrap .nav__items a.bo-active {
   background: #1a0000 !important;
   color: #ff4444 !important;
   border-left-color: #ff4444 !important;
+}
+
+/* ↳ h3 sub-items — indented, dimmer */
+#bo-toc-wrap .nav__items a[data-sub="1"] {
+  color: #aaaaaa !important;
+  font-size: 10px !important;
+  padding-left: 16px !important;
+}
+#bo-toc-wrap .nav__items a[data-sub="1"]:hover {
+  background: #ff0000 !important;
+  color: #000000 !important;
+}
+#bo-toc-wrap .nav__items a[data-sub="1"].bo-active {
+  background: #1a0000 !important;
+  color: #ff4444 !important;
 }
 
 /* ── Buy Me a Coffee button ── */
