@@ -2,6 +2,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
+{% if page.post_style %}
+<style>
+{% assign ps = page.post_style %}
+{% if ps.title_font == "courier" %}.page__title { font-family: 'Courier New', monospace !important; }{% endif %}
+{% if ps.title_font == "sans" %}.page__title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important; }{% endif %}
+{% if ps.body_font == "sans" %}.page__content, .page__content p, .page__content li { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important; }{% endif %}
+{% if ps.heading_color %}.page__content h1, .page__content h2 { color: {{ ps.heading_color }} !important; border-left-color: {{ ps.heading_color }}55 !important; }{% endif %}
+{% if ps.subheading_color %}.page__content h3, .page__content h4 { color: {{ ps.subheading_color }} !important; border-left-color: {{ ps.subheading_color }}55 !important; }{% endif %}
+{% if ps.cmd_color %}pre code { color: {{ ps.cmd_color }} !important; }{% endif %}
+{% if ps.code_bg %}pre { background: {{ ps.code_bg }} !important; }{% endif %}
+{% if ps.inline_code_color %}.page__content code:not(pre code), p code, li code { color: {{ ps.inline_code_color }} !important; }{% endif %}
+</style>
+{% endif %}
+
 <!-- Netlify Identity — required for Decap CMS OAuth redirect on all pages -->
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>

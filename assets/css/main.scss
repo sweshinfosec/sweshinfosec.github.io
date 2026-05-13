@@ -388,25 +388,74 @@ body { background: #0d0d0d !important; color: #cccccc; }
   font-size: 11px;
 }
 
-code, pre {
+/* ── Code blocks — terminal style with color coding ── */
+pre {
   background: #0a0a0a !important;
-  border: 1px solid #1e1e1e;
-  color: #00e676;
-  font-family: 'Courier New', monospace;
+  border: 1px solid #1e1e1e !important;
+  border-radius: 6px !important;
+  padding: 14px 16px !important;
+  overflow-x: auto !important;
+  position: relative !important;
+}
+
+pre code {
+  background: transparent !important;
+  border: none !important;
+  color: #9fef00 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  padding: 0 !important;
+}
+
+/* Inline code — orange, distinct from block output */
+.page__content code:not(pre code),
+p code, li code, td code {
+  background: #111 !important;
+  color: #ff9800 !important;
+  border: 1px solid #2a2a2a !important;
+  border-radius: 3px !important;
+  padding: 1px 6px !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 12px !important;
 }
 
 a { color: #4488ff; }
 a:hover { color: #ff9800; }
 
 /* ── Headings — hacker theme ── */
-h1, h2, h3, h4, h5, h6,
-.page__title,
+/* H1 / H2 — primary green (section titles) */
 .page__content h1,
-.page__content h2,
+.page__content h2 {
+  color: #9fef00 !important;
+  font-family: 'Orbitron', 'Courier New', monospace !important;
+  font-weight: 700 !important;
+  border-left: 3px solid #9fef0055 !important;
+  padding-left: 10px !important;
+  margin-top: 2em !important;
+}
+
+/* H3 / H4 — orange (sub-sections) */
 .page__content h3,
 .page__content h4 {
-  color: #9fef00 !important;
+  color: #ff9800 !important;
   font-family: 'Courier New', monospace !important;
+  font-weight: 700 !important;
+  border-left: 2px solid #ff980055 !important;
+  padding-left: 8px !important;
+}
+
+/* H5 / H6 — muted grey (minor notes) */
+.page__content h5,
+.page__content h6 {
+  color: #888888 !important;
+  font-family: 'Courier New', monospace !important;
+  font-weight: 700 !important;
+}
+
+/* Global fallback for headings outside post content */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Courier New', monospace;
 }
 
 /* ── Post & archive titles — Orbitron futuristic font ── */

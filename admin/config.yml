@@ -120,6 +120,67 @@ collections:
         default: "Phases"
         required: false
 
+      - label: "Post Styling"
+        name: "post_style"
+        widget: "object"
+        collapsed: true
+        hint: "Override fonts, heading colors, and code styling for this post"
+        fields:
+
+          - label: "Title font"
+            name: "title_font"
+            widget: "select"
+            required: false
+            default: "orbitron"
+            options:
+              - { label: "Orbitron — techy/hacker (default)", value: "orbitron" }
+              - { label: "Courier New — monospace terminal", value: "courier" }
+              - { label: "System sans-serif — clean/minimal", value: "sans" }
+
+          - label: "Heading color (H2/H3 in body)"
+            name: "heading_color"
+            widget: "string"
+            default: "#9fef00"
+            hint: "Hex color for section headings. Default: #9fef00 (green). Try #ff9800 (orange) or #4488ff (blue)"
+            required: false
+
+          - label: "Sub-heading color (H3/H4)"
+            name: "subheading_color"
+            widget: "string"
+            default: "#ff9800"
+            hint: "Hex color for H3/H4 sub-headings. Default: #ff9800 (orange)"
+            required: false
+
+          - label: "Body font"
+            name: "body_font"
+            widget: "select"
+            required: false
+            default: "courier"
+            options:
+              - { label: "Courier New — terminal (default)", value: "courier" }
+              - { label: "System sans-serif — readable/clean", value: "sans" }
+
+          - label: "Command output color"
+            name: "cmd_color"
+            widget: "string"
+            default: "#9fef00"
+            hint: "Color for terminal/command output text in code blocks. Default: #9fef00 (green)"
+            required: false
+
+          - label: "Code block background"
+            name: "code_bg"
+            widget: "string"
+            default: "#0a0a0a"
+            hint: "Background color for code/command blocks. Default: #0a0a0a (near-black)"
+            required: false
+
+          - label: "Inline code color"
+            name: "inline_code_color"
+            widget: "string"
+            default: "#ff9800"
+            hint: "Color for inline `code` snippets within text. Default: #ff9800 (orange)"
+            required: false
+
       - label: "Body"
         name: "body"
         widget: "markdown"
