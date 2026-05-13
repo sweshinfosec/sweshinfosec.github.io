@@ -115,11 +115,11 @@
 
         {% unless logo_path == empty %}
           <a class="site-logo" href="{{ '/' | relative_url }}">
-            <img src="{{ site.logo | relative_url }}" alt="{{ site.title }}">
+            <img src="{{ site.logo | relative_url }}" alt="{{ site.title }}" style="height:60px; width:auto;">
           </a>
         {% endunless %}
 
-        <a class="site-title" href="{{ '/' | relative_url }}" style="flex-shrink:0; margin-right:auto;">
+        <a class="site-title" href="{{ '/' | relative_url }}" style="flex-shrink:0; margin-right:auto; display:none;">
           <span class="title-swesh">Swesh</span><span class="title-info">Info</span><span class="title-sec">Sec</span>
         </a>
 
