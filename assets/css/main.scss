@@ -440,10 +440,72 @@ h4,
 .page__content h4,
 .page__content div h4 { font-size: 0.95em !important; color: #ffeb3b !important; font-family: 'Courier New', monospace !important; }
 
-/* Tags cloud page */
-.taxonomy__index a { color: #4488ff !important; }
-.taxonomy__index a:hover { color: #ff0000 !important; }
-.taxonomy__count { color: #444 !important; }
+/* ── Tags cloud page — pill boxes ── */
+.taxonomy__index {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+  gap: 8px !important;
+  margin-top: 12px !important;
+}
+.taxonomy__index dt { display: none !important; } /* hide letter headers */
+.taxonomy__index ul {
+  display: contents !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.taxonomy__index li { list-style: none !important; }
+
+/* Tag pill */
+.taxonomy__index a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  color: #9fef00 !important;
+  background: #0a0a0a !important;
+  border: 1px solid #9fef0033 !important;
+  border-radius: 4px !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 6px 10px !important;
+  text-decoration: none !important;
+  letter-spacing: 0.3px !important;
+  transition: background 0.13s, color 0.13s, border-color 0.13s !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+.taxonomy__index a:hover {
+  background: #ff0000 !important;
+  color: #000000 !important;
+  border-color: #ff0000 !important;
+}
+/* Count badge */
+.taxonomy__index .taxonomy__count {
+  background: #1a1a1a !important;
+  color: #444 !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  padding: 1px 5px !important;
+  border-radius: 3px !important;
+  margin-left: 6px !important;
+  flex-shrink: 0 !important;
+  font-family: 'Courier New', monospace !important;
+  transition: background 0.13s, color 0.13s !important;
+}
+.taxonomy__index a:hover .taxonomy__count {
+  background: #aa0000 !important;
+  color: #000 !important;
+}
+
+/* Tags page title */
+.layout--tags .page__title,
+.layout--tags h1 {
+  font-size: 1.1em !important;
+  border-bottom: 1px solid #1e1e1e !important;
+  padding-bottom: 8px !important;
+  margin-bottom: 16px !important;
+}
 
 /* Post meta (date, read time) */
 .page__meta { color: #444 !important; font-size: 11px !important; }
