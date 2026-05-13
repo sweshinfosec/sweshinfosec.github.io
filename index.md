@@ -37,6 +37,15 @@ author_profile: false
 .stat-l{font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
 
 .section-lbl{font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;font-family:'Courier New',monospace;margin-bottom:12px;}
+
+/* ── Support strip ── */
+.support-strip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 0;padding-top:16px;border-top:1px solid #1e1e1e;}
+.support-lbl{font-size:9px;color:#444;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;}
+.support-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Courier New',monospace;font-size:10px;font-weight:700;text-decoration:none;padding:5px 14px;border-radius:4px;border:1px solid;white-space:nowrap;transition:background .15s,color .15s,border-color .15s;}
+.support-btn.bmac{color:#ffb300;border-color:#ffb30044;background:#0d0d0d;}
+.support-btn.bmac:hover{background:#ffb300;color:#000 !important;border-color:#ffb300;}
+.support-btn.patreon{color:#ff424d;border-color:#ff424d44;background:#0d0d0d;}
+.support-btn.patreon:hover{background:#ff424d;color:#fff !important;border-color:#ff424d;}
 </style>
 
 <div class="hero-wrap">
@@ -91,6 +100,17 @@ author_profile: false
     <div class="stat-item"><div class="stat-n">12</div><div class="stat-l">Domains</div></div>
     <div class="stat-item"><div class="stat-n">AWS</div><div class="stat-l">Azure · GCP</div></div>
     <div class="stat-item"><div class="stat-n">OWASP</div><div class="stat-l">WSTG · CWE</div></div>
+  </div>
+
+  <!-- Support -->
+  <div class="support-strip">
+    <span class="support-lbl">// Support:</span>
+    <a class="support-btn bmac" href="https://buymeacoffee.com/sweshinfosec" target="_blank" rel="noopener">
+      ☕ Buy Me a Coffee
+    </a>
+    <a class="support-btn patreon" href="https://patreon.com/sweshinfosec" target="_blank" rel="noopener">
+      ⚑ Patreon
+    </a>
   </div>
 
 </div>

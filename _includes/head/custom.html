@@ -2,6 +2,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
+<!-- Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX with your Publisher ID -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
 <script>
 /* ── Single listener: build PHASES first, then append CONNECT last ── */
 window.addEventListener('DOMContentLoaded', function () {
@@ -134,5 +137,57 @@ window.addEventListener('DOMContentLoaded', function () {
     a.addEventListener('mouseover', function() { this.style.setProperty('color', '#ff0000', 'important'); });
     a.addEventListener('mouseout',  function() { this.style.setProperty('color', '#9fef00', 'important'); });
   });
+
+  /* ── STEP 3: Support buttons — after CONNECT, always last ── */
+  var supportSection = document.createElement('div');
+  supportSection.id = 'bo-support-section';
+  supportSection.style.setProperty('margin-top', '18px', 'important');
+  supportSection.style.setProperty('border-top', '1px solid #1e1e1e', 'important');
+  supportSection.style.setProperty('padding-top', '10px', 'important');
+
+  var sHdr = document.createElement('p');
+  sHdr.className = 'nav__title';
+  sHdr.textContent = 'Support';
+  supportSection.appendChild(sHdr);
+
+  var btnWrap = document.createElement('div');
+  btnWrap.style.setProperty('display', 'flex', 'important');
+  btnWrap.style.setProperty('flex-direction', 'column', 'important');
+  btnWrap.style.setProperty('gap', '7px', 'important');
+  btnWrap.style.setProperty('margin-top', '6px', 'important');
+
+  function makeSupBtn(href, label, color) {
+    var a = document.createElement('a');
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = label;
+    a.style.setProperty('display', 'block', 'important');
+    a.style.setProperty('font-family', "'Courier New', monospace", 'important');
+    a.style.setProperty('font-size', '10px', 'important');
+    a.style.setProperty('font-weight', '700', 'important');
+    a.style.setProperty('text-decoration', 'none', 'important');
+    a.style.setProperty('color', color, 'important');
+    a.style.setProperty('border', '1px solid ' + color + '44', 'important');
+    a.style.setProperty('border-radius', '4px', 'important');
+    a.style.setProperty('padding', '6px 10px', 'important');
+    a.style.setProperty('text-align', 'center', 'important');
+    a.style.setProperty('transition', 'background .15s, color .15s', 'important');
+    a.addEventListener('mouseover', function() {
+      this.style.setProperty('background', color, 'important');
+      this.style.setProperty('color', '#000', 'important');
+    });
+    a.addEventListener('mouseout', function() {
+      this.style.setProperty('background', 'transparent', 'important');
+      this.style.setProperty('color', color, 'important');
+    });
+    return a;
+  }
+
+  btnWrap.appendChild(makeSupBtn('https://buymeacoffee.com/sweshinfosec', '☕ Buy Me a Coffee', '#ffb300'));
+  btnWrap.appendChild(makeSupBtn('https://patreon.com/sweshinfosec', '⚑ Support on Patreon', '#ff424d'));
+
+  supportSection.appendChild(btnWrap);
+  sidebar.appendChild(supportSection);
 });
 </script>
