@@ -238,18 +238,19 @@ h4,
   margin-bottom: 6px !important;
 }
 
-/* Every nav link — green border box */
+/* Every nav link — no border, green text only */
 .nav__list .nav__items a {
   display: block !important;
   color: #9fef00 !important;
-  background: #000000 !important;
-  border: 1px solid #9fef00 !important;
-  border-radius: 3px !important;
+  background: transparent !important;
+  border: none !important;
+  border-left: 2px solid transparent !important;
+  border-radius: 0 !important;
   font-family: 'Courier New', monospace !important;
   font-size: 11px !important;
   font-weight: 700 !important;
   padding: 4px 9px !important;
-  margin-bottom: 3px !important;
+  margin-bottom: 2px !important;
   text-decoration: none !important;
   white-space: nowrap !important;
   overflow: hidden !important;
@@ -257,23 +258,23 @@ h4,
   transition: background 0.12s, color 0.12s, border-color 0.12s !important;
 }
 
-/* Hover — red fill (same as masthead) */
+/* Hover — red fill */
 .nav__list .nav__items a:hover {
   background: #ff0000 !important;
   color: #000000 !important;
-  border-color: #ff0000 !important;
+  border-left-color: #ff0000 !important;
 }
 
-/* Active / current section — red background + red text */
+/* Active / current section — red accent */
 .nav__list .nav__items a.bo-active {
   background: #1a0000 !important;
   color: #ff4444 !important;
-  border-color: #ff4444 !important;
+  border-left-color: #ff4444 !important;
 }
 
-/* ↳ h3 sub-items — indented, dimmer border (JS sets data-sub="1") */
+/* ↳ h3 sub-items — indented, dimmer */
 #bo-toc-wrap .nav__items a[data-sub="1"] {
-  border-color: #9fef0055 !important;
+  border-left-color: transparent !important;
   color: #aaaaaa !important;
   font-size: 10px !important;
   padding-left: 14px !important;
@@ -281,12 +282,12 @@ h4,
 #bo-toc-wrap .nav__items a[data-sub="1"]:hover {
   background: #ff0000 !important;
   color: #000000 !important;
-  border-color: #ff0000 !important;
+  border-left-color: #ff0000 !important;
 }
 #bo-toc-wrap .nav__items a[data-sub="1"].bo-active {
   background: #1a0000 !important;
   color: #ff4444 !important;
-  border-color: #ff4444 !important;
+  border-left-color: #ff4444 !important;
 }
 
 /* ── Buy Me a Coffee button ── */
