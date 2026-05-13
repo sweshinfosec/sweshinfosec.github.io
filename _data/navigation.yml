@@ -52,3 +52,42 @@ pentest_sidebar:
         url: /infosec/pentest/cloud/
       - title: "IoT"
         url: /infosec/pentest/iot/
+
+# Sidebar — pentest-ground.com walkthrough (categories + phases in one left sidebar)
+pentest_ground_walkthrough:
+  - title: "Pentest"
+    children:
+      - title: "Web Application"
+        url: /infosec/pentest/web/
+      - title: "Mobile"
+        url: /infosec/pentest/mobile/
+      - title: "Cloud"
+        url: /infosec/pentest/cloud/
+      - title: "IoT"
+        url: /infosec/pentest/iot/
+  - title: "Phases"
+    children:
+      - title: "TL;DR"
+        url: "#what-we-found-tldr"
+      - title: "Phase 1 — Info Gathering"
+        url: "#phase-1-information-gathering"
+      - title: "Phase 2 — Recon"
+        url: "#phase-2-reconnaissance"
+      - title: "Phase 3 — Scanning"
+        url: "#phase-3-scanning"
+      - title: "Phase 4 — Vuln Analysis"
+        url: "#phase-4-vulnerability-analysis"
+      - title: "Phase 5 — Exploitation"
+        url: "#phase-5-exploitation"
+      - title: "↳ F-009 SQLi CRITICAL"
+        url: "#f-009-sql-injection-critical-cvss-98"
+      - title: "↳ F-010 RCE CRITICAL"
+        url: "#f-010-werkzeug-debugger-rce-critical-cvss-98"
+      - title: "↳ F-011 BAC CRITICAL"
+        url: "#f-011-broken-access-control-unauthenticated-write-critical-cvss-91"
+      - title: "Phase 6 — Post Exploit"
+        url: "#phase-6-post-exploitation"
+      - title: "Kill Chain"
+        url: "#kill-chain"
+      - title: "Disclaimer"
+        url: "#disclaimer"

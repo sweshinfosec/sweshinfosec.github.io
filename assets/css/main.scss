@@ -217,6 +217,50 @@ h4,
   line-height:1.9; white-space:pre-wrap;
 }
 
+/* ── Left sidebar nav — BlackOps theme ── */
+/* Section headers (Pentest / Phases) */
+.nav__title {
+  color: #9fef00 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  border-bottom: 1px solid #1e1e1e !important;
+  padding-bottom: 4px !important;
+  margin-top: 14px !important;
+}
+/* Nav links */
+.nav__list .nav__items a {
+  color: #cccccc !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 12px !important;
+  padding: 3px 0 !important;
+  border-left: 2px solid transparent;
+  padding-left: 6px !important;
+  transition: color 0.12s, border-color 0.12s;
+  display: block;
+}
+.nav__list .nav__items a:hover {
+  color: #9fef00 !important;
+  border-left-color: #9fef00 !important;
+  background: transparent !important;
+}
+/* Phase sub-items (↳ findings) */
+.nav__list .nav__items a[href^="#f-0"] {
+  color: #ff4444 !important;
+  font-size: 11px !important;
+  padding-left: 14px !important;
+}
+.nav__list .nav__items a[href^="#f-0"]:hover {
+  color: #ff9800 !important;
+  border-left-color: #ff9800 !important;
+}
+/* Kill chain highlight */
+.nav__list .nav__items a[href="#kill-chain"] {
+  color: #ff9800 !important;
+}
+
 /* ── Buy Me a Coffee button ── */
 .bmac-btn {
   display:inline-block; background:#ff9800; color:#000 !important;
