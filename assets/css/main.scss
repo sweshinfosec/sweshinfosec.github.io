@@ -42,46 +42,83 @@ body { background: #0d0d0d !important; color: #cccccc; }
 .layout--home .sidebar { padding-top: 28px !important; }
 .layout--home .author__content { margin-top: 8px !important; }
 
-/* ── Search bar strip below masthead ── */
+/* ── Logo — force proper size, override any MM constraints ── */
+.masthead .site-logo img,
+.site-logo img {
+  height: 72px !important;
+  width: auto !important;
+  max-height: none !important;
+  max-width: none !important;
+  display: block !important;
+}
+
+/* ── Search bar strip — compact, right-aligned, no placeholder text ── */
 .bo-search-wrap {
   background: #080808;
   border-bottom: 1px solid #1e1e1e;
-  padding: 6px 2em;
+  padding: 3px 2em;
+  display: flex;
+  justify-content: flex-end;
 }
 .bo-search-inner {
   display: flex;
   align-items: center;
-  gap: 8px;
-  max-width: 660px;
+  gap: 5px;
 }
 .bo-search-input {
-  flex: 1;
+  width: 160px;
   background: #0d0d0d;
-  border: 1px solid #9fef0044;
+  border: 1px solid #9fef0033;
   color: #cccccc;
   font-family: 'Courier New', monospace;
-  font-size: 12px;
-  padding: 6px 12px;
+  font-size: 11px;
+  padding: 3px 8px;
   border-radius: 3px;
   outline: none;
   transition: border-color 0.15s;
 }
 .bo-search-input:focus { border-color: #9fef00; }
-.bo-search-input::placeholder { color: #444; }
+.bo-search-input::placeholder { color: transparent; }
 .bo-search-btn {
-  background: #9fef00;
-  color: #000;
-  border: none;
-  font-family: 'Courier New', monospace;
-  font-weight: 700;
-  font-size: 11px;
-  padding: 7px 18px;
+  background: transparent;
+  color: #9fef00;
+  border: 1px solid #9fef0033;
+  font-size: 12px;
+  padding: 3px 8px;
   border-radius: 3px;
   cursor: pointer;
-  letter-spacing: 1px;
-  transition: background 0.15s;
+  line-height: 1;
+  transition: background 0.15s, border-color 0.15s;
 }
-.bo-search-btn:hover { background: #ff0000; color: #000; }
+.bo-search-btn:hover { background: #ff0000; color: #000; border-color: #ff0000; }
+
+/* ── Author social links — BlackOps theme ── */
+.author__urls li a,
+.author__urls li a svg,
+.author__urls .btn {
+  color: #9fef00 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 12px !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 3px 0 !important;
+}
+.author__urls li a:hover { color: #ff0000 !important; }
+.author__urls li a svg { fill: #9fef00 !important; }
+
+/* // CONNECT section heading — injected by JS before .author__urls-wrapper */
+.bo-connect-hdr {
+  color: #9fef00;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #9fef0033;
+  padding-bottom: 5px;
+  margin: 16px 0 8px;
+}
 
 /* ── Increase overall page width ── */
 /* Only widen the outer containers — never force article/content to 100% width

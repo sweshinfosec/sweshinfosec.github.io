@@ -3,6 +3,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
 <script>
+/* ── Inject // CONNECT heading above author social links ── */
+window.addEventListener('DOMContentLoaded', function () {
+  var urlsWrap = document.querySelector('.author__urls-wrapper');
+  if (urlsWrap) {
+    var hdr = document.createElement('p');
+    hdr.className = 'bo-connect-hdr';
+    hdr.textContent = '// Connect';
+    urlsWrap.parentNode.insertBefore(hdr, urlsWrap);
+  }
+  /* Style social link items via JS (MM's global a{} wins CSS) */
+  var links = document.querySelectorAll('.author__urls li a');
+  links.forEach(function(a) {
+    a.style.setProperty('color', '#9fef00', 'important');
+    a.style.setProperty('font-family', "'Courier New', monospace", 'important');
+    a.style.setProperty('font-size', '12px', 'important');
+    a.style.setProperty('text-decoration', 'none', 'important');
+    a.addEventListener('mouseover', function() { this.style.setProperty('color', '#ff0000', 'important'); });
+    a.addEventListener('mouseout',  function() { this.style.setProperty('color', '#9fef00', 'important'); });
+  });
+});
+
 window.addEventListener('DOMContentLoaded', function () {
   var content = document.querySelector('.page__content');
   var navList  = document.querySelector('.sidebar .nav__list');

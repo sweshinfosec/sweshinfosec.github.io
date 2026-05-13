@@ -6,9 +6,15 @@ title: "IoT Pentest"
 
 <div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;">// IoT Walkthroughs</div>
 
-{% assign posts = site.posts | where_exp:"post", "post.tags contains 'iot-pentest'" %}
-{% if posts.size == 0 %}
+{% assign iot_posts = "" | split: "," %}
+{% for post in site.posts %}
+  {% if post.tags contains 'iot-pentest' %}
+    {% assign iot_posts = iot_posts | push: post %}
+  {% endif %}
+{% endfor %}
+
+{% if iot_posts.size == 0 %}
   <p style="color:#555;font-family:'Courier New',monospace;font-size:13px;">No IoT posts yet — check back soon.</p>
 {% else %}
-  {% for post in posts %}{% include archive-single.html %}{% endfor %}
+  {% for post in iot_posts %}{% include archive-single.html %}{% endfor %}
 {% endif %}

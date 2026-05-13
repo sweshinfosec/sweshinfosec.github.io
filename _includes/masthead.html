@@ -115,7 +115,7 @@
 
         {% unless logo_path == empty %}
           <a class="site-logo" href="{{ '/' | relative_url }}">
-            <img src="{{ site.logo | relative_url }}" alt="{{ site.title }}" style="height:64px; width:auto;">
+            <img src="{{ site.logo | relative_url }}" alt="{{ site.title }}" style="height:72px !important; width:auto !important; max-height:none !important; display:block;">
           </a>
         {% endunless %}
 
@@ -159,11 +159,11 @@
       </nav>
     </div>
   </div>
-  <!-- ── Search bar strip ── -->
+  <!-- ── Search bar strip — compact, right-aligned ── -->
   <div class="bo-search-wrap">
     <form class="bo-search-inner" action="{{ '/search/' | relative_url }}" method="get" role="search">
-      <input class="bo-search-input" type="search" name="q" placeholder="🔍  Search CVEs · tools · findings · walkthroughs…" autocomplete="off" spellcheck="false">
-      <button class="bo-search-btn" type="submit">SEARCH</button>
+      <input class="bo-search-input" type="search" name="q" autocomplete="off" spellcheck="false">
+      <button class="bo-search-btn" type="submit">&#128269;</button>
     </form>
   </div>
 </div>
