@@ -1,6 +1,6 @@
 #!/bin/bash
 # commitpost.sh — BlackOps auto-publish to GitHub Pages
-# Usage: ./commitpost.sh "Post title" path/to/walkthrough.md
+# Usage: ./commitpost.sh "Post title" path/to/walkthrough.md [path/to/session.json]
 # Called by /commitpost skill after BlackOps assessment
 
 SITE_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -10,6 +10,34 @@ TIME=$(date +%H:%M:%S)
 
 TITLE="${1:-Untitled Walkthrough}"
 SOURCE_MD="${2:-}"
+SESSION_JSON="${3:-}"
+
+# ── ENVIRONMENT GATE ──────────────────────────────────────────
+# UAT and Prod are NEVER published publicly — client reports only
+if [ -n "$SESSION_JSON" ] && [ -f "$SESSION_JSON" ]; then
+  ENV=$(python3 -c "import json; d=json.load(open('$SESSION_JSON')); print(d.get('environment','unknown'))" 2>/dev/null)
+  TARGET=$(python3 -c "import json; d=json.load(open('$SESSION_JSON')); print(d.get('target','unknown'))" 2>/dev/null)
+
+  if [ "$ENV" = "uat" ] || [ "$ENV" = "prod" ]; then
+    echo ""
+    echo "╔══════════════════════════════════════════════════════════╗"
+    echo "║         ⛔  PUBLISH BLOCKED — ENVIRONMENT GATE           ║"
+    echo "╠══════════════════════════════════════════════════════════╣"
+    echo "║                                                          ║"
+    printf "║  Environment : %-42s║\n" "$ENV"
+    printf "║  Target      : %-42s║\n" "$TARGET"
+    echo "║                                                          ║"
+    echo "║  UAT / Prod assessments are NEVER published publicly.    ║"
+    echo "║  Walkthrough delivered to client as private report only. ║"
+    echo "║                                                          ║"
+    echo "║  Allowed for public publish: lab | bugbounty only.       ║"
+    echo "╚══════════════════════════════════════════════════════════╝"
+    echo ""
+    exit 1
+  fi
+  echo "[commitpost] Environment: $ENV — publish allowed ✓"
+fi
+# ─────────────────────────────────────────────────────────────
 
 # Slugify title
 SLUG=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
