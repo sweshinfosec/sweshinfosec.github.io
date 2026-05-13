@@ -146,29 +146,45 @@ body { background: #0d0d0d !important; color: #cccccc; }
     margin: 0 auto !important;
   }
 }
-/* Archive/tag/search content — fill remaining width beside sidebar, not below it */
-.layout--tags .archive,
-.layout--categories .archive,
-.layout--search .archive {
-  width: 100% !important;
-}
-/* layout--archive: use flex so sidebar sits LEFT and content RIGHT */
-.layout--archive #main {
+/* ── Sidebar + content side-by-side on ALL non-home layouts ── */
+.layout--archive #main,
+.layout--single #main,
+.layout--splash #main,
+.layout--tags #main,
+.layout--categories #main,
+.layout--search #main {
   display: flex !important;
+  flex-wrap: nowrap !important;
   align-items: flex-start !important;
   gap: 2em !important;
 }
-.layout--archive #main .sidebar {
-  flex-shrink: 0 !important;
+
+/* Sidebar: fixed width, sticky scroll */
+.layout--archive #main .sidebar,
+.layout--single #main .sidebar,
+.layout--splash #main .sidebar,
+.layout--tags #main .sidebar,
+.layout--categories #main .sidebar,
+.layout--search #main .sidebar {
+  flex: 0 0 220px !important;
   width: 220px !important;
   min-width: 180px !important;
+  max-width: 220px !important;
   position: sticky !important;
   top: 2em !important;
 }
-.layout--archive #main .archive {
-  flex: 1 1 0% !important;
+
+/* Main content column: takes all remaining width */
+.layout--archive #main .archive,
+.layout--single #main article.page,
+.layout--splash #main article.page,
+.layout--tags #main .archive,
+.layout--categories #main .archive,
+.layout--search #main .archive {
+  flex: 1 1 auto !important;
   min-width: 0 !important;
   width: auto !important;
+  max-width: 100% !important;
 }
 
 /* ── Increase overall page width ── */
@@ -179,8 +195,8 @@ body { background: #0d0d0d !important; color: #cccccc; }
 /* Widen masthead */
 .masthead__inner-wrap { max-width: 100% !important; padding-left: 2em; padding-right: 2em; }
 
-/* Widen archive/home grid */
-.archive { width: 100% !important; }
+/* Widen archive/home grid — only for home layout, flex handles the rest */
+.layout--home .archive { width: 100% !important; }
 
 /* Sidebar + content row */
 .sidebar { opacity: 1 !important; }
