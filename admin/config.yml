@@ -109,10 +109,10 @@ collections:
         widget: "boolean"
         default: true
 
-      - label: "Table of Contents"
+      - label: "Table of Contents (MM right-side — keep OFF, left PHASES auto-builds)"
         name: "toc"
         widget: "boolean"
-        default: true
+        default: false
 
       - label: "TOC Label"
         name: "toc_label"
