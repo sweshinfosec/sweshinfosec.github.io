@@ -2,11 +2,20 @@ main:
   - title: "Home"
     url: /
 
-  - title: "InfoSec"
+  - title: "Info Sec"
     url: /infosec/
     children:
       - title: "Pentest"
         url: /infosec/pentest/
+        children:
+          - title: "Web"
+            url: /infosec/pentest/web/
+          - title: "Mobile"
+            url: /infosec/pentest/mobile/
+          - title: "Cloud"
+            url: /infosec/pentest/cloud/
+          - title: "IOT"
+            url: /infosec/pentest/iot/
       - title: "Vulnerability Assessment"
         url: /infosec/vulnerability-assessment/
       - title: "Malware Analysis"
@@ -21,6 +30,9 @@ main:
         url: /infosec/threat-modeling/
       - title: "Risk Assessment"
         url: /infosec/risk-assessment/
+
+  - title: "Tags"
+    url: /tags/
 
   - title: "Terms & Conditions"
     url: /terms/

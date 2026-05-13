@@ -7,22 +7,23 @@
 .title-info  { color: #cccccc !important; }
 .title-sec   { color: #ff0000 !important; }
 
-/* ── Dropdown nav ── */
-.bo-nav { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
-.bo-nav-item { position: relative; }
+/* ── Top nav items ── */
+.bo-nav { list-style:none; margin:0; padding:0; display:flex; align-items:center; }
+.bo-nav-item { position:relative; }
 .bo-nav-item > a {
-  color: #eeeeee;
+  color: #cccccc;
   text-decoration: none;
-  padding: 0 16px;
-  font-size: 14px;
+  padding: 0 14px;
+  font-size: 13px;
   line-height: 60px;
   display: inline-block;
   font-family: 'Courier New', monospace;
   white-space: nowrap;
+  transition: color 0.15s;
 }
-.bo-nav-item > a:hover { color: #9fef00; }
-.bo-caret { font-size: 9px; margin-left: 4px; color: #555; }
+.bo-nav-item > a:hover { color: #ff0000 !important; }
 
+/* ── Level 1 dropdown (Info Sec → submenus) ── */
 .bo-dropdown {
   display: none;
   position: absolute;
@@ -30,30 +31,70 @@
   left: 0;
   background: #111111;
   border: 1px solid #1e1e1e;
-  border-radius: 6px;
-  min-width: 230px;
+  border-top: 2px solid #ff0000;
+  border-radius: 0 0 6px 6px;
+  min-width: 220px;
   z-index: 9999;
   padding: 6px 0;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.7);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.8);
 }
-.bo-dropdown li { list-style: none; }
-.bo-dropdown li a {
+.bo-dropdown > li { list-style:none; position:relative; }
+.bo-dropdown > li > a {
   display: block;
-  padding: 9px 18px;
+  padding: 9px 16px;
   color: #aaaaaa;
   text-decoration: none;
   font-family: 'Courier New', monospace;
   font-size: 12px;
   border-left: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.12s, background 0.12s, border-color 0.12s;
+  white-space: nowrap;
 }
-.bo-dropdown li a:hover {
-  color: #9fef00;
+.bo-dropdown > li > a:hover {
+  color: #ff0000 !important;
   background: #0d0d0d;
-  border-left-color: #9fef00;
+  border-left-color: #ff0000;
 }
-.bo-nav-item:hover .bo-dropdown,
-.bo-nav-item:focus-within .bo-dropdown { display: block; }
+.bo-nav-item:hover > .bo-dropdown,
+.bo-nav-item:focus-within > .bo-dropdown { display: block; }
+
+/* ── Level 2 flyout (Pentest → Web/Mobile/Cloud/IOT) ── */
+.bo-flyout {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #111111;
+  border: 1px solid #1e1e1e;
+  border-top: 2px solid #ff0000;
+  border-radius: 0 6px 6px 0;
+  min-width: 180px;
+  z-index: 10000;
+  padding: 6px 0;
+  box-shadow: 4px 8px 28px rgba(0,0,0,0.8);
+}
+.bo-flyout li { list-style:none; }
+.bo-flyout li a {
+  display: block;
+  padding: 9px 16px;
+  color: #888888;
+  text-decoration: none;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  border-left: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.12s, background 0.12s, border-color 0.12s;
+}
+.bo-flyout li a:hover {
+  color: #ff0000 !important;
+  background: #0d0d0d;
+  border-left-color: #ff0000;
+}
+.bo-has-flyout:hover > .bo-flyout,
+.bo-has-flyout:focus-within > .bo-flyout { display: block; }
+
+.bo-arrow { float:right; color:#444; font-size:10px; margin-left:8px; }
+.bo-caret { font-size:9px; margin-left:4px; color:#555; }
 </style>
 
 <div class="masthead">
@@ -78,7 +119,18 @@
                 <a href="{{ link.url | relative_url }}">{{ link.title }}<span class="bo-caret">▾</span></a>
                 <ul class="bo-dropdown">
                   {%- for child in link.children -%}
-                    <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
+                    {%- if child.children -%}
+                      <li class="bo-has-flyout">
+                        <a href="{{ child.url | relative_url }}">{{ child.title }}<span class="bo-arrow">›</span></a>
+                        <ul class="bo-flyout">
+                          {%- for sub in child.children -%}
+                            <li><a href="{{ sub.url | relative_url }}">— {{ sub.title }}</a></li>
+                          {%- endfor -%}
+                        </ul>
+                      </li>
+                    {%- else -%}
+                      <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
+                    {%- endif -%}
                   {%- endfor -%}
                 </ul>
               {%- else -%}
