@@ -74,6 +74,22 @@ code, pre {
 a { color: #4488ff; }
 a:hover { color: #ff9800; }
 
+/* ── Headings — hacker theme ── */
+h1, h2, h3, h4, h5, h6,
+.page__title,
+.page__content h1,
+.page__content h2,
+.page__content h3,
+.page__content h4 {
+  color: #9fef00 !important;
+  font-family: 'Courier New', monospace !important;
+}
+
+h1 { font-size: 1.6em; border-bottom: 1px solid #1e1e1e; padding-bottom: 6px; }
+h2 { font-size: 1.3em; border-bottom: 1px solid #1e1e1e; padding-bottom: 4px; }
+h3 { font-size: 1.1em; color: #ff9800 !important; }
+h4 { font-size: 1em;   color: #ffeb3b !important; }
+
 /* ── Kill Chain Widget ── */
 .killchain-wrap {
   background: var(--bo-bg); border: 1px solid var(--bo-border);
