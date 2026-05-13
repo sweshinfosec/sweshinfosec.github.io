@@ -1,0 +1,58 @@
+title: "SweshInfoSec"
+tagline: "Pentesting · Bug Bounty · CVE Research"
+description: "Real-world web application security research, VAPT walkthroughs, and bug bounty findings by SweshInfoSec."
+url: "https://sweshinfosec.github.io"
+baseurl: ""
+
+author:
+  name: "SweshInfoSec"
+  email: "sweshinfosec@gmail.com"
+  twitter: "SweshInfoSec"
+  github: "sweshinfosec"
+  bio: "Security researcher | VAPT | Bug bounty | ArcGIS CVEs"
+  avatar: "/assets/images/avatar.png"
+
+remote_theme: "mmistakes/minimal-mistakes@4.26.2"
+minimal_mistakes_skin: "dark"
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-include-cache
+
+permalink: /:categories/:title/
+
+paginate: 10
+paginate_path: /page:num/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      share: true
+      related: true
+      show_date: true
+
+category_archive:
+  type: liquid
+  path: /categories/
+
+tag_archive:
+  type: liquid
+  path: /tags/
+
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-XXXXXXXXX-X"
+    anonymize_ip: false
+
+exclude:
+  - "*.sh"
+  - "Gemfile.lock"
+  - "README.md"
+  - "commitpost.sh"

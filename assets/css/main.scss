@@ -1,0 +1,87 @@
+---
+---
+
+@import "minimal-mistakes/skins/dark";
+@import "minimal-mistakes";
+
+/* ══════════════════════════════════════════
+   BlackOps Dark Terminal Theme — SweshInfoSec
+   ══════════════════════════════════════════ */
+
+:root {
+  --bo-bg:    #0d0d0d;
+  --bo-card:  #111111;
+  --bo-border:#1e1e1e;
+  --bo-text:  #cccccc;
+  --bo-muted: #444444;
+  --bo-crit:  #ff4444;
+  --bo-high:  #ff9800;
+  --bo-med:   #ffeb3b;
+  --bo-low:   #4488ff;
+  --bo-ok:    #00e676;
+  --bo-font:  'Courier New', monospace;
+}
+
+body { background: #0d0d0d !important; color: #cccccc; }
+
+.page__content, .archive__item-excerpt, .page__meta {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.masthead { background: #0a0a0a !important; border-bottom: 1px solid #1e1e1e; }
+.site-title { color: #00e676 !important; font-family: 'Courier New', monospace; font-weight: 700; letter-spacing: 2px; }
+.author__name { color: #00e676 !important; font-family: 'Courier New', monospace; }
+.author__bio { color: #888888; font-size: 12px; }
+
+.archive__item-title a { color: #00e676 !important; font-family: 'Courier New', monospace; }
+.archive__item-title a:hover { color: #ff9800 !important; }
+
+.page__taxonomy-item {
+  background: #111111;
+  border: 1px solid #1e1e1e;
+  color: #4488ff;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+}
+
+code, pre {
+  background: #0a0a0a !important;
+  border: 1px solid #1e1e1e;
+  color: #00e676;
+  font-family: 'Courier New', monospace;
+}
+
+a { color: #4488ff; }
+a:hover { color: #ff9800; }
+
+/* ── Kill Chain Widget ── */
+.killchain-wrap {
+  background: var(--bo-bg); border: 1px solid var(--bo-border);
+  border-radius: 8px; padding: 20px; font-family: var(--bo-font);
+  color: var(--bo-text); margin: 20px 0;
+}
+.phase-card { border: 1px solid var(--bo-border); border-radius: 6px; margin: 10px 0; overflow: hidden; }
+.phase-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bo-card); }
+.badge-crit { background:#3d0000; color:#ff4444; font-size:11px; font-weight:700; padding:3px 8px; border-radius:3px; }
+.badge-high { background:#2a1a00; color:#ff9800; font-size:11px; font-weight:700; padding:3px 8px; border-radius:3px; }
+.badge-med  { background:#1a1800; color:#ffeb3b; font-size:11px; font-weight:700; padding:3px 8px; border-radius:3px; }
+.badge-low  { background:#00001a; color:#4488ff; font-size:11px; font-weight:700; padding:3px 8px; border-radius:3px; }
+.badge-ok   { background:#002a14; color:#00e676; font-size:11px; font-weight:700; padding:3px 8px; border-radius:3px; }
+.result-ok   { color:#00e676; font-size:11px; padding:12px 14px; white-space:pre-wrap; }
+.result-fail { color:#ff4444; font-size:11px; padding:12px 14px; white-space:pre-wrap; }
+.result-warn { color:#ff9800; font-size:11px; padding:12px 14px; white-space:pre-wrap; }
+.terminal-log {
+  background:#0a1a0a; border:1px solid #00e67633; border-radius:6px;
+  padding:14px; font-family:var(--bo-font); font-size:11px; color:#888;
+  line-height:1.9; white-space:pre-wrap;
+}
+
+/* ── Buy Me a Coffee button ── */
+.bmac-btn {
+  display:inline-block; background:#ff9800; color:#000 !important;
+  font-family:'Courier New',monospace; font-size:13px; font-weight:700;
+  padding:8px 18px; border-radius:4px; text-decoration:none; margin:10px 0;
+}
+.bmac-btn:hover { background:#ffb74d; color:#000 !important; }
