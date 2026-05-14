@@ -632,8 +632,12 @@ aside.sidebar__right { display: none !important; }
   align-items: start !important;
   width: 100% !important;
 }
+/* Home: 4-col grid, first column stays empty → cards land in cols 2-3-4 */
 .layout--home .bo-most-visited .grid__wrapper {
   grid-template-columns: repeat(4, 1fr) !important;
+}
+.layout--home .bo-most-visited .grid__wrapper .grid__item:first-child {
+  grid-column: 2 !important;
 }
 
 /* Card — width:auto clears MM's flexbox percentage widths that persist in a grid context */
