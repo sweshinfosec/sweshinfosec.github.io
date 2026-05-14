@@ -508,95 +508,73 @@ nav.toc,
 aside.sidebar__right { display: none !important; }
 
 /* ── "You May Also Enjoy" — compact, hover green border ── */
+/* .page__related — MM's built-in related posts on single post pages.
+   All card styling is in the YOU MAY ALSO ENJOY block below. */
 .page__related {
   margin-top: 3em !important;
   border-top: 1px solid #1e1e1e !important;
   padding-top: 1.5em !important;
 }
-.page__related .archive__item-teaser { display: none !important; }
-
 .page__related h2 {
   font-family: 'Orbitron', 'Courier New', monospace !important;
   color: #9fef00 !important;
   font-size: 0.7em !important;
   letter-spacing: 2px !important;
 }
+/* ══════════════════════════════════════════════════════
+   Category listing pages — original MM list style
+   Green glow border on hover, tighter row gaps
+   ══════════════════════════════════════════════════════ */
 
-/* Grid: 3 columns on all pages, 4 columns on home page */
-.page__related .grid__wrapper,
-.bo-most-visited .grid__wrapper {
+/* Tighten row spacing between posts in list view */
+.layout--archive .archive .list__item {
+  padding: 4px 8px !important;
+  border-radius: 5px !important;
+  transition: background 0.13s, box-shadow 0.13s !important;
+  cursor: pointer !important;
+  margin-bottom: 4px !important;
+}
+.layout--archive .archive .list__item:hover {
+  background: #031000 !important;
+  box-shadow: 0 0 0 1px #9fef00, 0 0 14px rgba(159,239,0,0.10) !important;
+}
+.layout--archive .archive .list__item:hover .archive__item-title a {
+  color: #9fef00 !important;
+}
+.layout--archive .archive .list__item:hover .archive__item-excerpt {
+  color: #9fef0055 !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   YOU MAY ALSO ENJOY — bottom widget card style
+   3 cols on sub-pages, 4 cols on home. Full-width block.
+   Cards mirror home page Recent Posts exactly.
+   ══════════════════════════════════════════════════════ */
+
+/* Widget is a plain block so it sits full-width below the list */
+.bo-most-visited {
+  display: block !important;
+  width: 100% !important;
+  margin-top: 2.5em !important;
+  border-top: 1px solid #1e1e1e !important;
+  padding-top: 1.5em !important;
+  clear: both !important;
+}
+
+/* Inner grid — 3 cols by default, 4 on home */
+.bo-most-visited .grid__wrapper,
+.page__related .grid__wrapper {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
-  gap: 12px !important;
+  gap: 14px !important;
   align-items: start !important;
+  width: 100% !important;
 }
-/* Home page widget matches the 4-column "Recent Posts" grid */
 .layout--home .bo-most-visited .grid__wrapper {
   grid-template-columns: repeat(4, 1fr) !important;
 }
 
-/* Card styles are in the UNIFIED CARD STYLE section below — no duplicates here */
-/* Collapse MM's inner meta wrapper spacers */
-.page__related .page__meta-sep,
-.page__related .page__meta-readtime,
-.page__related p.page__meta,
-.bo-most-visited .page__meta-sep,
-.bo-most-visited .page__meta-readtime,
-.bo-most-visited p.page__meta { margin: 0 !important; padding: 0 !important; }
-
-.page__related .archive__item-excerpt,
-.bo-most-visited .archive__item-excerpt {
-  color: #666 !important;
-  font-size: 11px !important;
-  line-height: 1.4 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-/* ══════════════════════════════════════════════════════
-   UNIFIED CARD STYLE
-   Applies identically to:
-     • Category/sub-page post listings  (3 cols)
-     • "You May Also Enjoy" widget      (4 cols home / 3 cols sub)
-   Mirrors the home page Recent Posts card exactly.
-   ══════════════════════════════════════════════════════ */
-
-/* ── Category pages: 3-column grid ── */
-.layout--archive .archive {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 16px !important;
-  align-items: start !important;
-}
-/* Section headers, empty messages, non-card elements span all 3 cols */
-.layout--archive .archive > h1,
-.layout--archive .archive > h2,
-.layout--archive .archive > p,
-.layout--archive .archive > .sec-section-hdr,
-.layout--archive .archive > div[style*="font-family"],
-.layout--archive .archive > div[style*="letter-spacing"] {
-  grid-column: 1 / -1 !important;
-}
-/* You May Also Enjoy — full width row at the bottom of the archive grid */
-.layout--archive .archive > .bo-most-visited {
-  grid-column: 1 / -1 !important;
-  margin-top: 2em !important;
-  border-top: 1px solid #1e1e1e !important;
-  padding-top: 1.5em !important;
-}
-/* Grid cell wrapper — no visual style on the wrapper itself */
-.layout--archive .archive .list__item {
-  display: flex !important;
-  flex-direction: column !important;
-  width: auto !important;
-  float: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  background: none !important;
-}
-
-/* ── Shared inner card (archive__item) — SAME as home page ── */
-.layout--archive .archive .list__item .archive__item,
+/* Card */
 .bo-most-visited .grid__item,
 .page__related .grid__item {
   background: #0a0a0a !important;
@@ -606,13 +584,10 @@ aside.sidebar__right { display: none !important; }
   padding: 14px 15px 12px !important;
   display: flex !important;
   flex-direction: column !important;
-  width: 100% !important;
   transition: border-color 0.15s, background 0.15s, box-shadow 0.15s !important;
   cursor: pointer !important;
   margin: 0 !important;
 }
-/* Hover — green border, subtle glow */
-.layout--archive .archive .list__item:hover .archive__item,
 .bo-most-visited .grid__item:hover,
 .page__related .grid__item:hover {
   border-color: #9fef00 !important;
@@ -621,8 +596,7 @@ aside.sidebar__right { display: none !important; }
   box-shadow: 0 0 14px rgba(159,239,0,0.08) !important;
 }
 
-/* ── Title ── */
-.layout--archive .archive .list__item .archive__item-title,
+/* Title */
 .bo-most-visited .archive__item-title,
 .page__related .archive__item-title {
   margin: 0 0 5px !important;
@@ -630,7 +604,6 @@ aside.sidebar__right { display: none !important; }
   padding: 0 !important;
   width: 100% !important;
 }
-.layout--archive .archive .list__item .archive__item-title a,
 .bo-most-visited .archive__item-title a,
 .page__related .archive__item-title a {
   color: #9fef00 !important;
@@ -641,15 +614,12 @@ aside.sidebar__right { display: none !important; }
   text-decoration: none !important;
   transition: color 0.12s !important;
 }
-/* Title turns orange on hover — matches home */
-.layout--archive .archive .list__item:hover .archive__item-title a,
 .bo-most-visited .grid__item:hover .archive__item-title a,
 .page__related .grid__item:hover .archive__item-title a {
   color: #ff9800 !important;
 }
 
-/* ── Excerpt — 3-line clamp ── */
-.layout--archive .archive .list__item .archive__item-excerpt,
+/* Excerpt — 3-line clamp */
 .bo-most-visited .archive__item-excerpt,
 .page__related .archive__item-excerpt {
   font-size: 10px !important;
@@ -664,8 +634,7 @@ aside.sidebar__right { display: none !important; }
   overflow: hidden !important;
 }
 
-/* ── Meta (date · read time) — pushed to card bottom ── */
-.layout--archive .archive .list__item .page__meta,
+/* Meta — pushed to card bottom */
 .bo-most-visited .page__meta,
 .page__related .page__meta {
   font-size: 9px !important;
@@ -681,12 +650,10 @@ aside.sidebar__right { display: none !important; }
 .page__related .page__meta-readtime,
 .page__related p.page__meta { margin: 0 !important; padding: 0 !important; }
 
-/* ── Hide teaser images everywhere ── */
-.layout--archive .archive .list__item .archive__item-teaser,
+/* Hide teaser images */
 .bo-most-visited .archive__item-teaser,
 .page__related .archive__item-teaser { display: none !important; }
 
-/* ── No extra margin on archive__item wrappers ── */
 .bo-most-visited .archive__item,
 .page__related .archive__item { margin-bottom: 0 !important; }
 
