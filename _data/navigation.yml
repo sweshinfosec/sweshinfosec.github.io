@@ -31,14 +31,20 @@ main:
       - title: "Risk Assessment"
         url: /infosec/risk-assessment/
 
+  - title: "Tools"
+    url: /tools/
+    children:
+      - title: "Payloads"
+        url: /tools/payloads/
+
   - title: "Tags"
     url: /tags/
 
-  - title: "Terms & Conditions"
-    url: /terms/
-
   - title: "Privacy"
     url: /privacy-policy/
+    children:
+      - title: "Terms & Conditions"
+        url: /terms/
 
   - title: "About"
     url: /about/

