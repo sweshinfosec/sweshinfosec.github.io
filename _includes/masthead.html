@@ -36,14 +36,14 @@
 .bo-dropdown {
   display: none;
   position: absolute;
-  top: calc(100% + 4px);
+  top: 100%;           /* flush — no gap, mouse can slide straight down */
   left: 0;
   background: #000000;
   border: 2px solid #9fef00;
   border-radius: 4px;
   min-width: 220px;
   z-index: 9999;
-  padding: 4px 0;
+  padding: 6px 0 4px; /* top padding replaces the old 4px outer gap */
   box-shadow: 0 8px 28px rgba(0,0,0,0.9);
 }
 .bo-dropdown > li { list-style:none; position:relative; }
@@ -66,20 +66,26 @@
   border-left-color: #ff0000 !important;
 }
 .bo-nav-item:hover > .bo-dropdown,
-.bo-nav-item:focus-within > .bo-dropdown { display: block; }
+.bo-nav-item:focus-within > .bo-dropdown {
+  display: block;
+  animation: bo-fadein 0.08s ease;
+}
+/* Keep dropdown alive for ~200ms after cursor leaves — prevents snap-close on fast moves */
+.bo-nav-item > .bo-dropdown { transition: visibility 0.2s; }
+@keyframes bo-fadein { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
 
 /* ── Level 2 flyout (Pentest → Web/Mobile/Cloud/IOT) ── */
 .bo-flyout {
   display: none;
   position: absolute;
-  top: -2px;
-  left: calc(100% + 2px);
+  top: -6px;           /* overlap parent slightly so hover stays continuous */
+  left: 100%;          /* flush — no gap, mouse slides right without losing hover */
   background: #000000;
   border: 2px solid #9fef00;
   border-radius: 4px;
   min-width: 180px;
   z-index: 10000;
-  padding: 4px 0;
+  padding: 4px 0 4px 2px; /* small left padding replaces old 2px outer gap */
   box-shadow: 4px 8px 28px rgba(0,0,0,0.9);
 }
 .bo-flyout li { list-style:none; }
@@ -102,7 +108,10 @@
   border-left-color: #ff0000 !important;
 }
 .bo-has-flyout:hover > .bo-flyout,
-.bo-has-flyout:focus-within > .bo-flyout { display: block; }
+.bo-has-flyout:focus-within > .bo-flyout {
+  display: block;
+  animation: bo-fadein 0.08s ease;
+}
 
 .bo-arrow { float:right; color:#9fef00; font-size:10px; margin-left:8px; }
 .bo-caret { font-size:9px; margin-left:4px; color:#9fef00; }
