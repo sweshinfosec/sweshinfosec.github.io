@@ -88,23 +88,39 @@ title: "Info Sec"
   {% endif %}
 {% endfor %}
 
-{% comment %} ── Fallback: no matches at all ── {% endcomment %}
-{% assign total = 0 %}
+{% comment %} ── Recent Posts: show ALL posts not already shown in a section ── {% endcomment %}
+{% assign shown_urls = "" %}
 {% for section_name in sections %}
   {% assign s_idx = forloop.index0 %}
   {% assign s_tags_str = sections_tag_arrays[s_idx] %}
   {% assign s_tags = s_tags_str | split: "§" %}
   {% for post in site.posts %}
+    {% assign matched = false %}
     {% for tag in post.tags %}
       {% assign tag_lower = tag | downcase | replace: " ", "-" %}
-      {% if s_tags contains tag_lower %}{% assign total = total | plus: 1 %}{% endif %}
+      {% if s_tags contains tag_lower %}{% assign matched = true %}{% endif %}
     {% endfor %}
     {% for cat in post.categories %}
       {% assign cat_lower = cat | downcase | replace: " ", "-" %}
-      {% if s_tags contains cat_lower %}{% assign total = total | plus: 1 %}{% endif %}
+      {% if s_tags contains cat_lower %}{% assign matched = true %}{% endif %}
     {% endfor %}
+    {% if matched %}{% assign shown_urls = shown_urls | append: post.url | append: "|" %}{% endif %}
   {% endfor %}
 {% endfor %}
-{% if total == 0 %}
+
+{% assign recent_others = "" | split: "," %}
+{% for post in site.posts %}
+  {% unless shown_urls contains post.url %}
+    {% assign recent_others = recent_others | push: post %}
+  {% endunless %}
+{% endfor %}
+
+{% if recent_others.size > 0 %}
+  <div class="sec-section-hdr">// Recent Posts</div>
+  {% for post in recent_others %}{% include archive-single.html %}{% endfor %}
+{% endif %}
+
+{% comment %} Absolute fallback if nothing shown at all {% endcomment %}
+{% if shown_urls == "" and recent_others.size == 0 %}
   <p style="color:#555;font-family:'Courier New',monospace;font-size:13px;">No articles yet — check back soon.</p>
 {% endif %}

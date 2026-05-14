@@ -644,8 +644,11 @@ aside.sidebar__right { display: none !important; }
 }
 
 /* ── Card grid — pure custom classes, zero MM inheritance ── */
-/* 3 cols on all pages */
-.bo-cards-grid {
+/* ── Widget cards — all rules scoped under .bo-most-visited for max specificity ──
+   This beats MM's .page__content a, .archive a, and any other link rules.       */
+
+/* Grid — 3 cols everywhere */
+.bo-most-visited .bo-cards-grid {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 10px !important;
@@ -653,84 +656,87 @@ aside.sidebar__right { display: none !important; }
   box-sizing: border-box !important;
   margin-top: 0 !important;
 }
-/* Home: 4-col grid, col 1 empty → cards in cols 2·3·4 */
-.layout--home .bo-cards-grid {
+/* Home: 4-col, col 1 empty → cards pin to cols 2·3·4 */
+.layout--home .bo-most-visited .bo-cards-grid {
   grid-template-columns: repeat(4, 1fr) !important;
 }
-.layout--home .bo-cards-grid .bo-card:nth-child(1) { grid-column: 2 !important; }
-.layout--home .bo-cards-grid .bo-card:nth-child(2) { grid-column: 3 !important; }
-.layout--home .bo-cards-grid .bo-card:nth-child(3) { grid-column: 4 !important; }
+.layout--home .bo-most-visited .bo-cards-grid .bo-card:nth-child(1) { grid-column: 2 !important; }
+.layout--home .bo-most-visited .bo-cards-grid .bo-card:nth-child(2) { grid-column: 3 !important; }
+.layout--home .bo-most-visited .bo-cards-grid .bo-card:nth-child(3) { grid-column: 4 !important; }
 
-/* Individual card */
-.bo-card {
+/* Card shell */
+.bo-most-visited .bo-card {
   background: #0a0a0a !important;
   border: 1px solid #1e1e1e !important;
   border-top: 2px solid #9fef00 !important;
   border-radius: 6px !important;
   overflow: hidden !important;
-  transition: border-color 0.15s, box-shadow 0.15s !important;
   min-width: 0 !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
 }
-.bo-card:hover {
+.bo-most-visited .bo-card:hover {
   border-color: #9fef00 !important;
   box-shadow: 0 0 14px rgba(159,239,0,0.08) !important;
 }
 
-/* Full-card link — override MM page__content a styles completely */
-.bo-card-link,
-.bo-card-link:visited,
-.bo-card-link:hover,
-.bo-card-link:focus {
+/* Full-card link — beats .page__content a, .archive a, etc. */
+.bo-most-visited .bo-card .bo-card-link,
+.bo-most-visited .bo-card a.bo-card-link,
+.bo-most-visited .bo-card .bo-card-link:visited,
+.bo-most-visited .bo-card .bo-card-link:hover,
+.bo-most-visited .bo-card .bo-card-link:focus {
   display: flex !important;
   flex-direction: column !important;
   padding: 11px 13px 10px !important;
   text-decoration: none !important;
-  color: inherit !important;
+  color: #ccc !important;
   background: transparent !important;
   height: 100% !important;
   box-sizing: border-box !important;
   border: none !important;
   outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Title */
-.bo-card-title {
+.bo-most-visited .bo-card .bo-card-title {
   font-family: 'Courier New', monospace !important;
-  font-size: 11px !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
   color: #9fef00 !important;
   line-height: 1.35 !important;
-  margin-bottom: 6px !important;
-  transition: color 0.12s !important;
+  margin: 0 0 6px !important;
+  padding: 0 !important;
   display: -webkit-box !important;
   -webkit-line-clamp: 2 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
   text-decoration: none !important;
+  transition: color 0.12s !important;
 }
-.bo-card:hover .bo-card-title { color: #ff9800 !important; }
+.bo-most-visited .bo-card:hover .bo-card-title { color: #ff9800 !important; }
 
-/* Meta (date + views badge) */
-.bo-card-meta {
+/* Meta */
+.bo-most-visited .bo-card .bo-card-meta {
   font-size: 9px !important;
-  color: #555 !important;
-  margin-bottom: 6px !important;
-  margin-top: 0 !important;
+  color: #444 !important;
+  margin: 0 0 5px !important;
+  padding: 0 !important;
   line-height: 1.4 !important;
   text-decoration: none !important;
 }
-.bo-card-meta .fa-calendar-alt { margin-right: 3px !important; }
 
 /* Excerpt */
-.bo-card-excerpt {
+.bo-most-visited .bo-card .bo-card-excerpt {
   font-size: 10px !important;
   color: #3a3a3a !important;
   line-height: 1.5 !important;
+  margin: auto 0 0 !important;
+  padding: 0 !important;
   display: -webkit-box !important;
   -webkit-line-clamp: 3 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
-  margin-top: auto !important;
   text-decoration: none !important;
 }
 
