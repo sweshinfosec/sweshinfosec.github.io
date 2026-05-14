@@ -5,19 +5,50 @@ title: "Tools"
 ---
 
 <style>
-.tools-hdr{font-family:'Courier New',monospace;font-size:9px;color:#9fef00;letter-spacing:2.5px;text-transform:uppercase;padding:6px 0;margin:28px 0 2px;border-bottom:1px solid #1e1e1e;}
-.tools-card{background:#0a0a0a;border:1px solid #1e1e1e;border-left:3px solid #9fef00;border-radius:0 6px 6px 0;padding:18px 20px;margin:12px 0;font-family:'Courier New',monospace;transition:border-color .15s;}
-.tools-card:hover{border-left-color:#ff0000;}
-.tools-card a{color:#9fef00;text-decoration:none;font-size:14px;font-weight:700;}
-.tools-card a:hover{color:#ff0000;}
-.tools-card p{color:#666;font-size:11px;margin:6px 0 0;line-height:1.7;}
+.tl-hdr{font-family:'Courier New',monospace;font-size:9px;color:#9fef00;letter-spacing:2.5px;text-transform:uppercase;padding:6px 0;margin:28px 0 4px;border-bottom:1px solid #1e1e1e;}
+.tl-post-row{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid #0f0f0f;font-family:'Courier New',monospace;}
+.tl-post-row:last-child{border-bottom:none;}
+.tl-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;margin-top:2px;flex-shrink:0;}
+.badge-xss{background:#1a1800;color:#ffeb3b;}
+.badge-sqli{background:#3d0000;color:#ff4444;}
+.badge-cmdi{background:#2a1a00;color:#ff9800;}
+.badge-xxe{background:#00001a;color:#4488ff;}
+.badge-payload{background:#0d0d0d;color:#9fef00;border:1px solid #9fef0033;}
+.tl-post-title{font-size:12px;font-weight:700;color:#9fef00;}
+.tl-post-title a{color:inherit;text-decoration:none;}
+.tl-post-title a:hover{color:#ff0000;}
+.tl-post-excerpt{font-size:10px;color:#444;margin-top:3px;line-height:1.5;}
+.tl-section-link{font-family:'Courier New',monospace;font-size:11px;margin-top:10px;display:block;}
+.tl-section-link a{color:#9fef00;text-decoration:none;}
+.tl-section-link a:hover{color:#ff0000;}
 </style>
 
 <div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;">// Tools &amp; Resources</div>
 
-<div class="tools-hdr">// Offensive Resources</div>
+{% assign all_payload_posts = site.posts | where_exp: "p", "p.categories contains 'payloads'" %}
 
-<div class="tools-card">
-  <a href="/tools/payloads/">Payloads</a>
-  <p>Curated payload collections for web application testing — XSS, SQLi, command injection, LFI, SSTI and more.</p>
+<div class="tl-hdr">// Payloads — All ({{ all_payload_posts.size }})</div>
+
+{% for post in all_payload_posts %}
+<div class="tl-post-row">
+  {% if post.categories contains 'xss' %}
+    <span class="tl-badge badge-xss">XSS</span>
+  {% elsif post.categories contains 'sql-injection' %}
+    <span class="tl-badge badge-sqli">SQLi</span>
+  {% elsif post.categories contains 'command-injection' %}
+    <span class="tl-badge badge-cmdi">CMDi</span>
+  {% elsif post.categories contains 'xxe' %}
+    <span class="tl-badge badge-xxe">XXE</span>
+  {% else %}
+    <span class="tl-badge badge-payload">PL</span>
+  {% endif %}
+  <div>
+    <div class="tl-post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
+    {% if post.excerpt %}<div class="tl-post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>{% endif %}
+  </div>
 </div>
+{% endfor %}
+
+{% if all_payload_posts.size == 0 %}
+<div style="font-family:'Courier New',monospace;font-size:11px;color:#333;font-style:italic;padding:16px 0;">No payload posts yet.</div>
+{% endif %}

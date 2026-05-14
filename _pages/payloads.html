@@ -6,82 +6,124 @@ title: "Payloads"
 
 <style>
 .pl-section-hdr{font-family:'Courier New',monospace;font-size:9px;color:#9fef00;letter-spacing:2.5px;text-transform:uppercase;padding:6px 0;margin:32px 0 4px;border-bottom:1px solid #1e1e1e;}
-.pl-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:14px 0 28px;}
-.pl-cat-card{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:6px;padding:16px 18px;text-decoration:none;display:block;transition:border-color .15s,transform .15s;}
+.pl-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:14px 0 28px;}
+.pl-cat-card{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:6px;padding:14px 16px;text-decoration:none;display:block;transition:border-color .15s,transform .15s;}
 .pl-cat-card:hover{border-color:#9fef00;transform:translateY(-2px);}
 .pl-cat-card:hover .pl-cat-name{color:#ff0000;}
-.pl-cat-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:3px;display:inline-block;margin-bottom:10px;font-family:'Courier New',monospace;}
+.pl-cat-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:3px;display:inline-block;margin-bottom:8px;font-family:'Courier New',monospace;}
 .badge-xss{background:#1a1800;color:#ffeb3b;}
 .badge-sqli{background:#3d0000;color:#ff4444;}
 .badge-cmdi{background:#2a1a00;color:#ff9800;}
 .badge-xxe{background:#00001a;color:#4488ff;}
-.pl-cat-name{font-family:'Courier New',monospace;font-size:13px;font-weight:700;color:#9fef00;margin:0 0 5px;}
-.pl-cat-desc{font-family:'Courier New',monospace;font-size:10px;color:#444;line-height:1.6;}
-.pl-cat-count{font-family:'Courier New',monospace;font-size:9px;color:#333;margin-top:8px;}
+.pl-cat-name{font-family:'Courier New',monospace;font-size:13px;font-weight:700;color:#9fef00;margin:0 0 4px;}
+.pl-cat-desc{font-family:'Courier New',monospace;font-size:10px;color:#444;line-height:1.5;}
+.pl-cat-count{font-family:'Courier New',monospace;font-size:9px;color:#333;margin-top:6px;}
 .pl-cat-count span{color:#9fef00;}
-.pl-post-row{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid #0f0f0f;font-family:'Courier New',monospace;}
+.pl-post-row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #0f0f0f;font-family:'Courier New',monospace;}
 .pl-post-row:last-child{border-bottom:none;}
-.pl-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;margin-top:2px;flex-shrink:0;background:#1a1800;color:#ffeb3b;}
+.pl-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;margin-top:2px;flex-shrink:0;}
 .pl-post-title{font-size:12px;font-weight:700;color:#9fef00;}
 .pl-post-title a{color:inherit;text-decoration:none;}
 .pl-post-title a:hover{color:#ff0000;}
 .pl-post-excerpt{font-size:10px;color:#444;margin-top:3px;line-height:1.5;}
+.pl-view-all{font-family:'Courier New',monospace;font-size:11px;margin-top:8px;margin-bottom:4px;}
+.pl-view-all a{color:#9fef00;text-decoration:none;}
+.pl-view-all a:hover{color:#ff0000;}
 </style>
 
 <div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">// Payload Collections</div>
-<div style="font-family:'Courier New',monospace;font-size:11px;color:#555;margin-bottom:24px;">Curated offensive payloads for authorised security testing. Select a category to browse.</div>
+<div style="font-family:'Courier New',monospace;font-size:11px;color:#555;margin-bottom:24px;">Curated offensive payloads for authorised security testing.</div>
 
+{% assign xss_posts  = site.posts | where_exp: "p", "p.categories contains 'xss'" %}
+{% assign sqli_posts = site.posts | where_exp: "p", "p.categories contains 'sql-injection'" %}
+{% assign cmdi_posts = site.posts | where_exp: "p", "p.categories contains 'command-injection'" %}
+{% assign xxe_posts  = site.posts | where_exp: "p", "p.categories contains 'xxe'" %}
+
+<!-- ── Category cards ── -->
 <div class="pl-section-hdr">// Categories</div>
-
-{% assign xss_count   = site.posts | where_exp: "p", "p.categories contains 'xss'"              | size %}
-{% assign sqli_count  = site.posts | where_exp: "p", "p.categories contains 'sql-injection'"    | size %}
-{% assign cmdi_count  = site.posts | where_exp: "p", "p.categories contains 'command-injection'" | size %}
-{% assign xxe_count   = site.posts | where_exp: "p", "p.categories contains 'xxe'"              | size %}
-
 <div class="pl-cat-grid">
-
   <a class="pl-cat-card" href="/tools/payloads/xss/">
     <span class="pl-cat-badge badge-xss">XSS</span>
     <div class="pl-cat-name">Cross-Site Scripting</div>
-    <div class="pl-cat-desc">Session theft, keylogging, phishing, DOM manipulation, WAF bypass techniques.</div>
-    <div class="pl-cat-count"><span>{{ xss_count }}</span> posts</div>
+    <div class="pl-cat-desc">Session theft, keylogging, phishing, DOM manipulation, WAF bypass.</div>
+    <div class="pl-cat-count"><span>{{ xss_posts.size }}</span> posts</div>
   </a>
-
   <a class="pl-cat-card" href="/tools/payloads/sql-injection/">
     <span class="pl-cat-badge badge-sqli">SQLi</span>
     <div class="pl-cat-name">SQL Injection</div>
-    <div class="pl-cat-desc">Error-based, union, blind boolean, time-based, out-of-band extraction.</div>
-    <div class="pl-cat-count"><span>{{ sqli_count }}</span> posts</div>
+    <div class="pl-cat-desc">Error-based, union, blind boolean, time-based, OOB extraction.</div>
+    <div class="pl-cat-count"><span>{{ sqli_posts.size }}</span> posts</div>
   </a>
-
   <a class="pl-cat-card" href="/tools/payloads/command-injection/">
     <span class="pl-cat-badge badge-cmdi">CMDi</span>
     <div class="pl-cat-name">Command Injection</div>
-    <div class="pl-cat-desc">OS command injection, RCE chains, reverse shells, filter bypass, blind detection.</div>
-    <div class="pl-cat-count"><span>{{ cmdi_count }}</span> posts</div>
+    <div class="pl-cat-desc">OS command injection, RCE chains, reverse shells, filter bypass.</div>
+    <div class="pl-cat-count"><span>{{ cmdi_posts.size }}</span> posts</div>
   </a>
-
   <a class="pl-cat-card" href="/tools/payloads/xxe/">
     <span class="pl-cat-badge badge-xxe">XXE</span>
     <div class="pl-cat-name">XML External Entity</div>
-    <div class="pl-cat-desc">File read, SSRF via XXE, blind OOB exfiltration, error-based extraction.</div>
-    <div class="pl-cat-count"><span>{{ xxe_count }}</span> posts</div>
+    <div class="pl-cat-desc">File read, SSRF via XXE, blind OOB exfiltration, error-based.</div>
+    <div class="pl-cat-count"><span>{{ xxe_posts.size }}</span> posts</div>
   </a>
-
 </div>
 
-<div class="pl-section-hdr">// Recent XSS Posts</div>
-
-{% assign xss_posts = site.posts | where_exp: "p", "p.categories contains 'xss'" | sort: "date" | reverse %}
-{% for post in xss_posts limit:5 %}
+<!-- ── XSS posts ── -->
+{% if xss_posts.size > 0 %}
+<div class="pl-section-hdr">// Cross-Site Scripting (XSS)</div>
+{% for post in xss_posts %}
 <div class="pl-post-row">
-  <span class="pl-badge">XSS</span>
+  <span class="pl-badge badge-xss">XSS</span>
   <div>
     <div class="pl-post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
     {% if post.excerpt %}<div class="pl-post-excerpt">{{ post.excerpt | strip_html | truncate: 130 }}</div>{% endif %}
   </div>
 </div>
 {% endfor %}
-{% if xss_count > 5 %}
-<div style="font-family:'Courier New',monospace;font-size:11px;margin-top:10px;"><a href="/tools/payloads/xss/" style="color:#9fef00;text-decoration:none;">View all {{ xss_count }} XSS posts →</a></div>
+<div class="pl-view-all"><a href="/tools/payloads/xss/">View all XSS →</a></div>
+{% endif %}
+
+<!-- ── SQLi posts ── -->
+{% if sqli_posts.size > 0 %}
+<div class="pl-section-hdr">// SQL Injection</div>
+{% for post in sqli_posts %}
+<div class="pl-post-row">
+  <span class="pl-badge badge-sqli">SQLi</span>
+  <div>
+    <div class="pl-post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
+    {% if post.excerpt %}<div class="pl-post-excerpt">{{ post.excerpt | strip_html | truncate: 130 }}</div>{% endif %}
+  </div>
+</div>
+{% endfor %}
+<div class="pl-view-all"><a href="/tools/payloads/sql-injection/">View all SQLi →</a></div>
+{% endif %}
+
+<!-- ── CMDi posts ── -->
+{% if cmdi_posts.size > 0 %}
+<div class="pl-section-hdr">// Command Injection</div>
+{% for post in cmdi_posts %}
+<div class="pl-post-row">
+  <span class="pl-badge badge-cmdi">CMDi</span>
+  <div>
+    <div class="pl-post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
+    {% if post.excerpt %}<div class="pl-post-excerpt">{{ post.excerpt | strip_html | truncate: 130 }}</div>{% endif %}
+  </div>
+</div>
+{% endfor %}
+<div class="pl-view-all"><a href="/tools/payloads/command-injection/">View all CMDi →</a></div>
+{% endif %}
+
+<!-- ── XXE posts ── -->
+{% if xxe_posts.size > 0 %}
+<div class="pl-section-hdr">// XML External Entity (XXE)</div>
+{% for post in xxe_posts %}
+<div class="pl-post-row">
+  <span class="pl-badge badge-xxe">XXE</span>
+  <div>
+    <div class="pl-post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
+    {% if post.excerpt %}<div class="pl-post-excerpt">{{ post.excerpt | strip_html | truncate: 130 }}</div>{% endif %}
+  </div>
+</div>
+{% endfor %}
+<div class="pl-view-all"><a href="/tools/payloads/xxe/">View all XXE →</a></div>
 {% endif %}

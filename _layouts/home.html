@@ -1,0 +1,82 @@
+---
+layout: archive
+---
+
+{{ content }}
+
+<style>
+.bo-home-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0 28px;}
+.bo-home-card{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:6px;transition:border-color .15s;}
+.bo-home-card:hover{border-color:#9fef00;}
+.bo-home-card a{text-decoration:none;}
+.bo-home-title{font-family:'Courier New',monospace;font-size:12px;font-weight:700;color:#9fef00;line-height:1.4;}
+.bo-home-card:hover .bo-home-title{color:#ff0000;}
+.bo-home-meta{font-family:'Courier New',monospace;font-size:10px;color:#444;display:flex;gap:8px;align-items:center;}
+.bo-home-excerpt{font-family:'Courier New',monospace;font-size:10px;color:#555;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.bo-pager{display:flex;justify-content:space-between;align-items:center;font-family:'Courier New',monospace;font-size:11px;margin:8px 0 32px;padding-top:14px;border-top:1px solid #1e1e1e;}
+.bo-pager a{color:#9fef00;text-decoration:none;padding:5px 14px;border:1px solid #9fef0044;border-radius:4px;}
+.bo-pager a:hover{background:#9fef00;color:#000;}
+.bo-pager span{color:#333;}
+@media(max-width:900px){.bo-home-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.bo-home-grid{grid-template-columns:1fr;}}
+</style>
+
+{% assign infosec_posts = site.posts | where_exp: "p", "p.categories contains 'infosec'" %}
+
+{% if infosec_posts.size > 0 %}
+
+{% if paginator.posts %}
+  {% assign display_posts = "" | split: "" %}
+  {% for post in paginator.posts %}
+    {% unless post.categories contains "payloads" %}
+      {% assign display_posts = display_posts | push: post %}
+    {% endunless %}
+  {% endfor %}
+{% else %}
+  {% assign display_posts = infosec_posts | limit: 12 %}
+{% endif %}
+
+<div class="bo-home-grid">
+  {% for post in display_posts %}
+  <div class="bo-home-card">
+    <a href="{{ post.url | relative_url }}">
+      <div class="bo-home-title">{{ post.title }}</div>
+    </a>
+    <div class="bo-home-meta">
+      <span>{{ post.date | date: "%b %d, %Y" }}</span>
+      {% if post.read_time %}<span>· {{ post.content | number_of_words | divided_by: 180 | plus: 1 }} min read</span>{% endif %}
+    </div>
+    {% if post.excerpt %}
+    <div class="bo-home-excerpt">{{ post.excerpt | strip_html }}</div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+{% if paginator.total_pages > 1 %}
+<div class="bo-pager">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}">← Newer</a>
+  {% else %}
+    <span></span>
+  {% endif %}
+  <span>Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}">Older →</a>
+  {% else %}
+    {% if infosec_posts.size > 12 %}
+      <a href="{{ '/infosec/' | relative_url }}">View all →</a>
+    {% else %}
+      <span></span>
+    {% endif %}
+  {% endif %}
+</div>
+{% elsif infosec_posts.size > 12 %}
+<div class="bo-pager">
+  <span></span>
+  <span></span>
+  <a href="{{ '/infosec/' | relative_url }}">View all posts →</a>
+</div>
+{% endif %}
+
+{% endif %}
