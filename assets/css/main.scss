@@ -599,7 +599,7 @@ aside.sidebar__right { display: none !important; }
    Cards mirror home page Recent Posts exactly.
    ══════════════════════════════════════════════════════ */
 
-/* Widget is a plain block so it sits full-width below the list */
+/* Widget wrapper */
 .bo-most-visited {
   display: block !important;
   width: 100% !important;
@@ -609,7 +609,27 @@ aside.sidebar__right { display: none !important; }
   clear: both !important;
 }
 
-/* Section heading — "YOU MAY ALSO ENJOY" */
+/* Home page: make the wrapper a 4-col grid so label + cards share the same column grid */
+.layout--home .bo-most-visited {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  column-gap: 10px !important;
+  row-gap: 0 !important;
+  align-items: start !important;
+}
+/* Label: sits in cols 2–4 (row 1), aligned exactly with first card */
+.layout--home .bo-most-visited .bo-mv-label {
+  grid-column: 2 / 5 !important;
+  grid-row: 1 !important;
+  margin-bottom: 0.75em !important;
+}
+/* Cards grid: full-width row 2, owns its own 4-col sub-grid with col 1 empty */
+.layout--home .bo-most-visited .bo-cards-grid {
+  grid-column: 1 / 5 !important;
+  grid-row: 2 !important;
+}
+
+/* Section heading */
 .bo-mv-label {
   font-family: 'Orbitron', 'Courier New', monospace !important;
   font-size: 11px !important;
