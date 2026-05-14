@@ -27,18 +27,3 @@ title: "Web Application Pentest"
 {% else %}
   {% for post in web_posts %}{% include archive-single.html %}{% endfor %}
 {% endif %}
-
-{% comment %} If fewer than 5 matched, pad with other recent posts {% endcomment %}
-{% if web_posts.size < 5 %}
-  {% assign used_urls = "" %}
-  {% for p in web_posts %}{% assign used_urls = used_urls | append: p.url | append: "|" %}{% endfor %}
-  {% assign extra_count = 0 %}
-  {% for post in site.posts %}
-    {% unless used_urls contains post.url %}
-      {% if extra_count < 4 %}
-        {% include archive-single.html %}
-        {% assign extra_count = extra_count | plus: 1 %}
-      {% endif %}
-    {% endunless %}
-  {% endfor %}
-{% endif %}
