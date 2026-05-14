@@ -535,56 +535,7 @@ aside.sidebar__right { display: none !important; }
   grid-template-columns: repeat(4, 1fr) !important;
 }
 
-/* Card base — flex column, content stacks tight from top */
-.page__related .grid__item,
-.bo-most-visited .grid__item {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
-  padding: 10px 12px !important;
-  border-radius: 5px !important;
-  border: 1px solid #1e1e1e !important;
-  background: #0d0d0d !important;
-  transition: box-shadow 0.13s, background 0.13s !important;
-  cursor: pointer !important;
-}
-
-/* Hover — green border glow */
-.page__related .grid__item:hover,
-.bo-most-visited .grid__item:hover {
-  background: #031000 !important;
-  box-shadow: 0 0 0 1px #9fef00, 0 0 14px rgba(159,239,0,0.10) !important;
-}
-.page__related .grid__item:hover .archive__item-title a,
-.bo-most-visited .grid__item:hover .archive__item-title a {
-  color: #9fef00 !important;
-}
-
-/* Small text sizes — tight vertical rhythm */
-.page__related .archive__item-title,
-.bo-most-visited .archive__item-title {
-  font-size: 0.75em !important;
-  line-height: 1.3 !important;
-  margin: 0 0 3px 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-}
-.page__related .archive__item-title a,
-.bo-most-visited .archive__item-title a {
-  color: #9fef00 !important;
-  font-family: 'Orbitron', 'Courier New', monospace !important;
-  font-weight: 700 !important;
-  text-decoration: none !important;
-}
-.page__related .page__meta,
-.bo-most-visited .page__meta {
-  color: #444 !important;
-  font-size: 10px !important;
-  margin: 0 0 3px 0 !important;
-  padding: 0 !important;
-  line-height: 1.4 !important;
-}
+/* Card styles are in the UNIFIED CARD STYLE section below — no duplicates here */
 /* Collapse MM's inner meta wrapper spacers */
 .page__related .page__meta-sep,
 .page__related .page__meta-readtime,
@@ -601,25 +552,22 @@ aside.sidebar__right { display: none !important; }
   margin: 0 !important;
   padding: 0 !important;
 }
-.page__related .archive__item,
-.bo-most-visited .archive__item { margin-bottom: 0 !important; }
-.page__related .archive__item-teaser,
-.bo-most-visited .archive__item-teaser { display: none !important; }
-
 /* ══════════════════════════════════════════════════════
-   Category / Sub-pages — 3-column card grid
-   (matches home page style but 3 cols instead of 4)
+   UNIFIED CARD STYLE
+   Applies identically to:
+     • Category/sub-page post listings  (3 cols)
+     • "You May Also Enjoy" widget      (4 cols home / 3 cols sub)
+   Mirrors the home page Recent Posts card exactly.
    ══════════════════════════════════════════════════════ */
 
-/* Make the archive wrapper a 3-col grid on all listing pages */
+/* ── Category pages: 3-column grid ── */
 .layout--archive .archive {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 16px !important;
   align-items: start !important;
 }
-
-/* Section headers, empty messages, and non-card divs span all 3 cols */
+/* Section headers & non-card elements span full width */
 .layout--archive .archive > h1,
 .layout--archive .archive > h2,
 .layout--archive .archive > p,
@@ -628,65 +576,112 @@ aside.sidebar__right { display: none !important; }
 .layout--archive .archive > div[style*="letter-spacing"] {
   grid-column: 1 / -1 !important;
 }
-
-/* Each post card */
+/* Grid cell wrapper — no visual style on the wrapper itself */
 .layout--archive .archive .list__item {
   display: flex !important;
   flex-direction: column !important;
-  align-items: flex-start !important;
-  padding: 10px 12px !important;
-  border-radius: 5px !important;
-  border: 1px solid #1e1e1e !important;
-  background: #0d0d0d !important;
-  transition: box-shadow 0.13s, background 0.13s !important;
-  cursor: pointer !important;
-  /* Remove any MM-set width/float */
   width: auto !important;
   float: none !important;
   margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
 }
 
-/* Hide teaser image — match home page card style */
-.layout--archive .archive .list__item .archive__item-teaser {
-  display: none !important;
+/* ── Shared inner card (archive__item) — SAME as home page ── */
+.layout--archive .archive .list__item .archive__item,
+.bo-most-visited .grid__item,
+.page__related .grid__item {
+  background: #0a0a0a !important;
+  border: 1px solid #1e1e1e !important;
+  border-top: 2px solid #222 !important;
+  border-radius: 6px !important;
+  padding: 14px 15px 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+}
+/* Hover — green border, subtle glow */
+.layout--archive .archive .list__item:hover .archive__item,
+.bo-most-visited .grid__item:hover,
+.page__related .grid__item:hover {
+  border-color: #9fef00 !important;
+  border-top-color: #9fef00 !important;
+  background: #0d0d0d !important;
+  box-shadow: 0 0 14px rgba(159,239,0,0.08) !important;
 }
 
-/* Hover — green glow border */
-.layout--archive .archive .list__item:hover {
-  background: #031000 !important;
-  box-shadow: 0 0 0 1px #9fef00, 0 0 14px rgba(159,239,0,0.10) !important;
-}
-.layout--archive .archive .list__item:hover .archive__item-title a {
-  color: #9fef00 !important;
-}
-
-/* Title */
-.layout--archive .archive .list__item .archive__item-title {
-  font-size: 0.85em !important;
+/* ── Title ── */
+.layout--archive .archive .list__item .archive__item-title,
+.bo-most-visited .archive__item-title,
+.page__related .archive__item-title {
+  margin: 0 0 5px !important;
   line-height: 1.3 !important;
-  margin: 0 0 4px 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
 }
-.layout--archive .archive .list__item .archive__item-title a {
+.layout--archive .archive .list__item .archive__item-title a,
+.bo-most-visited .archive__item-title a,
+.page__related .archive__item-title a {
   color: #9fef00 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
   text-decoration: none !important;
+  transition: color 0.12s !important;
+}
+/* Title turns orange on hover — matches home */
+.layout--archive .archive .list__item:hover .archive__item-title a,
+.bo-most-visited .grid__item:hover .archive__item-title a,
+.page__related .grid__item:hover .archive__item-title a {
+  color: #ff9800 !important;
 }
 
-/* Date / read-time meta */
-.layout--archive .archive .list__item .page__meta {
+/* ── Excerpt — 3-line clamp ── */
+.layout--archive .archive .list__item .archive__item-excerpt,
+.bo-most-visited .archive__item-excerpt,
+.page__related .archive__item-excerpt {
   font-size: 10px !important;
   color: #444 !important;
-  margin: 0 0 4px 0 !important;
+  line-height: 1.55 !important;
+  margin: 0 0 8px !important;
   padding: 0 !important;
+  flex: 1 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
 }
 
-/* Excerpt */
-.layout--archive .archive .list__item .archive__item-excerpt {
-  font-size: 11px !important;
-  color: #555 !important;
-  line-height: 1.4 !important;
-  margin: 0 !important;
+/* ── Meta (date · read time) — pushed to card bottom ── */
+.layout--archive .archive .list__item .page__meta,
+.bo-most-visited .page__meta,
+.page__related .page__meta {
+  font-size: 9px !important;
+  color: #2a2a2a !important;
+  margin: auto 0 0 !important;
   padding: 0 !important;
+  line-height: 1.4 !important;
 }
+.bo-most-visited .page__meta-sep,
+.bo-most-visited .page__meta-readtime,
+.bo-most-visited p.page__meta,
+.page__related .page__meta-sep,
+.page__related .page__meta-readtime,
+.page__related p.page__meta { margin: 0 !important; padding: 0 !important; }
+
+/* ── Hide teaser images everywhere ── */
+.layout--archive .archive .list__item .archive__item-teaser,
+.bo-most-visited .archive__item-teaser,
+.page__related .archive__item-teaser { display: none !important; }
+
+/* ── No extra margin on archive__item wrappers ── */
+.bo-most-visited .archive__item,
+.page__related .archive__item { margin-bottom: 0 !important; }
 
 /* Section headings inside posts — ALL h2 same size everywhere */
 h2,
