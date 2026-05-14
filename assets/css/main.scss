@@ -522,16 +522,22 @@ aside.sidebar__right { display: none !important; }
   letter-spacing: 2px !important;
 }
 
-/* Grid: always 3 columns, cards size to their own content */
-.page__related .grid__wrapper {
+/* Grid: 3 columns on all pages, 4 columns on home page */
+.page__related .grid__wrapper,
+.bo-most-visited .grid__wrapper {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 12px !important;
-  align-items: start !important;   /* no forced equal-height stretching */
+  align-items: start !important;
+}
+/* Home page widget matches the 4-column "Recent Posts" grid */
+.layout--home .bo-most-visited .grid__wrapper {
+  grid-template-columns: repeat(4, 1fr) !important;
 }
 
-/* Card base — flex column so content stacks tight from top */
-.page__related .grid__item {
+/* Card base — flex column, content stacks tight from top */
+.page__related .grid__item,
+.bo-most-visited .grid__item {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
@@ -545,29 +551,34 @@ aside.sidebar__right { display: none !important; }
 }
 
 /* Hover — green border glow */
-.page__related .grid__item:hover {
+.page__related .grid__item:hover,
+.bo-most-visited .grid__item:hover {
   background: #031000 !important;
   box-shadow: 0 0 0 1px #9fef00, 0 0 14px rgba(159,239,0,0.10) !important;
 }
-.page__related .grid__item:hover .archive__item-title a {
+.page__related .grid__item:hover .archive__item-title a,
+.bo-most-visited .grid__item:hover .archive__item-title a {
   color: #9fef00 !important;
 }
 
 /* Small text sizes — tight vertical rhythm */
-.page__related .archive__item-title {
+.page__related .archive__item-title,
+.bo-most-visited .archive__item-title {
   font-size: 0.75em !important;
   line-height: 1.3 !important;
   margin: 0 0 3px 0 !important;
   padding: 0 !important;
   width: 100% !important;
 }
-.page__related .archive__item-title a {
+.page__related .archive__item-title a,
+.bo-most-visited .archive__item-title a {
   color: #9fef00 !important;
   font-family: 'Orbitron', 'Courier New', monospace !important;
   font-weight: 700 !important;
   text-decoration: none !important;
 }
-.page__related .page__meta {
+.page__related .page__meta,
+.bo-most-visited .page__meta {
   color: #444 !important;
   font-size: 10px !important;
   margin: 0 0 3px 0 !important;
@@ -577,16 +588,23 @@ aside.sidebar__right { display: none !important; }
 /* Collapse MM's inner meta wrapper spacers */
 .page__related .page__meta-sep,
 .page__related .page__meta-readtime,
-.page__related p.page__meta { margin: 0 !important; padding: 0 !important; }
-.page__related .archive__item-excerpt {
+.page__related p.page__meta,
+.bo-most-visited .page__meta-sep,
+.bo-most-visited .page__meta-readtime,
+.bo-most-visited p.page__meta { margin: 0 !important; padding: 0 !important; }
+
+.page__related .archive__item-excerpt,
+.bo-most-visited .archive__item-excerpt {
   color: #666 !important;
   font-size: 11px !important;
   line-height: 1.4 !important;
   margin: 0 !important;
   padding: 0 !important;
 }
-/* Remove any MM-injected bottom margin on archive items inside related */
-.page__related .archive__item { margin-bottom: 0 !important; }
+.page__related .archive__item,
+.bo-most-visited .archive__item { margin-bottom: 0 !important; }
+.page__related .archive__item-teaser,
+.bo-most-visited .archive__item-teaser { display: none !important; }
 
 /* ══════════════════════════════════════════════════════
    Category / Sub-pages — 3-column card grid
