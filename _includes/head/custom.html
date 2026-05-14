@@ -336,7 +336,7 @@ window.BO_PAGE = {
         + '</article></div>';
     }).join('');
 
-    return '<div class="page__related bo-most-visited" style="margin-top:2.5em;border-top:1px solid #1e1e1e;padding-top:1.5em;">'
+    return '<div class="page__related bo-most-visited">'
       + '<h2 style="font-family:\'Orbitron\',\'Courier New\',monospace;color:#9fef00;font-size:0.7em;letter-spacing:2px;text-transform:uppercase;">YOU MAY ALSO ENJOY</h2>'
       + '<div class="grid__wrapper">' + cards + '</div>'
       + '</div>';
@@ -377,10 +377,11 @@ window.BO_PAGE = {
             if (main) main.insertAdjacentHTML('beforeend', widget);
           }
         } else {
-          /* Listing/category page: insert AFTER the archive grid, not inside it */
+          /* Listing/category page: append INSIDE .archive so it sits below
+             all posts. CSS gives it grid-column:1/-1 to span all 3 cols. */
           var archive = document.querySelector('#main .archive');
           if (archive) {
-            archive.insertAdjacentHTML('afterend', widget);
+            archive.insertAdjacentHTML('beforeend', widget);
           } else {
             var main = document.querySelector('#main');
             if (main) main.insertAdjacentHTML('beforeend', widget);

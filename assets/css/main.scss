@@ -567,7 +567,7 @@ aside.sidebar__right { display: none !important; }
   gap: 16px !important;
   align-items: start !important;
 }
-/* Section headers & non-card elements span full width */
+/* Section headers, empty messages, non-card elements span all 3 cols */
 .layout--archive .archive > h1,
 .layout--archive .archive > h2,
 .layout--archive .archive > p,
@@ -575,6 +575,13 @@ aside.sidebar__right { display: none !important; }
 .layout--archive .archive > div[style*="font-family"],
 .layout--archive .archive > div[style*="letter-spacing"] {
   grid-column: 1 / -1 !important;
+}
+/* You May Also Enjoy — full width row at the bottom of the archive grid */
+.layout--archive .archive > .bo-most-visited {
+  grid-column: 1 / -1 !important;
+  margin-top: 2em !important;
+  border-top: 1px solid #1e1e1e !important;
+  padding-top: 1.5em !important;
 }
 /* Grid cell wrapper — no visual style on the wrapper itself */
 .layout--archive .archive .list__item {
