@@ -323,42 +323,37 @@ window.BO_PAGE = {
     var cards = posts3.map(function(p) {
       var v = visits(p.url);
       var vBadge = v > 1
-        ? '<span style="color:#9fef00;font-size:9px;letter-spacing:1px;margin-left:6px;">▲ ' + v + ' views</span>'
+        ? '<span style="color:#9fef00;font-size:9px;margin-left:6px;letter-spacing:1px;">▲ ' + v + ' views</span>'
         : '';
       return '<div class="grid__item">'
         + '<article class="archive__item">'
-        + '<h2 class="archive__item-title no_toc" style="margin:0 0 3px">'
+        + '<h2 class="archive__item-title no_toc">'
         + '<a href="' + p.url + '" rel="permalink">' + p.title + '</a></h2>'
-        + '<p class="page__meta" style="margin:0 0 3px;padding:0;">'
-        + '<i class="fas fa-calendar-alt" aria-hidden="true"></i> ' + p.date
-        + vBadge + '</p>'
-        + (p.excerpt ? '<p class="archive__item-excerpt" style="margin:0;padding:0;">' + p.excerpt + '</p>' : '')
+        + '<p class="page__meta"><i class="fas fa-calendar-alt" aria-hidden="true"></i> '
+        + p.date + vBadge + '</p>'
+        + (p.excerpt ? '<p class="archive__item-excerpt">' + p.excerpt + '</p>' : '')
         + '</article></div>';
     }).join('');
 
-    return '<div class="page__related bo-most-visited">'
-      + '<h2 style="font-family:\'Orbitron\',\'Courier New\',monospace;color:#9fef00;font-size:0.7em;letter-spacing:2px;text-transform:uppercase;">YOU MAY ALSO ENJOY</h2>'
+    return '<div class="bo-most-visited">'
+      + '<h4 class="bo-mv-label">YOU MAY ALSO ENJOY</h4>'
       + '<div class="grid__wrapper">' + cards + '</div>'
       + '</div>';
   }
 
-  /* ── 5. Inject widget after DOM is ready ── */
+  /* ── 5. Inject widget — SAME logic for every page type ── */
   document.addEventListener('DOMContentLoaded', function () {
-    var layout     = (window.BO_PAGE || {}).layout || '';
-    var pageUrl    = (window.BO_PAGE || {}).url    || '';
-    var isPost     = layout === 'single';
-    var filter     = CAT_MAP[_path] || null;
+    var layout  = (window.BO_PAGE || {}).layout || '';
+    var pageUrl = (window.BO_PAGE || {}).url    || '';
+    var isPost  = layout === 'single';
+    var filter  = CAT_MAP[_path] || null;
 
-    /* Only run on known category/listing pages or single post pages */
     if (!filter && !isPost) return;
 
-    /* Remove existing MM related widget on post pages */
-    if (isPost) {
-      var existing = document.querySelector('.page__related');
-      if (existing) existing.remove();
-    }
+    /* Remove MM's built-in related widget (single posts only) */
+    var mmRelated = document.querySelector('.page__related');
+    if (mmRelated) mmRelated.remove();
 
-    /* Skip pages that already have the widget (safety guard) */
     if (document.querySelector('.bo-most-visited')) return;
 
     fetch('/posts.json')
@@ -368,27 +363,17 @@ window.BO_PAGE = {
         if (!top3.length) return;
         var widget = renderWidget(top3);
 
-        if (isPost) {
-          /* Single post: inject before page footer */
-          var footer = document.querySelector('.page__footer');
-          if (footer) footer.insertAdjacentHTML('beforebegin', widget);
-          else {
-            var main = document.querySelector('#main');
-            if (main) main.insertAdjacentHTML('beforeend', widget);
-          }
-        } else {
-          /* Listing/category page: append INSIDE .archive so it sits below
-             all posts. CSS gives it grid-column:1/-1 to span all 3 cols. */
-          var archive = document.querySelector('#main .archive');
-          if (archive) {
-            archive.insertAdjacentHTML('beforeend', widget);
-          } else {
-            var main = document.querySelector('#main');
-            if (main) main.insertAdjacentHTML('beforeend', widget);
-          }
-        }
+        /* ── SAME insertion point for ALL page types ──
+           • Archive pages  → .archive (the content column beside the sidebar)
+           • Single posts   → .page__inner-wrap (gives correct indent,
+                               same as post content / share buttons / prev-next)
+           Both elements have the same effective width = page minus sidebar.  */
+        var contentCol = document.querySelector('#main .archive')   /* listing pages  */
+                      || document.querySelector('.page__inner-wrap') /* single posts  */
+                      || document.querySelector('#main');
+        if (contentCol) contentCol.insertAdjacentHTML('beforeend', widget);
       })
-      .catch(function() {}); /* silently fail if posts.json unavailable */
+      .catch(function() {});
   });
 })();
 </script>

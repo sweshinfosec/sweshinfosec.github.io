@@ -522,27 +522,55 @@ aside.sidebar__right { display: none !important; }
   letter-spacing: 2px !important;
 }
 /* ══════════════════════════════════════════════════════
-   Category listing pages — original MM list style
-   Green glow border on hover, tighter row gaps
+   Category listing pages — clean vertical LIST view
+   Override ALL MM float/grid/flex defaults on list items
    ══════════════════════════════════════════════════════ */
 
-/* Tighten row spacing between posts in list view */
-.layout--archive .archive .list__item {
-  padding: 4px 8px !important;
-  border-radius: 5px !important;
+/* Force the archive container to be a plain vertical block */
+.layout--archive .archive,
+.layout--tags .archive,
+.layout--categories .archive {
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Force every post row to be full-width, no card box */
+.layout--archive .archive .list__item,
+.layout--tags .archive .list__item,
+.layout--categories .archive .list__item {
+  display: block !important;
+  width: 100% !important;
+  float: none !important;
+  clear: both !important;
+  padding: 6px 8px !important;
+  margin: 0 0 2px 0 !important;
+  border: none !important;
+  border-bottom: 1px solid #1a1a1a !important;
+  border-radius: 4px !important;
+  background: transparent !important;
   transition: background 0.13s, box-shadow 0.13s !important;
   cursor: pointer !important;
-  margin-bottom: 4px !important;
+  box-sizing: border-box !important;
 }
-.layout--archive .archive .list__item:hover {
+/* Remove any card border/bg from the inner archive__item too */
+.layout--archive .archive .list__item .archive__item,
+.layout--tags .archive .list__item .archive__item,
+.layout--categories .archive .list__item .archive__item {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Hover — green glow, no solid border */
+.layout--archive .archive .list__item:hover,
+.layout--tags .archive .list__item:hover,
+.layout--categories .archive .list__item:hover {
   background: #031000 !important;
-  box-shadow: 0 0 0 1px #9fef00, 0 0 14px rgba(159,239,0,0.10) !important;
+  box-shadow: 0 0 0 1px #9fef00, 0 0 10px rgba(159,239,0,0.08) !important;
+  border-bottom-color: transparent !important;
 }
 .layout--archive .archive .list__item:hover .archive__item-title a {
   color: #9fef00 !important;
-}
-.layout--archive .archive .list__item:hover .archive__item-excerpt {
-  color: #9fef0055 !important;
 }
 
 /* ══════════════════════════════════════════════════════
@@ -559,6 +587,20 @@ aside.sidebar__right { display: none !important; }
   border-top: 1px solid #1e1e1e !important;
   padding-top: 1.5em !important;
   clear: both !important;
+}
+
+/* Section heading — "YOU MAY ALSO ENJOY" */
+.bo-mv-label {
+  font-family: 'Orbitron', 'Courier New', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+  color: #9fef00 !important;
+  text-transform: uppercase !important;
+  margin: 0 0 1em !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
 
 /* Inner grid — 3 cols by default, 4 on home */
