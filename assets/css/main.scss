@@ -552,13 +552,33 @@ aside.sidebar__right { display: none !important; }
   cursor: pointer !important;
   box-sizing: border-box !important;
 }
-/* Remove any card border/bg from the inner archive__item too */
+/* Remove any card border/bg from the inner archive__item too; kill default bottom margin */
 .layout--archive .archive .list__item .archive__item,
 .layout--tags .archive .list__item .archive__item,
 .layout--categories .archive .list__item .archive__item {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* Clamp excerpt/teaser/meta margins so rows stay compact */
+.layout--archive .archive .list__item .archive__item-excerpt,
+.layout--tags .archive .list__item .archive__item-excerpt,
+.layout--categories .archive .list__item .archive__item-excerpt {
+  margin-bottom: 2px !important;
+  margin-top: 2px !important;
+}
+.layout--archive .archive .list__item .archive__item-teaser,
+.layout--tags .archive .list__item .archive__item-teaser,
+.layout--categories .archive .list__item .archive__item-teaser {
+  display: none !important;
+}
+.layout--archive .archive .list__item p,
+.layout--tags .archive .list__item p,
+.layout--categories .archive .list__item p {
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
 }
 
 /* Hover — green glow, no solid border */
@@ -616,9 +636,12 @@ aside.sidebar__right { display: none !important; }
   grid-template-columns: repeat(4, 1fr) !important;
 }
 
-/* Card */
+/* Card — width:auto clears MM's flexbox percentage widths that persist in a grid context */
 .bo-most-visited .grid__item,
 .page__related .grid__item {
+  width: auto !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
   background: #0a0a0a !important;
   border: 1px solid #1e1e1e !important;
   border-top: 2px solid #222 !important;
