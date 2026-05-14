@@ -507,18 +507,69 @@ nav.toc,
 .toc__menu,
 aside.sidebar__right { display: none !important; }
 
-/* ── "You May Also Enjoy" — hide fallback logo, clean card style ── */
-.page__related { margin-top: 3em !important; border-top: 1px solid #1e1e1e !important; padding-top: 1.5em !important; }
+/* ── "You May Also Enjoy" — compact, hover green border ── */
+.page__related {
+  margin-top: 3em !important;
+  border-top: 1px solid #1e1e1e !important;
+  padding-top: 1.5em !important;
+}
 .page__related .archive__item-teaser { display: none !important; }
+
 .page__related h2 {
   font-family: 'Orbitron', 'Courier New', monospace !important;
   color: #9fef00 !important;
-  font-size: 0.85em !important;
+  font-size: 0.7em !important;
   letter-spacing: 2px !important;
 }
-.page__related .archive__item-title a { color: #9fef00 !important; font-size: 0.9em !important; }
-.page__related .page__meta { color: #555 !important; font-size: 11px !important; }
-.page__related .archive__item-excerpt { color: #888 !important; font-size: 12px !important; }
+
+/* Grid: always 3 columns */
+.page__related .grid__wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 12px !important;
+}
+
+/* Card base */
+.page__related .grid__item {
+  padding: 10px 12px !important;
+  border-radius: 5px !important;
+  border: 1px solid #1e1e1e !important;
+  background: #0d0d0d !important;
+  transition: box-shadow 0.13s, background 0.13s !important;
+  cursor: pointer !important;
+}
+
+/* Hover — green border glow */
+.page__related .grid__item:hover {
+  background: #031000 !important;
+  box-shadow: 0 0 0 1px #9fef00, 0 0 14px rgba(159,239,0,0.10) !important;
+}
+.page__related .grid__item:hover .archive__item-title a {
+  color: #9fef00 !important;
+}
+
+/* Small text sizes */
+.page__related .archive__item-title {
+  font-size: 0.75em !important;
+  line-height: 1.4 !important;
+  margin-bottom: 4px !important;
+}
+.page__related .archive__item-title a {
+  color: #9fef00 !important;
+  font-family: 'Orbitron', 'Courier New', monospace !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+.page__related .page__meta {
+  color: #444 !important;
+  font-size: 10px !important;
+  margin-bottom: 4px !important;
+}
+.page__related .archive__item-excerpt {
+  color: #666 !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+}
 
 /* ── Archive list hover — green border box on ALL listing/category pages ── */
 .layout--archive .list__item {
