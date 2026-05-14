@@ -588,31 +588,86 @@ aside.sidebar__right { display: none !important; }
 /* Remove any MM-injected bottom margin on archive items inside related */
 .page__related .archive__item { margin-bottom: 0 !important; }
 
-/* ── Archive list hover — green border box on ALL listing/category pages ── */
-.layout--archive .list__item {
-  padding: 6px 8px !important;
+/* ══════════════════════════════════════════════════════
+   Category / Sub-pages — 3-column card grid
+   (matches home page style but 3 cols instead of 4)
+   ══════════════════════════════════════════════════════ */
+
+/* Make the archive wrapper a 3-col grid on all listing pages */
+.layout--archive .archive {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 16px !important;
+  align-items: start !important;
+}
+
+/* Section headers, empty messages, and non-card divs span all 3 cols */
+.layout--archive .archive > h1,
+.layout--archive .archive > h2,
+.layout--archive .archive > p,
+.layout--archive .archive > .sec-section-hdr,
+.layout--archive .archive > div[style*="font-family"],
+.layout--archive .archive > div[style*="letter-spacing"] {
+  grid-column: 1 / -1 !important;
+}
+
+/* Each post card */
+.layout--archive .archive .list__item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  padding: 10px 12px !important;
   border-radius: 5px !important;
-  transition: background 0.13s, box-shadow 0.13s !important;
+  border: 1px solid #1e1e1e !important;
+  background: #0d0d0d !important;
+  transition: box-shadow 0.13s, background 0.13s !important;
   cursor: pointer !important;
+  /* Remove any MM-set width/float */
+  width: auto !important;
+  float: none !important;
+  margin: 0 !important;
 }
 
-.layout--archive .list__item:hover {
+/* Hide teaser image — match home page card style */
+.layout--archive .archive .list__item .archive__item-teaser {
+  display: none !important;
+}
+
+/* Hover — green glow border */
+.layout--archive .archive .list__item:hover {
   background: #031000 !important;
-  box-shadow: 0 0 0 1px #9fef00, 0 0 18px rgba(159,239,0,0.10) !important;
-  border-radius: 5px !important;
+  box-shadow: 0 0 0 1px #9fef00, 0 0 14px rgba(159,239,0,0.10) !important;
+}
+.layout--archive .archive .list__item:hover .archive__item-title a {
+  color: #9fef00 !important;
 }
 
-.layout--archive .list__item:hover .archive__item-title a {
+/* Title */
+.layout--archive .archive .list__item .archive__item-title {
+  font-size: 0.85em !important;
+  line-height: 1.3 !important;
+  margin: 0 0 4px 0 !important;
+}
+.layout--archive .archive .list__item .archive__item-title a {
   color: #9fef00 !important;
   text-decoration: none !important;
 }
 
-.layout--archive .list__item:hover .page__meta {
-  color: #9fef0066 !important;
+/* Date / read-time meta */
+.layout--archive .archive .list__item .page__meta {
+  font-size: 10px !important;
+  color: #444 !important;
+  margin: 0 0 4px 0 !important;
+  padding: 0 !important;
 }
 
-.layout--archive .list__item:hover .archive__item-excerpt {
-  color: #9fef0055 !important;
+/* Excerpt */
+.layout--archive .archive .list__item .archive__item-excerpt {
+  font-size: 11px !important;
+  color: #555 !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* Section headings inside posts — ALL h2 same size everywhere */

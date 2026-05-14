@@ -238,3 +238,152 @@ window.addEventListener('DOMContentLoaded', function () {
   sidebar.appendChild(supportSection);
 });
 </script>
+
+<!-- ══════════════════════════════════════════════════════
+     BlackOps — Most Visited Posts Widget
+     Tracks page visits in localStorage, renders top-3
+     "You May Also Enjoy" cards per page context.
+     ══════════════════════════════════════════════════════ -->
+<script>
+/* ── Inject current page layout/url for the widget to read ── */
+window.BO_PAGE = {
+  layout: "{{ page.layout }}",
+  url:    "{{ page.url }}"
+};
+</script>
+<script>
+(function () {
+  /* ── 1. Track this visit ── */
+  var _path = window.location.pathname;
+  var _vk   = 'bo_v_' + _path;
+  try { localStorage.setItem(_vk, (parseInt(localStorage.getItem(_vk) || '0', 10) + 1).toString()); } catch(e) {}
+
+  /* ── 2. Category filter map (permalink → {cats[], fallback}) ── */
+  var CAT_MAP = {
+    '/':                                    { cats: 'all',               fallback: false },
+    '/infosec/':                            { cats: 'infosec',           fallback: false },
+    '/infosec/pentest/':                    { cats: 'pentest',           fallback: false },
+    '/infosec/pentest/web/':               { cats: ['web-application-pentest','web-application','web','owasp'], fallback: false },
+    '/infosec/pentest/cloud/':             { cats: ['cloud-pentest','cloud','aws','azure','gcp'],               fallback: true  },
+    '/infosec/pentest/mobile/':            { cats: ['mobile-pentest','mobile','android','ios'],                  fallback: true  },
+    '/infosec/pentest/iot/':               { cats: ['iot-pentest','iot','firmware','embedded'],                  fallback: true  },
+    '/infosec/red-teaming/':               { cats: ['red-teaming','red-team'],                                   fallback: true  },
+    '/infosec/vulnerability-assessment/':  { cats: ['vulnerability-assessment','vapt'],                          fallback: true  },
+    '/infosec/malware-analysis/':          { cats: ['malware-analysis','malware'],                               fallback: true  },
+    '/infosec/forensic-investigation/':    { cats: ['forensic-investigation','forensics','dfir'],                fallback: true  },
+    '/infosec/smart-contracts/':           { cats: ['smart-contracts','smart-contract','solidity','defi'],       fallback: true  },
+    '/infosec/threat-modeling/':           { cats: ['threat-modeling','threat-model'],                           fallback: true  },
+    '/infosec/risk-assessment/':           { cats: ['risk-assessment','risk'],                                   fallback: true  }
+  };
+
+  /* All infosec categories for "infosec" and "pentest" pages */
+  var ALL_INFOSEC = [
+    'web-application-pentest','cloud-pentest','mobile-pentest','iot-pentest',
+    'red-teaming','vulnerability-assessment','malware-analysis','forensic-investigation',
+    'smart-contracts','threat-modeling','risk-assessment','bug-bounty','ctf','walkthroughs'
+  ];
+
+  /* ── 3. Helpers ── */
+  function visits(url) {
+    try { return parseInt(localStorage.getItem('bo_v_' + url) || '0', 10); } catch(e) { return 0; }
+  }
+
+  function normalize(s) { return (s || '').toLowerCase().replace(/\s+/g, '-'); }
+
+  function postMatchesCats(post, cats) {
+    var pc = (post.categories || []).map(normalize);
+    var pt = (post.tags       || []).map(normalize);
+    return cats.some(function(c) {
+      return pc.indexOf(c) !== -1 || pt.indexOf(c) !== -1;
+    });
+  }
+
+  function filterAndSort(posts, filter, excludeUrl) {
+    var primary = posts.filter(function(p) {
+      if (p.url === excludeUrl) return false;
+      if (!filter || filter.cats === 'all') return true;
+      var cats = (filter.cats === 'infosec' || filter.cats === 'pentest') ? ALL_INFOSEC : filter.cats;
+      return postMatchesCats(p, cats);
+    });
+    primary.sort(function(a, b) { return visits(b.url) - visits(a.url); });
+
+    if (filter && filter.fallback && primary.length < 3) {
+      var used = primary.map(function(p) { return p.url; });
+      var extra = posts.filter(function(p) {
+        return p.url !== excludeUrl && used.indexOf(p.url) === -1;
+      });
+      extra.sort(function(a, b) { return visits(b.url) - visits(a.url); });
+      primary = primary.concat(extra);
+    }
+    return primary.slice(0, 3);
+  }
+
+  /* ── 4. Render HTML for the widget ── */
+  function renderWidget(posts3) {
+    var cards = posts3.map(function(p) {
+      var v = visits(p.url);
+      var vBadge = v > 1
+        ? '<span style="color:#9fef00;font-size:9px;letter-spacing:1px;margin-left:6px;">▲ ' + v + ' views</span>'
+        : '';
+      return '<div class="grid__item">'
+        + '<article class="archive__item">'
+        + '<h2 class="archive__item-title no_toc" style="margin:0 0 3px">'
+        + '<a href="' + p.url + '" rel="permalink">' + p.title + '</a></h2>'
+        + '<p class="page__meta" style="margin:0 0 3px;padding:0;">'
+        + '<i class="fas fa-calendar-alt" aria-hidden="true"></i> ' + p.date
+        + vBadge + '</p>'
+        + (p.excerpt ? '<p class="archive__item-excerpt" style="margin:0;padding:0;">' + p.excerpt + '</p>' : '')
+        + '</article></div>';
+    }).join('');
+
+    return '<div class="page__related bo-most-visited" style="margin-top:2.5em;border-top:1px solid #1e1e1e;padding-top:1.5em;">'
+      + '<h2 style="font-family:\'Orbitron\',\'Courier New\',monospace;color:#9fef00;font-size:0.7em;letter-spacing:2px;text-transform:uppercase;">YOU MAY ALSO ENJOY</h2>'
+      + '<div class="grid__wrapper">' + cards + '</div>'
+      + '</div>';
+  }
+
+  /* ── 5. Inject widget after DOM is ready ── */
+  document.addEventListener('DOMContentLoaded', function () {
+    var layout     = (window.BO_PAGE || {}).layout || '';
+    var pageUrl    = (window.BO_PAGE || {}).url    || '';
+    var isPost     = layout === 'single';
+    var filter     = CAT_MAP[_path] || null;
+
+    /* Only run on known category/listing pages or single post pages */
+    if (!filter && !isPost) return;
+
+    /* Remove existing MM related widget on post pages */
+    if (isPost) {
+      var existing = document.querySelector('.page__related');
+      if (existing) existing.remove();
+    }
+
+    /* Skip pages that already have the widget (safety guard) */
+    if (document.querySelector('.bo-most-visited')) return;
+
+    fetch('/posts.json')
+      .then(function(r) { return r.json(); })
+      .then(function(allPosts) {
+        var top3 = filterAndSort(allPosts, filter, isPost ? pageUrl : null);
+        if (!top3.length) return;
+        var widget = renderWidget(top3);
+
+        if (isPost) {
+          /* Single post: inject before page footer */
+          var footer = document.querySelector('.page__footer');
+          if (footer) footer.insertAdjacentHTML('beforebegin', widget);
+          else {
+            var main = document.querySelector('#main');
+            if (main) main.insertAdjacentHTML('beforeend', widget);
+          }
+        } else {
+          /* Listing/category page: append to archive section */
+          var archive = document.querySelector('#main .archive')
+                     || document.querySelector('#main');
+          if (archive) archive.insertAdjacentHTML('beforeend', widget);
+        }
+      })
+      .catch(function() {}); /* silently fail if posts.json unavailable */
+  });
+})();
+</script>
