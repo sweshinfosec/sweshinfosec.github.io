@@ -377,10 +377,14 @@ window.BO_PAGE = {
             if (main) main.insertAdjacentHTML('beforeend', widget);
           }
         } else {
-          /* Listing/category page: append to archive section */
-          var archive = document.querySelector('#main .archive')
-                     || document.querySelector('#main');
-          if (archive) archive.insertAdjacentHTML('beforeend', widget);
+          /* Listing/category page: insert AFTER the archive grid, not inside it */
+          var archive = document.querySelector('#main .archive');
+          if (archive) {
+            archive.insertAdjacentHTML('afterend', widget);
+          } else {
+            var main = document.querySelector('#main');
+            if (main) main.insertAdjacentHTML('beforeend', widget);
+          }
         }
       })
       .catch(function() {}); /* silently fail if posts.json unavailable */
