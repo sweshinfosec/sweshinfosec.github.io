@@ -325,19 +325,17 @@ window.BO_PAGE = {
       var vBadge = v > 1
         ? '<span style="color:#9fef00;font-size:9px;margin-left:6px;letter-spacing:1px;">▲ ' + v + ' views</span>'
         : '';
-      return '<div class="grid__item">'
-        + '<article class="archive__item">'
-        + '<h2 class="archive__item-title no_toc">'
-        + '<a href="' + p.url + '" rel="permalink">' + p.title + '</a></h2>'
-        + '<p class="page__meta"><i class="fas fa-calendar-alt" aria-hidden="true"></i> '
-        + p.date + vBadge + '</p>'
-        + (p.excerpt ? '<p class="archive__item-excerpt">' + p.excerpt + '</p>' : '')
-        + '</article></div>';
+      return '<div class="bo-card">'
+        + '<a class="bo-card-link" href="' + p.url + '" rel="permalink">'
+        + '<div class="bo-card-title">' + p.title + '</div>'
+        + '<div class="bo-card-meta"><i class="fas fa-calendar-alt"></i> ' + p.date + vBadge + '</div>'
+        + (p.excerpt ? '<div class="bo-card-excerpt">' + p.excerpt + '</div>' : '')
+        + '</a></div>';
     }).join('');
 
     return '<div class="bo-most-visited">'
       + '<h4 class="bo-mv-label">YOU MAY ALSO ENJOY</h4>'
-      + '<div class="grid__wrapper">' + cards + '</div>'
+      + '<div class="bo-cards-grid">' + cards + '</div>'
       + '</div>';
   }
 
