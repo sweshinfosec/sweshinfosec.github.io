@@ -36,6 +36,15 @@ main:
     children:
       - title: "Payloads"
         url: /tools/payloads/
+        children:
+          - title: "XSS"
+            url: /tools/payloads/xss/
+          - title: "SQL Injection"
+            url: /tools/payloads/sql-injection/
+          - title: "Command Injection"
+            url: /tools/payloads/command-injection/
+          - title: "XXE"
+            url: /tools/payloads/xxe/
 
   - title: "Tags"
     url: /tags/

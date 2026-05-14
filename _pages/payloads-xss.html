@@ -1,0 +1,43 @@
+---
+layout: archive
+permalink: /tools/payloads/xss/
+title: "XSS Payloads"
+---
+
+<style>
+.pl-hdr{font-family:'Courier New',monospace;font-size:9px;color:#9fef00;letter-spacing:2.5px;text-transform:uppercase;padding:6px 0;margin:28px 0 4px;border-bottom:1px solid #1e1e1e;}
+.pl-post-row{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid #111;font-family:'Courier New',monospace;}
+.pl-post-row:last-child{border-bottom:none;}
+.pl-badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:3px;background:#1a1800;color:#ffeb3b;white-space:nowrap;margin-top:2px;flex-shrink:0;}
+.pl-post-title{font-size:13px;font-weight:700;color:#9fef00;}
+.pl-post-title:hover{color:#ff0000;}
+.pl-post-title a{color:inherit;text-decoration:none;}
+.pl-post-excerpt{font-size:11px;color:#555;margin-top:4px;line-height:1.6;}
+.pl-tag{display:inline-block;font-size:9px;padding:2px 6px;background:#0a0a0a;border:1px solid #1e1e1e;border-radius:3px;color:#444;margin:3px 2px 0;font-family:'Courier New',monospace;}
+.back-link{font-family:'Courier New',monospace;font-size:11px;color:#444;text-decoration:none;display:inline-block;margin-bottom:20px;}
+.back-link:hover{color:#9fef00;}
+</style>
+
+<a class="back-link" href="/tools/payloads/">← back to Payloads</a>
+
+<div style="font-family:'Courier New',monospace;font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">// Cross-Site Scripting</div>
+<div style="font-family:'Courier New',monospace;font-size:11px;color:#555;margin-bottom:24px;">Injection of malicious scripts into web pages viewed by other users — session theft, credential capture, page manipulation.</div>
+
+{% assign xss_posts = site.posts | where_exp: "p", "p.categories contains 'xss'" | sort: "title" %}
+
+{% if xss_posts.size > 0 %}
+  {% for post in xss_posts %}
+  <div class="pl-post-row">
+    <span class="pl-badge">XSS</span>
+    <div>
+      <div class="pl-post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
+      {% if post.excerpt %}<div class="pl-post-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</div>{% endif %}
+      <div>
+        {% for tag in post.tags limit:6 %}<span class="pl-tag">{{ tag }}</span>{% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+  <div style="font-family:'Courier New',monospace;font-size:11px;color:#333;font-style:italic;padding:20px 0;">No XSS posts yet.</div>
+{% endif %}
