@@ -522,15 +522,20 @@ aside.sidebar__right { display: none !important; }
   letter-spacing: 2px !important;
 }
 
-/* Grid: always 3 columns */
+/* Grid: always 3 columns, cards size to their own content */
 .page__related .grid__wrapper {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 12px !important;
+  align-items: start !important;   /* no forced equal-height stretching */
 }
 
-/* Card base */
+/* Card base — flex column so content stacks tight from top */
 .page__related .grid__item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
   padding: 10px 12px !important;
   border-radius: 5px !important;
   border: 1px solid #1e1e1e !important;
@@ -548,11 +553,13 @@ aside.sidebar__right { display: none !important; }
   color: #9fef00 !important;
 }
 
-/* Small text sizes */
+/* Small text sizes — tight vertical rhythm */
 .page__related .archive__item-title {
   font-size: 0.75em !important;
-  line-height: 1.4 !important;
-  margin-bottom: 4px !important;
+  line-height: 1.3 !important;
+  margin: 0 0 3px 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
 }
 .page__related .archive__item-title a {
   color: #9fef00 !important;
@@ -563,13 +570,23 @@ aside.sidebar__right { display: none !important; }
 .page__related .page__meta {
   color: #444 !important;
   font-size: 10px !important;
-  margin-bottom: 4px !important;
+  margin: 0 0 3px 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
 }
+/* Collapse MM's inner meta wrapper spacers */
+.page__related .page__meta-sep,
+.page__related .page__meta-readtime,
+.page__related p.page__meta { margin: 0 !important; padding: 0 !important; }
 .page__related .archive__item-excerpt {
   color: #666 !important;
   font-size: 11px !important;
-  line-height: 1.5 !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
+/* Remove any MM-injected bottom margin on archive items inside related */
+.page__related .archive__item { margin-bottom: 0 !important; }
 
 /* ── Archive list hover — green border box on ALL listing/category pages ── */
 .layout--archive .list__item {
