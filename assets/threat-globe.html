@@ -43,9 +43,18 @@
     font-family:var(--font-mono);
     overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
+    scrollbar-width:thin;
+    scrollbar-color: var(--green-dim) var(--panel);
   }
 
   ::selection{ background:var(--green); color:#0a0b0a; }
+
+  /* themed scrollbar — no stock white/light OS bar */
+  ::-webkit-scrollbar{ width:10px; height:10px; }
+  ::-webkit-scrollbar-track{ background:var(--panel); }
+  ::-webkit-scrollbar-thumb{ background:var(--green-dim); border-radius:5px; border:2px solid var(--panel); }
+  ::-webkit-scrollbar-thumb:hover{ background:var(--green); }
+  ::-webkit-scrollbar-corner{ background:var(--panel); }
 
   /* subtle scanline + vignette atmosphere */
   .crt{
@@ -108,6 +117,7 @@
   .grid{
     display:grid; grid-template-columns: 1fr 340px; gap:16px; align-items:start;
   }
+  .grid > *{ min-width:0; }
   @media (max-width: 880px){ .grid{ grid-template-columns:1fr; } }
 
   .panel{
@@ -181,11 +191,11 @@
   /* ============ STAT STRIP ============ */
   .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:16px; }
   @media (max-width:700px){ .stats{ grid-template-columns:repeat(2,1fr); } }
-  .stat{ padding:14px 16px; }
+  .stat{ padding:14px 16px; min-width:0; }
   .stat .lbl{ font-size:10px; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase; }
   .stat .val{ font-family:var(--font-display); font-size:26px; color:var(--green); margin-top:6px; text-shadow:var(--glow-green); font-variant-numeric:tabular-nums; }
   .stat .val.warn{ color:var(--amber); text-shadow:0 0 12px rgba(255,184,0,.5); }
-  .stat .sparkline{ margin-top:8px; height:22px; }
+  .stat .sparkline{ margin-top:8px; height:22px; width:100%; display:block; }
 
   footer.note{
     margin-top:22px; font-size:10.5px; color:var(--text-faint); line-height:1.7; border-top:1px solid var(--line); padding-top:14px;
