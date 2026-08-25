@@ -14,7 +14,6 @@ title: "Web Application Pentest"
   {% for tag in post.tags %}
     {% assign tag_lower = tag | downcase | replace: " ", "-" %}
     {% if web_tags contains tag_lower %}{% assign matched = true %}{% endif %}
-    {% endunless %}
   {% endfor %}
   {% for cat in post.categories %}
     {% assign cat_lower = cat | downcase | replace: " ", "-" %}
