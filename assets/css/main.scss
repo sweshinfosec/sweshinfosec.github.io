@@ -43,6 +43,9 @@ body { background: #0d0d0d !important; color: #cccccc; }
 /* Search bar (masthead.html is include_cached theme-wide, so hide it per-page via CSS instead of Liquid) */
 .layout--home .bo-search-wrap { display: none !important; }
 
+/* Top site nav+logo now lives inside the globe panel's own header on home -- hide the external masthead there (main.scss is per-page, not include_cached, so this is safe unlike the search bar) */
+.layout--home .masthead { display: none !important; }
+
 /* ── Author sidebar — push content down so it sits in the vertical middle ── */
 .layout--home .sidebar .author__avatar { margin-top: 24px !important; }
 .layout--home .sidebar { padding-top: 28px !important; }

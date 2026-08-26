@@ -81,27 +81,66 @@
   .stage.ready{ opacity:1; }
 
   header.top{
-    display:flex; align-items:flex-end; justify-content:space-between;
+    position:relative; display:flex; align-items:center; justify-content:flex-start;
     border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:16px; gap:16px; flex-wrap:wrap;
   }
-  .brand{ display:flex; flex-direction:column; gap:4px; }
-  .brand .eyebrow{
-    font-size:10px; letter-spacing:3px; color:var(--green-dim); text-transform:uppercase;
-  }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .brand img{ height:52px; width:auto; display:block; }
   .brand h1{
-    font-family:var(--font-display); font-weight:800; font-size:clamp(20px,3vw,30px);
+    font-family:var(--font-display); font-weight:800; font-size:clamp(16px,2.4vw,22px);
     letter-spacing:1.5px; margin:0; color:var(--text); text-wrap:balance;
   }
-  .brand h1 span{ color:var(--green); text-shadow:var(--glow-green); }
-  .brand .sub{ font-size:11px; color:var(--text-dim); letter-spacing:.5px; }
+  .brand h1 span{ color:var(--green); }
 
-  .status-cluster{ display:flex; align-items:center; gap:22px; }
+  /* embedded site nav — mirrors the real site header's .bo-nav, opens real pages via target=_top.
+     Centered dead-middle of the header row regardless of the logo's width. */
+  .embedded-nav{
+    display:flex; justify-content:center; min-width:0;
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  }
+  .bo-nav{ list-style:none; margin:0; padding:0; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .bo-nav-item{ position:relative; }
+  .bo-nav-item > a{
+    color:var(--green); background:#000; border:2px solid var(--green); border-radius:4px;
+    text-decoration:none; padding:5px 12px; font-size:12px; line-height:1.6; display:inline-block;
+    font-family:var(--font-mono); font-weight:700; white-space:nowrap;
+    transition:background .15s, color .15s, border-color .15s;
+  }
+  .bo-nav-item > a:hover{ background:var(--red) !important; color:#000 !important; border-color:var(--red) !important; }
+  .bo-dropdown{
+    display:none; position:absolute; top:100%; left:0; background:#000; border:2px solid var(--green);
+    border-radius:4px; min-width:210px; z-index:50; padding:6px 0 4px; box-shadow:0 8px 28px rgba(0,0,0,.9);
+  }
+  .bo-dropdown > li{ list-style:none; position:relative; }
+  .bo-dropdown > li > a{
+    display:block; padding:8px 14px; color:var(--green); background:#000; text-decoration:none;
+    font-family:var(--font-mono); font-size:11px; font-weight:700; border-left:3px solid transparent;
+    transition:color .12s, background .12s, border-color .12s; white-space:nowrap;
+  }
+  .bo-dropdown > li > a:hover{ color:#000 !important; background:var(--red) !important; border-left-color:var(--red) !important; }
+  .bo-nav-item:hover > .bo-dropdown, .bo-nav-item:focus-within > .bo-dropdown{ display:block; }
+  .bo-flyout{
+    display:none; position:absolute; top:-6px; left:100%; background:#000; border:2px solid var(--green);
+    border-radius:4px; min-width:170px; z-index:60; padding:4px 0 4px 2px; box-shadow:4px 8px 28px rgba(0,0,0,.9);
+  }
+  .bo-flyout li{ list-style:none; }
+  .bo-flyout li a{
+    display:block; padding:8px 14px; color:var(--green); background:#000; text-decoration:none;
+    font-family:var(--font-mono); font-size:11px; font-weight:700; border-left:3px solid transparent;
+    white-space:nowrap; transition:color .12s, background .12s, border-color .12s;
+  }
+  .bo-flyout li a:hover{ color:#000 !important; background:var(--red) !important; border-left-color:var(--red) !important; }
+  .bo-has-flyout:hover > .bo-flyout, .bo-has-flyout:focus-within > .bo-flyout{ display:block; }
+  .bo-arrow{ float:right; color:var(--green); font-size:9px; margin-left:8px; }
+  .bo-caret{ font-size:8px; margin-left:4px; color:var(--green); }
+  @media (max-width:880px){ .embedded-nav{ display:none; } }
+
   .clock{ text-align:right; }
-  .clock .time{ font-family:var(--font-display); font-size:20px; color:var(--green); letter-spacing:2px; text-shadow:var(--glow-green); font-variant-numeric:tabular-nums; }
-  .clock .date{ font-size:10px; color:var(--text-dim); letter-spacing:1.5px; }
+  .clock .time{ font-family:var(--font-display); font-size:18px; color:var(--green); letter-spacing:2px; text-shadow:var(--glow-green); font-variant-numeric:tabular-nums; }
+  .clock .date{ font-size:9px; color:var(--text-dim); letter-spacing:1.5px; }
 
   .defcon{ display:flex; flex-direction:column; align-items:flex-end; gap:5px; }
-  .defcon .label{ font-size:10px; letter-spacing:2px; color:var(--text-dim); }
+  .defcon .label{ font-size:9px; letter-spacing:2px; color:var(--text-dim); }
   .defcon .pips{ display:flex; gap:4px; }
   .defcon .pip{ width:16px; height:7px; background:var(--line); border-radius:1px; transition:background .3s, box-shadow .3s; }
   .defcon .pip.on.lvl-1{ background:var(--green); box-shadow:var(--glow-green); }
@@ -112,6 +151,15 @@
     font-size:10px; letter-spacing:2px; color:var(--void); background:var(--amber);
     padding:4px 8px; border-radius:2px; font-weight:700;
   }
+
+  /* status readouts relocated onto the globe canvas itself */
+  .map-wrap > .sim-badge{ position:absolute; left:14px; bottom:54px; z-index:5; }
+  .map-wrap > .map-tagline{
+    position:absolute; left:14px; bottom:28px; z-index:5;
+    font-size:10px; color:var(--text-dim); letter-spacing:.5px;
+  }
+  .map-wrap > .defcon{ position:absolute; right:14px; bottom:46px; z-index:5; }
+  .map-wrap > .clock{ position:absolute; top:14px; right:14px; z-index:5; }
 
   /* ============ MAIN GRID ============ */
   .grid{
@@ -215,27 +263,73 @@
 <div class="stage" id="stage">
   <header class="top">
     <div class="brand">
-      <div class="eyebrow">// sweshinfosec &nbsp;·&nbsp; operations console</div>
+      <a href="/" target="_top"><img src="/assets/images/Logo.png" alt="SweshInfoSec"></a>
       <h1>SWESH <span>INFOSEC</span> BLOG</h1>
-      <div class="sub">procedurally generated attack telemetry — rotating 3D demo instance</div>
     </div>
-    <div class="status-cluster">
-      <div class="sim-badge">SIMULATED DATA</div>
-      <div class="defcon">
-        <div class="label">THREAT LEVEL</div>
-        <div class="pips" id="defconPips"></div>
-      </div>
-      <div class="clock">
-        <div class="time" id="clockTime">00:00:00</div>
-        <div class="date" id="clockDate">—</div>
-      </div>
-    </div>
+    <nav class="embedded-nav">
+      <ul class="bo-nav">
+        <li class="bo-nav-item"><a href="/" target="_top">Home</a></li>
+        <li class="bo-nav-item">
+          <a href="/infosec/" target="_top">Info Sec<span class="bo-caret">▾</span></a>
+          <ul class="bo-dropdown">
+            <li class="bo-has-flyout">
+              <a href="/infosec/pentest/" target="_top">Pentest<span class="bo-arrow">›</span></a>
+              <ul class="bo-flyout">
+                <li><a href="/infosec/pentest/web/" target="_top">— Web</a></li>
+                <li><a href="/infosec/pentest/mobile/" target="_top">— Mobile</a></li>
+                <li><a href="/infosec/pentest/cloud/" target="_top">— Cloud</a></li>
+                <li><a href="/infosec/pentest/iot/" target="_top">— IOT</a></li>
+              </ul>
+            </li>
+            <li><a href="/infosec/vulnerability-assessment/" target="_top">Vulnerability Assessment</a></li>
+            <li><a href="/infosec/malware-analysis/" target="_top">Malware Analysis</a></li>
+            <li><a href="/infosec/forensic-investigation/" target="_top">Forensic Investigation</a></li>
+            <li><a href="/infosec/smart-contracts/" target="_top">Smart Contracts</a></li>
+            <li><a href="/infosec/red-teaming/" target="_top">Red Teaming</a></li>
+            <li><a href="/infosec/threat-modeling/" target="_top">Threat Modeling</a></li>
+            <li><a href="/infosec/risk-assessment/" target="_top">Risk Assessment</a></li>
+          </ul>
+        </li>
+        <li class="bo-nav-item">
+          <a href="/tools/" target="_top">Tools<span class="bo-caret">▾</span></a>
+          <ul class="bo-dropdown">
+            <li class="bo-has-flyout">
+              <a href="/tools/payloads/" target="_top">Payloads<span class="bo-arrow">›</span></a>
+              <ul class="bo-flyout">
+                <li><a href="/tools/payloads/xss/" target="_top">— XSS</a></li>
+                <li><a href="/tools/payloads/sql-injection/" target="_top">— SQL Injection</a></li>
+                <li><a href="/tools/payloads/command-injection/" target="_top">— Command Injection</a></li>
+                <li><a href="/tools/payloads/xxe/" target="_top">— XXE</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="bo-nav-item"><a href="/tags/" target="_top">Tags</a></li>
+        <li class="bo-nav-item">
+          <a href="/privacy-policy/" target="_top">Privacy<span class="bo-caret">▾</span></a>
+          <ul class="bo-dropdown">
+            <li><a href="/terms/" target="_top">Terms &amp; Conditions</a></li>
+          </ul>
+        </li>
+        <li class="bo-nav-item"><a href="/about/" target="_top">About</a></li>
+      </ul>
+    </nav>
   </header>
 
   <div class="grid">
     <div class="panel map-wrap">
       <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
       <canvas id="dotmap"></canvas>
+      <div class="clock">
+        <div class="time" id="clockTime">00:00:00</div>
+        <div class="date" id="clockDate">—</div>
+      </div>
+      <div class="sim-badge">SIMULATED DATA</div>
+      <div class="map-tagline">procedurally generated attack telemetry — rotating 3D demo instance</div>
+      <div class="defcon">
+        <div class="label">THREAT LEVEL</div>
+        <div class="pips" id="defconPips"></div>
+      </div>
       <div class="map-caption">ORTHOGRAPHIC · 3D · AUTO-ROTATE // NODES: <span id="nodeCount">0</span></div>
       <div class="map-legend">
         <div class="row"><span><i class="swatch src"></i>source</span><span><i class="swatch dst"></i>target</span></div>
