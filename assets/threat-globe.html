@@ -81,7 +81,7 @@
   .stage.ready{ opacity:1; }
 
   header.top{
-    position:relative; display:flex; align-items:center; justify-content:flex-start;
+    position:relative; z-index:20; display:flex; align-items:center; justify-content:flex-start;
     border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:16px; gap:16px; flex-wrap:wrap;
   }
   .brand{ display:flex; align-items:center; gap:14px; }
@@ -93,10 +93,10 @@
   .brand h1 span{ color:var(--green); }
 
   /* embedded site nav — mirrors the real site header's .bo-nav, opens real pages via target=_top.
-     Centered dead-middle of the header row regardless of the logo's width. */
+     Right-aligned to the header row, vertically centered. */
   .embedded-nav{
-    display:flex; justify-content:center; min-width:0;
-    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    display:flex; justify-content:flex-end; min-width:0;
+    position:absolute; right:0; top:50%; transform:translateY(-50%);
   }
   .bo-nav{ list-style:none; margin:0; padding:0; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
   .bo-nav-item{ position:relative; }
