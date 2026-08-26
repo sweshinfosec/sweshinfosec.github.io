@@ -296,7 +296,7 @@ body { background: #0d0d0d !important; color: #cccccc; }
 .layout--home .archive__item:hover {
   border-color: #9fef00 !important;
   border-top-color: #9fef00 !important;
-  background: #0d0d0d !important;
+  background: #031000 !important;
   box-shadow: 0 0 14px rgba(159,239,0,0.08) !important;
 }
 
@@ -316,7 +316,7 @@ body { background: #0d0d0d !important; color: #cccccc; }
   transition: color 0.12s !important;
 }
 .layout--home .archive__item:hover .archive__item-title a {
-  color: #ff9800 !important;
+  color: #ff0000 !important;
 }
 
 /* Excerpt — clamped 3 lines */
@@ -535,35 +535,40 @@ aside.sidebar__right { display: none !important; }
   letter-spacing: 2px !important;
 }
 /* ══════════════════════════════════════════════════════
-   Category listing pages — clean vertical LIST view
-   Override ALL MM float/grid/flex defaults on list items
+   Category listing pages — CARD GRID view
+   3 cols, matches "You May Also Enjoy" card styling exactly
    ══════════════════════════════════════════════════════ */
 
-/* Force the archive container to be a plain vertical block */
+/* Archive container becomes a 3-col grid */
 .layout--archive .archive,
 .layout--tags .archive,
 .layout--categories .archive {
-  display: block !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 12px !important;
   width: 100% !important;
 }
 
-/* Force every post row to be full-width, no card box */
+/* Each post becomes a card shell — mirrors .bo-most-visited .bo-card */
 .layout--archive .archive .list__item,
 .layout--tags .archive .list__item,
 .layout--categories .archive .list__item {
-  display: block !important;
+  display: flex !important;
+  flex-direction: column !important;
   width: 100% !important;
   float: none !important;
-  clear: both !important;
-  padding: 6px 8px !important;
-  margin: 0 0 2px 0 !important;
-  border: none !important;
-  border-bottom: 1px solid #1a1a1a !important;
-  border-radius: 4px !important;
-  background: transparent !important;
-  transition: background 0.13s, box-shadow 0.13s !important;
+  clear: none !important;
+  padding: 11px 13px 10px !important;
+  margin: 0 !important;
+  border: 1px solid #1e1e1e !important;
+  border-top: 2px solid #9fef00 !important;
+  border-bottom: 1px solid #1e1e1e !important;
+  border-radius: 6px !important;
+  background: #0a0a0a !important;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
+  height: 100% !important;
 }
 /* Remove any card border/bg from the inner archive__item too; kill default bottom margin */
 .layout--archive .archive .list__item .archive__item,
@@ -574,13 +579,35 @@ aside.sidebar__right { display: none !important; }
   box-shadow: none !important;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
 }
-/* Clamp excerpt/teaser/meta margins so rows stay compact */
+/* Title — clamp to 2 lines like a card */
+.layout--archive .archive .list__item .archive__item-title,
+.layout--tags .archive .list__item .archive__item-title,
+.layout--categories .archive .list__item .archive__item-title {
+  margin: 0 0 6px !important;
+}
+.layout--archive .archive .list__item .archive__item-title a,
+.layout--tags .archive .list__item .archive__item-title a,
+.layout--categories .archive .list__item .archive__item-title a {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+/* Clamp excerpt to 3 lines, hide teaser image, compact meta */
 .layout--archive .archive .list__item .archive__item-excerpt,
 .layout--tags .archive .list__item .archive__item-excerpt,
 .layout--categories .archive .list__item .archive__item-excerpt {
-  margin-bottom: 2px !important;
+  margin-bottom: 0 !important;
   margin-top: 2px !important;
+  flex: 1 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
 }
 .layout--archive .archive .list__item .archive__item-teaser,
 .layout--tags .archive .list__item .archive__item-teaser,
@@ -594,16 +621,31 @@ aside.sidebar__right { display: none !important; }
   margin-bottom: 2px !important;
 }
 
-/* Hover — green glow, no solid border */
+/* Hover — same green border-glow + red title as You May Also Enjoy cards */
 .layout--archive .archive .list__item:hover,
 .layout--tags .archive .list__item:hover,
 .layout--categories .archive .list__item:hover {
   background: #031000 !important;
-  box-shadow: 0 0 0 1px #9fef00, 0 0 10px rgba(159,239,0,0.08) !important;
-  border-bottom-color: transparent !important;
+  border-color: #9fef00 !important;
+  box-shadow: 0 0 14px rgba(159,239,0,0.08) !important;
 }
 .layout--archive .archive .list__item:hover .archive__item-title a {
-  color: #9fef00 !important;
+  color: #ff0000 !important;
+}
+
+@media (max-width: 900px) {
+  .layout--archive .archive,
+  .layout--tags .archive,
+  .layout--categories .archive {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 560px) {
+  .layout--archive .archive,
+  .layout--tags .archive,
+  .layout--categories .archive {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -724,7 +766,7 @@ aside.sidebar__right { display: none !important; }
   text-decoration: none !important;
   transition: color 0.12s !important;
 }
-.bo-most-visited .bo-card:hover .bo-card-title { color: #ff9800 !important; }
+.bo-most-visited .bo-card:hover .bo-card-title { color: #ff0000 !important; }
 
 /* Meta */
 .bo-most-visited .bo-card .bo-card-meta {
