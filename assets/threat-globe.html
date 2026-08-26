@@ -84,13 +84,22 @@
     position:relative; z-index:20; display:flex; align-items:center; justify-content:flex-start;
     border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:16px; gap:16px; flex-wrap:wrap;
   }
-  .brand{ display:flex; align-items:center; gap:14px; }
-  .brand img{ height:52px; width:auto; display:block; }
+  .brand{ display:flex; align-items:center; gap:16px; }
+  .brand img{ height:76px; width:auto; display:block; }
+  .brand-text{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+  .brand-eyebrow{
+    font-family:var(--font-mono); font-size:10px; letter-spacing:2px; color:var(--text-dim);
+    text-transform:uppercase; white-space:nowrap;
+  }
   .brand h1{
     font-family:var(--font-display); font-weight:800; font-size:clamp(16px,2.4vw,22px);
     letter-spacing:1.5px; margin:0; color:var(--text); text-wrap:balance;
   }
   .brand h1 span{ color:var(--green); }
+  .brand-caption{
+    font-family:var(--font-mono); font-size:10px; letter-spacing:.5px; color:var(--text-dim);
+    white-space:nowrap;
+  }
 
   /* embedded site nav — mirrors the real site header's .bo-nav, opens real pages via target=_top.
      Right-aligned to the header row, vertically centered. */
@@ -264,7 +273,11 @@
   <header class="top">
     <div class="brand">
       <a href="/" target="_top"><img src="/assets/images/Logo.png" alt="SweshInfoSec"></a>
-      <h1>SWESH <span>INFOSEC</span> BLOG</h1>
+      <div class="brand-text">
+        <div class="brand-eyebrow">// SWESHINFOSEC &nbsp;·&nbsp; OPERATIONS CONSOLE</div>
+        <h1>SWESH <span>INFOSEC</span> BLOG</h1>
+        <div class="brand-caption">// Cybersecurity Researcher &nbsp;·&nbsp; Offensive Security</div>
+      </div>
     </div>
     <nav class="embedded-nav">
       <ul class="bo-nav">
