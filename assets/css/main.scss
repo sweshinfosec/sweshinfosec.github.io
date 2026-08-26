@@ -1080,6 +1080,15 @@ a.bo-flink:hover,
   justify-content: flex-end !important;
   width: 100% !important;
 }
+.bo-strip-search {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
 
 /* ── Single post — center the title header block ── */
 .layout--single .page__hero,
