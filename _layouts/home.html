@@ -61,15 +61,7 @@ layout: archive
     <span></span>
   {% endif %}
   <span>Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | relative_url }}">Older →</a>
-  {% else %}
-    {% if infosec_posts.size > 12 %}
-      <a href="{{ '/infosec/' | relative_url }}">View all →</a>
-    {% else %}
-      <span></span>
-    {% endif %}
-  {% endif %}
+  <a href="{{ '/infosec/' | relative_url }}">Older →</a>
 </div>
 {% elsif infosec_posts.size > 12 %}
 <div class="bo-pager">
