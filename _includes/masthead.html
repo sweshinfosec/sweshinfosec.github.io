@@ -169,12 +169,14 @@
     </div>
 
     <!-- ── Search strip — outside .masthead__menu (avoids overflow:hidden), right-aligned ── -->
+    {% unless page.layout == "home" %}
     <div class="bo-search-wrap">
       <form class="bo-strip-search" action="{{ '/search/' | relative_url }}" method="get" role="search">
         <input class="bo-search-input" type="search" name="q" autocomplete="off" spellcheck="false" placeholder="search…">
         <button class="bo-search-btn" type="submit">&#128269;</button>
       </form>
     </div>
+    {% endunless %}
 
   </div>
 </div>
