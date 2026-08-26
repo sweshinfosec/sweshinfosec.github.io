@@ -626,9 +626,9 @@ aside.sidebar__right { display: none !important; }
   row-gap: 0 !important;
   align-items: start !important;
 }
-/* Label: sits in cols 2–4 (row 1), aligned exactly with first card */
+/* Label: full width row 1, left-aligned with the cards below */
 .layout--home .bo-most-visited .bo-mv-label {
-  grid-column: 2 / 5 !important;
+  grid-column: 1 / 5 !important;
   grid-row: 1 !important;
   margin-bottom: 0.75em !important;
 }
@@ -665,13 +665,10 @@ aside.sidebar__right { display: none !important; }
   box-sizing: border-box !important;
   margin-top: 0 !important;
 }
-/* Home: 4-col, col 1 empty → cards pin to cols 2·3·4 */
+/* Home: 4-col, left-aligned so cards fill cols 1·2·3·4 */
 .layout--home .bo-most-visited .bo-cards-grid {
   grid-template-columns: repeat(4, 1fr) !important;
 }
-.layout--home .bo-most-visited .bo-cards-grid .bo-card:nth-child(1) { grid-column: 2 !important; }
-.layout--home .bo-most-visited .bo-cards-grid .bo-card:nth-child(2) { grid-column: 3 !important; }
-.layout--home .bo-most-visited .bo-cards-grid .bo-card:nth-child(3) { grid-column: 4 !important; }
 
 /* Card shell */
 .bo-most-visited .bo-card {
