@@ -122,8 +122,10 @@ title: "Info Sec"
 {% endfor %}
 
 {% if recent_others.size > 0 %}
-  <div class="sec-section-hdr">// Recent Posts</div>
+  <div class="bo-mv-label sec-recent-label">Recent Posts</div>
+  <div class="sec-recent-grid">
   {% for post in recent_others %}{% include archive-single.html %}{% endfor %}
+  </div>
 {% endif %}
 
 {% comment %} Absolute fallback if nothing shown at all {% endcomment %}

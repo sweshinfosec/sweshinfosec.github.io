@@ -606,6 +606,103 @@ aside.sidebar__right { display: none !important; }
   color: #ff0000 !important;
 }
 
+/* ── "Recent Posts" fallback section (infosec.html) — grid mode like You May Also Enjoy,
+   while the tag-filtered sections above it stay in plain list mode ── */
+.sec-recent-label {
+  margin-top: 2em !important;
+  padding-top: 1em !important;
+  border-top: 1px solid #1e1e1e !important;
+}
+.layout--archive .archive .sec-recent-grid,
+.layout--tags .archive .sec-recent-grid,
+.layout--categories .archive .sec-recent-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+.layout--archive .archive .sec-recent-grid .list__item,
+.layout--tags .archive .sec-recent-grid .list__item,
+.layout--categories .archive .sec-recent-grid .list__item {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  float: none !important;
+  clear: none !important;
+  padding: 11px 13px 10px !important;
+  margin: 0 !important;
+  border: 1px solid #1e1e1e !important;
+  border-top: 2px solid #9fef00 !important;
+  border-bottom: 1px solid #1e1e1e !important;
+  border-radius: 6px !important;
+  background: #0a0a0a !important;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  height: 100% !important;
+}
+.layout--archive .archive .sec-recent-grid .list__item .archive__item,
+.layout--tags .archive .sec-recent-grid .list__item .archive__item,
+.layout--categories .archive .sec-recent-grid .list__item .archive__item {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+.layout--archive .archive .sec-recent-grid .list__item .archive__item-title a,
+.layout--tags .archive .sec-recent-grid .list__item .archive__item-title a,
+.layout--categories .archive .sec-recent-grid .list__item .archive__item-title a {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.layout--archive .archive .sec-recent-grid .list__item .archive__item-excerpt,
+.layout--tags .archive .sec-recent-grid .list__item .archive__item-excerpt,
+.layout--categories .archive .sec-recent-grid .list__item .archive__item-excerpt {
+  flex: 1 !important;
+  margin: 2px 0 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.layout--archive .archive .sec-recent-grid .list__item .archive__item-teaser,
+.layout--tags .archive .sec-recent-grid .list__item .archive__item-teaser,
+.layout--categories .archive .sec-recent-grid .list__item .archive__item-teaser {
+  display: none !important;
+}
+.layout--archive .archive .sec-recent-grid .list__item:hover,
+.layout--tags .archive .sec-recent-grid .list__item:hover,
+.layout--categories .archive .sec-recent-grid .list__item:hover {
+  background: #031000 !important;
+  border-color: #9fef00 !important;
+  box-shadow: 0 0 14px rgba(159,239,0,0.08) !important;
+}
+.layout--archive .archive .sec-recent-grid .list__item:hover .archive__item-title a,
+.layout--tags .archive .sec-recent-grid .list__item:hover .archive__item-title a,
+.layout--categories .archive .sec-recent-grid .list__item:hover .archive__item-title a {
+  color: #ff0000 !important;
+}
+@media (max-width: 900px) {
+  .layout--archive .archive .sec-recent-grid,
+  .layout--tags .archive .sec-recent-grid,
+  .layout--categories .archive .sec-recent-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 560px) {
+  .layout--archive .archive .sec-recent-grid,
+  .layout--tags .archive .sec-recent-grid,
+  .layout--categories .archive .sec-recent-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* ══════════════════════════════════════════════════════
    YOU MAY ALSO ENJOY — bottom widget card style
    3 cols on sub-pages, 4 cols on home. Full-width block.
