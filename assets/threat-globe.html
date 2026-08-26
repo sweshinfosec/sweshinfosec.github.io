@@ -98,12 +98,27 @@
   }
 
   /* embedded site nav — mirrors the real site header's .bo-nav, opens real pages via target=_top.
-     Right-aligned to the header row, vertically centered. */
+     Right-aligned to the header row, pinned to the top; search sits directly below it in the
+     same block. */
   .embedded-nav{
-    display:flex; justify-content:flex-end; min-width:0;
-    position:absolute; right:0; top:50%; transform:translateY(-50%);
+    display:flex; flex-direction:column; align-items:flex-end; gap:8px; min-width:0;
+    position:absolute; right:0; top:0;
   }
   .bo-nav{ list-style:none; margin:0; padding:0; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .embedded-search{ display:flex; align-items:center; gap:6px; }
+  .embedded-search input{
+    width:150px; background:#000; border:1px solid rgba(159,239,0,.3); color:var(--text);
+    font-family:var(--font-mono); font-size:11px; padding:5px 10px; border-radius:4px; outline:none;
+    transition:border-color .15s;
+  }
+  .embedded-search input::placeholder{ color:var(--text-faint); }
+  .embedded-search input:focus{ border-color:var(--green); }
+  .embedded-search button{
+    background:transparent; color:var(--green); border:1px solid rgba(159,239,0,.3); font-size:13px;
+    padding:5px 10px; border-radius:4px; cursor:pointer; line-height:1;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .embedded-search button:hover{ background:var(--red); color:#000; border-color:var(--red); }
   .bo-nav-item{ position:relative; }
   .bo-nav-item > a{
     color:var(--green); background:#000; border:2px solid var(--green); border-radius:4px;
@@ -321,6 +336,10 @@
         </li>
         <li class="bo-nav-item"><a href="/about/" target="_top">About</a></li>
       </ul>
+      <form class="embedded-search" action="/search/" method="get" role="search" target="_top">
+        <input type="search" name="q" autocomplete="off" spellcheck="false" placeholder="search…">
+        <button type="submit">&#128269;</button>
+      </form>
     </nav>
   </header>
 
