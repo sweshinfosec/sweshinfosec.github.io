@@ -1117,6 +1117,26 @@
         }
         var item = seq[lineIdx++];
         var isPrompt = !!item.prompt;
+        var isHit = item.cls === 'hit';
+
+        // for the payoff line, hold on a bare blinking cursor for a beat first —
+        // like the console is "processing" — then reveal the result all at once
+        // instead of typing it out at the normal pace.
+        if (isHit && !reduceMotion){
+          var waitRow = document.createElement('div');
+          waitRow.className = 'ln';
+          waitRow.appendChild(cursorEl);
+          opsEl.appendChild(waitRow);
+          while (opsEl.children.length > 8){ opsEl.removeChild(opsEl.firstChild); }
+          opsEl.scrollTop = opsEl.scrollHeight;
+          setTimeout(function(){
+            if (cursorEl.parentNode) cursorEl.parentNode.removeChild(cursorEl);
+            if (waitRow.parentNode) waitRow.parentNode.removeChild(waitRow);
+            revealLine(item);
+          }, 2000);
+          return;
+        }
+
         var row = document.createElement('div');
         row.className = 'ln' + (item.cls ? ' ' + item.cls : '');
         var textSpan = document.createElement('span');
@@ -1124,28 +1144,38 @@
         opsEl.appendChild(row);
         while (opsEl.children.length > 8){ opsEl.removeChild(opsEl.firstChild); }
 
-        if (item.cls === 'hit'){
-          opsEl.classList.remove('breach');
-          void opsEl.offsetWidth; // restart the flash animation
-          opsEl.classList.add('breach');
-        }
-
         if (reduceMotion){
           textSpan.textContent = item.t;
           opsEl.scrollTop = opsEl.scrollHeight;
-          setTimeout(nextLine, 300);
+          if (isHit){ opsEl.classList.remove('breach'); void opsEl.offsetWidth; opsEl.classList.add('breach'); }
+          setTimeout(nextLine, isHit ? 900 : 300);
           return;
         }
         var ci = 0, txt = item.t;
         if (isPrompt) row.appendChild(cursorEl); // blinking keyboard-entry indicator
         (function typeChar(){
-          if (ci > txt.length){ setTimeout(nextLine, item.cls ? 750 : 120); return; }
+          if (ci > txt.length){ setTimeout(nextLine, 120); return; }
           textSpan.textContent = txt.slice(0, ci);
           ci++;
           opsEl.scrollTop = opsEl.scrollHeight;
           // commands "typed on a keyboard" run slower than tool output streaming past
           setTimeout(typeChar, isPrompt ? (30 + Math.random()*40) : (10 + Math.random()*14));
         })();
+      }
+
+      function revealLine(item){
+        var row = document.createElement('div');
+        row.className = 'ln' + (item.cls ? ' ' + item.cls : '');
+        var textSpan = document.createElement('span');
+        textSpan.textContent = item.t;
+        row.appendChild(textSpan);
+        opsEl.appendChild(row);
+        while (opsEl.children.length > 8){ opsEl.removeChild(opsEl.firstChild); }
+        opsEl.scrollTop = opsEl.scrollHeight;
+        opsEl.classList.remove('breach');
+        void opsEl.offsetWidth; // restart the flash animation
+        opsEl.classList.add('breach');
+        setTimeout(nextLine, 900);
       }
       nextLine();
     }
