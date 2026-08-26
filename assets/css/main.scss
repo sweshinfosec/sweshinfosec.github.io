@@ -37,6 +37,9 @@ body { background: #0d0d0d !important; color: #cccccc; }
 /* ── Remove top padding on archive grid so hero card starts flush ── */
 .layout--home .archive { padding-top: 0 !important; margin-top: 0 !important; }
 
+/* Home layout has no sidebar -- reclaim the reserved right-sidebar padding so home content stretches full width, matching the masthead */
+.layout--home .archive { padding-right: 0 !important; }
+
 /* ── Author sidebar — push content down so it sits in the vertical middle ── */
 .layout--home .sidebar .author__avatar { margin-top: 24px !important; }
 .layout--home .sidebar { padding-top: 28px !important; }
@@ -1124,3 +1127,82 @@ a.bo-flink:hover,
   padding:8px 18px; border-radius:4px; text-decoration:none; margin:10px 0;
 }
 .bmac-btn:hover { background:#ffb74d; color:#000 !important; }
+
+/* ── Scrollbar theming — all scrollbars match dark BlackOps theme ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e1e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9fef00;
+}
+::-webkit-scrollbar-corner {
+  background: #0d0d0d;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e1e1e #0d0d0d;
+}
+
+/* ── Sidebar author pills — prevent horizontal overflow scrollbar ── */
+.author__urls,
+.sidebar .author__content,
+.sidebar__right {
+  overflow-x: hidden !important;
+}
+.page__meta,
+.page__taxonomy {
+  overflow-x: hidden !important;
+}
+
+/* ── Social share buttons — override MM blue with BlackOps theme ── */
+.page__share { border-top: 1px solid #1e1e1e !important; padding-top: 14px !important; }
+.page__share-title {
+  font-family: 'Courier New', monospace !important;
+  font-size: 9px !important;
+  letter-spacing: 2px !important;
+  color: #444 !important;
+  text-transform: uppercase !important;
+}
+
+.btn--twitter,
+.btn--facebook,
+.btn--linkedin {
+  background: #0a0a0a !important;
+  color: #9fef00 !important;
+  border: 1px solid #9fef0044 !important;
+  border-radius: 4px !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 6px 14px !important;
+  transition: background 0.15s, color 0.15s, border-color 0.15s !important;
+  box-shadow: none !important;
+}
+
+.btn--twitter:hover,
+.btn--facebook:hover,
+.btn--linkedin:hover {
+  background: #9fef00 !important;
+  color: #000 !important;
+  border-color: #9fef00 !important;
+}
+
+/* Icons inside share buttons */
+.btn--twitter .fab,
+.btn--facebook .fab,
+.btn--linkedin .fab,
+.btn--twitter .fa,
+.btn--facebook .fa,
+.btn--linkedin .fa {
+  color: inherit !important;
+}
