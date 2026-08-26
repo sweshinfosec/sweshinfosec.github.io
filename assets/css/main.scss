@@ -535,40 +535,35 @@ aside.sidebar__right { display: none !important; }
   letter-spacing: 2px !important;
 }
 /* ══════════════════════════════════════════════════════
-   Category listing pages — CARD GRID view
-   3 cols, matches "You May Also Enjoy" card styling exactly
+   Category listing pages — clean vertical LIST view
+   Override ALL MM float/grid/flex defaults on list items
    ══════════════════════════════════════════════════════ */
 
-/* Archive container becomes a 3-col grid */
+/* Force the archive container to be a plain vertical block */
 .layout--archive .archive,
 .layout--tags .archive,
 .layout--categories .archive {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 12px !important;
+  display: block !important;
   width: 100% !important;
 }
 
-/* Each post becomes a card shell — mirrors .bo-most-visited .bo-card */
+/* Force every post row to be full-width, no card box */
 .layout--archive .archive .list__item,
 .layout--tags .archive .list__item,
 .layout--categories .archive .list__item {
-  display: flex !important;
-  flex-direction: column !important;
+  display: block !important;
   width: 100% !important;
   float: none !important;
-  clear: none !important;
-  padding: 11px 13px 10px !important;
-  margin: 0 !important;
-  border: 1px solid #1e1e1e !important;
-  border-top: 2px solid #9fef00 !important;
-  border-bottom: 1px solid #1e1e1e !important;
-  border-radius: 6px !important;
-  background: #0a0a0a !important;
-  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s !important;
+  clear: both !important;
+  padding: 6px 8px !important;
+  margin: 0 0 2px 0 !important;
+  border: none !important;
+  border-bottom: 1px solid #1a1a1a !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  transition: background 0.13s, box-shadow 0.13s !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
-  height: 100% !important;
 }
 /* Remove any card border/bg from the inner archive__item too; kill default bottom margin */
 .layout--archive .archive .list__item .archive__item,
@@ -579,35 +574,13 @@ aside.sidebar__right { display: none !important; }
   box-shadow: none !important;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
 }
-/* Title — clamp to 2 lines like a card */
-.layout--archive .archive .list__item .archive__item-title,
-.layout--tags .archive .list__item .archive__item-title,
-.layout--categories .archive .list__item .archive__item-title {
-  margin: 0 0 6px !important;
-}
-.layout--archive .archive .list__item .archive__item-title a,
-.layout--tags .archive .list__item .archive__item-title a,
-.layout--categories .archive .list__item .archive__item-title a {
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2 !important;
-  -webkit-box-orient: vertical !important;
-  overflow: hidden !important;
-}
-/* Clamp excerpt to 3 lines, hide teaser image, compact meta */
+/* Clamp excerpt/teaser/meta margins so rows stay compact */
 .layout--archive .archive .list__item .archive__item-excerpt,
 .layout--tags .archive .list__item .archive__item-excerpt,
 .layout--categories .archive .list__item .archive__item-excerpt {
-  margin-bottom: 0 !important;
+  margin-bottom: 2px !important;
   margin-top: 2px !important;
-  flex: 1 !important;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 3 !important;
-  -webkit-box-orient: vertical !important;
-  overflow: hidden !important;
 }
 .layout--archive .archive .list__item .archive__item-teaser,
 .layout--tags .archive .list__item .archive__item-teaser,
@@ -621,31 +594,16 @@ aside.sidebar__right { display: none !important; }
   margin-bottom: 2px !important;
 }
 
-/* Hover — same green border-glow + red title as You May Also Enjoy cards */
+/* Hover — green glow, no solid border */
 .layout--archive .archive .list__item:hover,
 .layout--tags .archive .list__item:hover,
 .layout--categories .archive .list__item:hover {
   background: #031000 !important;
-  border-color: #9fef00 !important;
-  box-shadow: 0 0 14px rgba(159,239,0,0.08) !important;
+  box-shadow: 0 0 0 1px #9fef00, 0 0 10px rgba(159,239,0,0.08) !important;
+  border-bottom-color: transparent !important;
 }
 .layout--archive .archive .list__item:hover .archive__item-title a {
   color: #ff0000 !important;
-}
-
-@media (max-width: 900px) {
-  .layout--archive .archive,
-  .layout--tags .archive,
-  .layout--categories .archive {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-@media (max-width: 560px) {
-  .layout--archive .archive,
-  .layout--tags .archive,
-  .layout--categories .archive {
-    grid-template-columns: 1fr !important;
-  }
 }
 
 /* ══════════════════════════════════════════════════════
