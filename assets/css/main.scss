@@ -64,6 +64,10 @@ body { background: #0d0d0d !important; color: #cccccc; }
 /* ── Hide MM's built-in Lunr search toggle (we use our own strip) ── */
 .search__toggle { display: none !important; }
 
+/* Nav buttons bottom-align within the (logo-height) nav row, so they sit flush
+   against the search strip directly below instead of floating centered with a gap */
+.masthead__menu nav { align-items: flex-end !important; }
+
 /* ── Search strip — compact, right-aligned; sits inside .masthead__menu
       so its right edge is flush with the last nav button ── */
 .bo-search-wrap {

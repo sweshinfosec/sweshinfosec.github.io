@@ -298,7 +298,8 @@ window.BO_PAGE = {
     });
   }
 
-  function filterAndSort(posts, filter, excludeUrl) {
+  function filterAndSort(posts, filter, excludeUrl, count) {
+    count = count || 3;
     var primary = posts.filter(function(p) {
       if (p.url === excludeUrl) return false;
       if (!filter || filter.cats === 'all') return true;
@@ -307,7 +308,7 @@ window.BO_PAGE = {
     });
     primary.sort(function(a, b) { return visits(b.url) - visits(a.url); });
 
-    if (filter && filter.fallback && primary.length < 4) {
+    if (filter && filter.fallback && primary.length < count) {
       var used = primary.map(function(p) { return p.url; });
       var extra = posts.filter(function(p) {
         return p.url !== excludeUrl && used.indexOf(p.url) === -1;
@@ -315,7 +316,7 @@ window.BO_PAGE = {
       extra.sort(function(a, b) { return visits(b.url) - visits(a.url); });
       primary = primary.concat(extra);
     }
-    return primary.slice(0, 4);
+    return primary.slice(0, count);
   }
 
   /* ── 4. Render HTML for the widget ── */
@@ -357,7 +358,8 @@ window.BO_PAGE = {
     fetch('/posts.json')
       .then(function(r) { return r.json(); })
       .then(function(allPosts) {
-        var top3 = filterAndSort(allPosts, filter, isPost ? pageUrl : null);
+        var widgetCount = (_path === '/') ? 4 : 3; // home page only gets the wider 4-card layout
+        var top3 = filterAndSort(allPosts, filter, isPost ? pageUrl : null, widgetCount);
         if (!top3.length) return;
         var widget = renderWidget(top3);
 
