@@ -169,14 +169,16 @@
     </div>
 
     <!-- ── Search strip — outside .masthead__menu (avoids overflow:hidden), right-aligned ── -->
-    {% unless page.layout == "home" %}
+    <!-- NOTE: this include is cached (include_cached) by the theme's default.html, and that
+         cache is shared across ALL pages regardless of which page rendered it first, so a
+         per-page Liquid conditional here would be unreliable. Hiding on the home page is
+         done in main.scss via ".layout--home .bo-search-wrap" instead. -->
     <div class="bo-search-wrap">
       <form class="bo-strip-search" action="{{ '/search/' | relative_url }}" method="get" role="search">
         <input class="bo-search-input" type="search" name="q" autocomplete="off" spellcheck="false" placeholder="search…">
         <button class="bo-search-btn" type="submit">&#128269;</button>
       </form>
     </div>
-    {% endunless %}
 
   </div>
 </div>
