@@ -207,6 +207,28 @@ body { background: #0d0d0d !important; color: #cccccc; }
   padding-right: 0 !important;
 }
 
+/* Right rail (Support / Tags / Archive-calendar / Ad) -- third flex child,
+   sibling of .sidebar and .archive in the #main flex row above. */
+.layout--archive #main .bo-right-rail,
+.layout--tags #main .bo-right-rail,
+.layout--categories #main .bo-right-rail,
+.layout--search #main .bo-right-rail {
+  flex: 0 0 240px !important;
+  width: 240px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+  position: sticky !important;
+  top: 2em !important;
+}
+@media (max-width: 1300px) {
+  .layout--archive #main .bo-right-rail,
+  .layout--tags #main .bo-right-rail,
+  .layout--categories #main .bo-right-rail,
+  .layout--search #main .bo-right-rail {
+    display: none !important;
+  }
+}
+
 /* ── Increase overall page width ── */
 /* Only widen the outer containers — never force article/content to 100% width
    because that overlaps the author sidebar in Minimal Mistakes' flex layout */
@@ -1329,4 +1351,193 @@ a.bo-flink:hover,
 .btn--facebook .fa,
 .btn--linkedin .fa {
   color: inherit !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   Right Rail — Support / Tags / Archive Calendar / Ad
+   ══════════════════════════════════════════════════════ */
+
+.bo-rail-widget {
+  background: #0a0a0a;
+  border: 1px solid #1e1e1e;
+  border-radius: 6px;
+  padding: 12px 13px 13px;
+  margin-bottom: 14px;
+}
+.bo-rail-title {
+  color: #9fef00;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #9fef0033;
+  padding-bottom: 6px;
+  margin: 0 0 10px;
+}
+
+/* Support buttons */
+.bo-rail-btn {
+  display: block;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none !important;
+  text-align: center;
+  padding: 7px 8px;
+  border-radius: 4px;
+  margin-bottom: 7px;
+  transition: background .15s, color .15s;
+}
+.bo-rail-btn:last-child { margin-bottom: 0; }
+.bo-rail-coffee { color: #ffb300; border: 1px solid #ffb30044; }
+.bo-rail-coffee:hover { background: #ffb300; color: #000 !important; }
+.bo-rail-patreon { color: #ff424d; border: 1px solid #ff424d44; }
+.bo-rail-patreon:hover { background: #ff424d; color: #000 !important; }
+
+/* Tag cloud */
+.bo-rail-tagcloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.bo-rail-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #9fef00;
+  background: #1f242c;
+  border: 1px solid #9fef0033;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 4px 7px;
+  text-decoration: none !important;
+  letter-spacing: 0.2px;
+  transition: background .13s, color .13s, border-color .13s;
+}
+.bo-rail-tag:hover { background: #ff0000; color: #000; border-color: #ff0000; }
+.bo-rail-tag-count {
+  background: #2a303a;
+  color: #444;
+  font-size: 8px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+.bo-rail-tag:hover .bo-rail-tag-count { background: #aa0000; color: #000; }
+.bo-rail-more {
+  display: block;
+  margin-top: 10px;
+  color: #666;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  text-decoration: none !important;
+}
+.bo-rail-more:hover { color: #ff0000; }
+
+/* Calendar */
+.bo-cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #cccccc;
+  margin-bottom: 8px;
+}
+.bo-cal-month,
+.bo-cal-year {
+  cursor: pointer;
+  font-weight: 700;
+  color: #9fef00;
+  transition: color .13s;
+}
+.bo-cal-month:hover,
+.bo-cal-year:hover { color: #ff0000; }
+.bo-cal-arrow {
+  background: transparent;
+  border: 1px solid #9fef0033;
+  color: #9fef00;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  cursor: pointer;
+  font-size: 13px;
+}
+.bo-cal-arrow:hover { background: #9fef00; color: #000; }
+.bo-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+.bo-cal-dow span {
+  font-family: 'Courier New', monospace;
+  font-size: 8px;
+  color: #444;
+  font-weight: 700;
+  padding-bottom: 4px;
+}
+.bo-cal-day {
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  color: #555;
+  padding: 4px 0;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background .13s, color .13s;
+}
+.bo-cal-day:hover { background: #1f242c; color: #cccccc; }
+.bo-cal-day.bo-cal-has { color: #9fef00; font-weight: 700; box-shadow: inset 0 -2px 0 #9fef00; }
+.bo-cal-day.bo-cal-has:hover { background: #9fef00; color: #000; }
+.bo-cal-day.bo-cal-empty { cursor: default; }
+.bo-cal-day.bo-cal-empty:hover { background: transparent; }
+.bo-cal-results { margin-top: 10px; border-top: 1px solid #1e1e1e; padding-top: 8px; }
+.bo-cal-label {
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  color: #666;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.bo-cal-empty-msg {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: #333;
+  font-style: italic;
+}
+.bo-cal-list { list-style: none; margin: 0; padding: 0; }
+.bo-cal-list li { margin-bottom: 6px; }
+.bo-cal-list a {
+  color: #9fef00;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  text-decoration: none !important;
+  line-height: 1.4;
+}
+.bo-cal-list a:hover { color: #ff0000; }
+
+/* Ad slot */
+.bo-rail-ad { padding-bottom: 10px; }
+.bo-rail-ad-label {
+  font-family: 'Courier New', monospace;
+  font-size: 8px;
+  color: #333;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.bo-rail-ad-slot {
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #1e1e1e;
+  border-radius: 4px;
 }

@@ -1,0 +1,144 @@
+<div class="bo-right-rail">
+
+  <div class="bo-rail-widget bo-rail-support">
+    <div class="bo-rail-title">Support</div>
+    <a class="bo-rail-btn bo-rail-coffee" href="https://buymeacoffee.com/sweshinfosec" target="_blank" rel="noopener">&#9749; Buy Me a Coffee</a>
+    <a class="bo-rail-btn bo-rail-patreon" href="https://www.patreon.com/c/SweshInfoSec" target="_blank" rel="noopener">&#9873; Support on Patreon</a>
+  </div>
+
+  <div class="bo-rail-widget bo-rail-tags">
+    <div class="bo-rail-title">Tags</div>
+    <div class="bo-rail-tagcloud">
+      {% assign tag_str = "" %}
+      {% for tag in site.tags %}
+        {% assign cnt = tag[1] | size | plus: 1000 %}
+        {% assign tag_str = tag_str | append: cnt | append: "|" | append: tag[0] | append: ";;" %}
+      {% endfor %}
+      {% assign tag_arr = tag_str | split: ";;" %}
+      {% assign sorted_tags = tag_arr | sort | reverse %}
+      {% for pair in sorted_tags limit: 14 %}
+        {% assign parts = pair | split: "|" %}
+        {% assign raw_count = parts[0] | plus: 0 %}
+        {% assign real_count = raw_count | minus: 1000 %}
+        {% assign tag_name = parts[1] %}
+        <a href="/tags/#{{ tag_name | slugify }}" class="bo-rail-tag">{{ tag_name }}<span class="bo-rail-tag-count">{{ real_count }}</span></a>
+      {% endfor %}
+    </div>
+    <a href="/tags/" class="bo-rail-more">All tags &rarr;</a>
+  </div>
+
+  <div class="bo-rail-widget bo-rail-calendar">
+    <div class="bo-rail-title">Archive</div>
+    <div id="bo-cal-root" class="bo-cal-root"></div>
+  </div>
+
+  <div class="bo-rail-widget bo-rail-ad">
+    <div class="bo-rail-ad-label">Advertisement</div>
+    <!--
+      Reserved ad slot. Once the AdSense account is approved, replace the
+      contents of .bo-rail-ad-slot below with the <ins class="adsbygoogle">
+      snippet AdSense gives you for this unit (Ads > By ad unit) -- do not
+      hand-write ad markup yourself. The adsbygoogle.js loader script is
+      already present sitewide in _includes/head/custom.html.
+    -->
+    <div class="bo-rail-ad-slot"></div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('bo-cal-root');
+  if (!root) return;
+
+  var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  fetch('/posts.json')
+    .then(function (r) { return r.json(); })
+    .then(function (posts) {
+      var parsed = posts.map(function (p) {
+        var d = new Date(p.date);
+        return { title: p.title, url: p.url, date: p.date, y: d.getFullYear(), m: d.getMonth(), day: d.getDate(), ts: d.getTime() };
+      }).filter(function (p) { return !isNaN(p.ts); });
+
+      var today = new Date();
+      var viewY = today.getFullYear(), viewM = today.getMonth();
+
+      if (parsed.length && !parsed.some(function (p) { return p.y === viewY && p.m === viewM; })) {
+        var latest = parsed.reduce(function (a, b) { return b.ts > a.ts ? b : a; });
+        viewY = latest.y; viewM = latest.m;
+      }
+
+      function showResults(list, label) {
+        var box = root.querySelector('.bo-cal-results');
+        if (!box) return;
+        if (!list.length) {
+          box.innerHTML = '<div class="bo-cal-label">' + label + '</div><div class="bo-cal-empty-msg">No posts on this day.</div>';
+          return;
+        }
+        var sorted = list.slice().sort(function (a, b) { return b.ts - a.ts; });
+        var html = '<div class="bo-cal-label">' + label + ' &middot; ' + list.length + ' post' + (list.length > 1 ? 's' : '') + '</div><ul class="bo-cal-list">';
+        sorted.forEach(function (p) {
+          html += '<li><a href="' + p.url + '">' + p.title + '</a></li>';
+        });
+        html += '</ul>';
+        box.innerHTML = html;
+      }
+
+      function render() {
+        var daysInMonth = new Date(viewY, viewM + 1, 0).getDate();
+        var firstDow = new Date(viewY, viewM, 1).getDay();
+        var byDay = {};
+        parsed.forEach(function (p) {
+          if (p.y === viewY && p.m === viewM) { (byDay[p.day] = byDay[p.day] || []).push(p); }
+        });
+
+        var html = '';
+        html += '<div class="bo-cal-nav">';
+        html += '<button type="button" class="bo-cal-arrow" data-dir="-1" aria-label="Previous month">&#8249;</button>';
+        html += '<span class="bo-cal-month" data-act="month">' + MONTHS[viewM] + '</span> <span class="bo-cal-year" data-act="year">' + viewY + '</span>';
+        html += '<button type="button" class="bo-cal-arrow" data-dir="1" aria-label="Next month">&#8250;</button>';
+        html += '</div>';
+        html += '<div class="bo-cal-grid bo-cal-dow"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>';
+        html += '<div class="bo-cal-grid bo-cal-days">';
+        for (var i = 0; i < firstDow; i++) { html += '<span class="bo-cal-day bo-cal-empty"></span>'; }
+        for (var d = 1; d <= daysInMonth; d++) {
+          html += '<span class="bo-cal-day' + (byDay[d] ? ' bo-cal-has' : '') + '" data-day="' + d + '">' + d + '</span>';
+        }
+        html += '</div>';
+        html += '<div class="bo-cal-results"></div>';
+        root.innerHTML = html;
+
+        root.querySelectorAll('.bo-cal-arrow').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            viewM += parseInt(this.getAttribute('data-dir'), 10);
+            if (viewM < 0) { viewM = 11; viewY--; }
+            if (viewM > 11) { viewM = 0; viewY++; }
+            render();
+          });
+        });
+        var monthLabel = root.querySelector('[data-act="month"]');
+        if (monthLabel) {
+          monthLabel.addEventListener('click', function () {
+            showResults(parsed.filter(function (p) { return p.y === viewY && p.m === viewM; }), MONTHS[viewM] + ' ' + viewY);
+          });
+        }
+        var yearLabel = root.querySelector('[data-act="year"]');
+        if (yearLabel) {
+          yearLabel.addEventListener('click', function () {
+            showResults(parsed.filter(function (p) { return p.y === viewY; }), viewY);
+          });
+        }
+        root.querySelectorAll('.bo-cal-day:not(.bo-cal-empty)').forEach(function (el) {
+          el.addEventListener('click', function () {
+            var day = parseInt(this.getAttribute('data-day'), 10);
+            showResults(byDay[day] || [], MONTHS[viewM] + ' ' + day + ', ' + viewY);
+          });
+        });
+      }
+
+      render();
+    })
+    .catch(function () {});
+})();
+</script>
