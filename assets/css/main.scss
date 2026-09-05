@@ -229,6 +229,59 @@ body { background: #0d0d0d !important; color: #cccccc; }
   }
 }
 
+/* ── Single walkthrough posts: same right rail, added carefully ──
+   MM's native .sidebar__right TOC is already hidden sitewide (the site's
+   own JS relocates the TOC into the left profile sidebar instead), so the
+   300px padding-right that MM's float layout reserves on article.page for
+   that TOC has been dead space -- same bug as the archive pages had, just
+   float-based instead of flex-based. Converting #main to the same flex
+   row used everywhere else reclaims that space for the new rail without
+   touching the (already-hidden) native TOC markup. */
+.layout--single #main {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-start !important;
+  gap: 2em !important;
+  max-width: 100% !important;
+  padding-left: 2em !important;
+  padding-right: 2em !important;
+}
+@media (min-width: 80em) {
+  .layout--single #main {
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+  }
+}
+.layout--single #main .sidebar {
+  flex: 0 0 220px !important;
+  width: 220px !important;
+  min-width: 180px !important;
+  max-width: 220px !important;
+  position: sticky !important;
+  top: 2em !important;
+}
+.layout--single #main article.page {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: 100% !important;
+  padding-right: 0 !important;
+  float: none !important;
+}
+.layout--single #main .bo-right-rail {
+  flex: 0 0 240px !important;
+  width: 240px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+  position: sticky !important;
+  top: 2em !important;
+}
+@media (max-width: 1300px) {
+  .layout--single #main .bo-right-rail {
+    display: none !important;
+  }
+}
+
 /* ── Increase overall page width ── */
 /* Only widen the outer containers — never force article/content to 100% width
    because that overlaps the author sidebar in Minimal Mistakes' flex layout */
