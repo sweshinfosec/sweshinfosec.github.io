@@ -30,5 +30,3 @@ Real-world security assessments run with the BlackOps framework — web apps, mo
 
 <a href="https://buymeacoffee.com/sweshinfosec" class="bmac-btn" target="_blank">☕ Buy Me a Coffee</a>
 
----
-*Generated with BlackOps — [SweshInfoSec](https://sweshinfosec.github.io)*

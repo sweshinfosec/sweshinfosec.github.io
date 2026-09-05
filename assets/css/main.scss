@@ -196,6 +196,17 @@ body { background: #0d0d0d !important; color: #cccccc; }
   max-width: 100% !important;
 }
 
+/* Reclaim MM's reserved native-sidebar padding-right on these pages too --
+   we already lay the sidebar out in the flex row above, so this leftover
+   padding was just dead space on the right edge (same fix already applied
+   to .layout--home .archive above). */
+.layout--archive .archive,
+.layout--tags .archive,
+.layout--categories .archive,
+.layout--search .archive {
+  padding-right: 0 !important;
+}
+
 /* ── Increase overall page width ── */
 /* Only widen the outer containers — never force article/content to 100% width
    because that overlaps the author sidebar in Minimal Mistakes' flex layout */
