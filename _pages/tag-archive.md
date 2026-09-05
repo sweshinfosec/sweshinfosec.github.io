@@ -2,5 +2,5 @@
 layout: tags
 permalink: /tags/
 title: "Tags"
-author_profile: false
+author_profile: true
 ---
