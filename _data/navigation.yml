@@ -16,6 +16,8 @@ main:
             url: /infosec/pentest/cloud/
           - title: "IOT"
             url: /infosec/pentest/iot/
+          - title: "Network / Infra"
+            url: /infosec/pentest/network/
       - title: "Vulnerability Assessment"
         url: /infosec/vulnerability-assessment/
       - title: "Malware Analysis"
@@ -70,6 +72,8 @@ pentest_sidebar:
         url: /infosec/pentest/cloud/
       - title: "IoT"
         url: /infosec/pentest/iot/
+      - title: "Network / Infra"
+        url: /infosec/pentest/network/
 
 # Sidebar — generic post TOC (Phases section is generated dynamically by JS)
 # Works for every post automatically — no changes needed when adding new articles
@@ -84,3 +88,5 @@ post_toc:
         url: /infosec/pentest/cloud/
       - title: "IoT"
         url: /infosec/pentest/iot/
+      - title: "Network / Infra"
+        url: /infosec/pentest/network/

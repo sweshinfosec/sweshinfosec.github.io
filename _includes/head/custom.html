@@ -267,6 +267,7 @@ window.BO_PAGE = {
     '/infosec/pentest/cloud/':             { cats: ['cloud-pentest','cloud','aws','azure','gcp'],               fallback: true  },
     '/infosec/pentest/mobile/':            { cats: ['mobile-pentest','mobile','android','ios'],                  fallback: true  },
     '/infosec/pentest/iot/':               { cats: ['iot-pentest','iot','firmware','embedded'],                  fallback: true  },
+    '/infosec/pentest/network/':           { cats: ['network-pentest','network-infrastructure','infrastructure-pentest','telnet','ssh','smb','ftp'], fallback: true  },
     '/infosec/red-teaming/':               { cats: ['red-teaming','red-team'],                                   fallback: true  },
     '/infosec/vulnerability-assessment/':  { cats: ['vulnerability-assessment','vapt'],                          fallback: true  },
     '/infosec/malware-analysis/':          { cats: ['malware-analysis','malware'],                               fallback: true  },
@@ -278,7 +279,7 @@ window.BO_PAGE = {
 
   /* All infosec categories for "infosec" and "pentest" pages */
   var ALL_INFOSEC = [
-    'web-application-pentest','cloud-pentest','mobile-pentest','iot-pentest',
+    'web-application-pentest','cloud-pentest','mobile-pentest','iot-pentest','network-pentest',
     'red-teaming','vulnerability-assessment','malware-analysis','forensic-investigation',
     'smart-contracts','threat-modeling','risk-assessment','bug-bounty','ctf','walkthroughs'
   ];

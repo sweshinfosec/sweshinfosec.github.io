@@ -23,6 +23,9 @@ title: "Info Sec"
 {% comment %} ── Pentest — IoT ── {% endcomment %}
 {% assign iot_tags = "iot-pentest,iot,firmware,embedded,hardware,uart,jtag,spi,i2c,binwalk,firmwalker,qemu,openocd,nfc,rfid,zigbee,zwave,bluetooth,ble,mqtt,modbus,can-bus,industrial,plc,scada,rtl-sdr,hackrf,radio,wireless,esp32,arduino,raspberry-pi" | split: "," %}
 
+{% comment %} ── Pentest — Network / Infra ── {% endcomment %}
+{% assign network_tags = "network-pentest,network-infrastructure,infrastructure-pentest,internal-pentest,external-pentest,network,infra,telnet,ssh,ftp,smb,smb-relay,snmp,rdp,active-directory,kerberos,ldap,dns-enumeration,dhcp,vlan-hopping,firewall,ids-ips,responder,crackmapexec,netexec,impacket,eternalblue,smbclient,enum4linux,weak-credentials,default-credentials,network-misconfiguration" | split: "," %}
+
 {% comment %} ── Vulnerability Assessment ── {% endcomment %}
 {% assign va_tags = "vulnerability-assessment,vapt,cve,nvd,cvss,nessus,openvas,qualys,vulnerability-management,patch-management,security-scanning,misconfig,misconfiguration,cwe,exposure,network-scan,nmap,nikto,nuclei" | split: "," %}
 
@@ -48,11 +51,12 @@ title: "Info Sec"
 {% assign all_tags = web_tags | concat: cloud_tags | concat: mobile_tags | concat: iot_tags | concat: va_tags | concat: ma_tags | concat: fi_tags | concat: sc_tags | concat: rt_tags | concat: tm_tags | concat: ra_tags %}
 
 {% comment %} ── Sections config ── {% endcomment %}
-{% assign sections = "Pentest — Web Application|Pentest — Cloud|Pentest — Mobile|Pentest — IoT|Vulnerability Assessment|Malware Analysis|Forensic Investigation|Smart Contracts|Red Teaming|Threat Modeling|Risk Assessment" | split: "|" %}
+{% assign sections = "Pentest — Web Application|Pentest — Cloud|Pentest — Mobile|Pentest — IoT|Pentest — Network / Infrastructure|Vulnerability Assessment|Malware Analysis|Forensic Investigation|Smart Contracts|Red Teaming|Threat Modeling|Risk Assessment" | split: "|" %}
 {% assign section_tags_list = web_tags | join: "§" %}
 {% assign section_tags_list = section_tags_list | append: "||" | append: (cloud_tags | join: "§") %}
 {% assign section_tags_list = section_tags_list | append: "||" | append: (mobile_tags | join: "§") %}
 {% assign section_tags_list = section_tags_list | append: "||" | append: (iot_tags | join: "§") %}
+{% assign section_tags_list = section_tags_list | append: "||" | append: (network_tags | join: "§") %}
 {% assign section_tags_list = section_tags_list | append: "||" | append: (va_tags | join: "§") %}
 {% assign section_tags_list = section_tags_list | append: "||" | append: (ma_tags | join: "§") %}
 {% assign section_tags_list = section_tags_list | append: "||" | append: (fi_tags | join: "§") %}

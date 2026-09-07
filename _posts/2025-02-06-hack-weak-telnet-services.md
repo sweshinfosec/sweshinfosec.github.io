@@ -3,7 +3,7 @@ layout: single
 title: "Hack Weak Telnet Services: The Dangerous Reality of Weak Telnet Configurations"
 date: 2025-02-06
 categories: [infosec, pentest]
-tags: [network-pentest, telnet, weak-credentials, misconfiguration, nmap]
+tags: [network-pentest, telnet, weak-credentials, default-credentials]
 author_profile: true
 read_time: true
 show_date: true
