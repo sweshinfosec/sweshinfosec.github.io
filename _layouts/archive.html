@@ -22,7 +22,125 @@ layout: default
       <h1 id="page-title" class="page__title"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>{{ page.title }}</h1>
     {% endunless %}
     {{ content }}
+    <div class="pg-controls" id="pg-controls"></div>
   </div>
 
   {% include right-rail.html %}
 </div>
+
+<script>
+(function () {
+  var PER_PAGE = 8;
+  var archive = document.querySelector(".archive");
+  if (!archive) return;
+
+  var items = Array.prototype.slice.call(archive.querySelectorAll(".pg-item"));
+  if (items.length === 0) return;
+
+  var headers = Array.prototype.slice.call(archive.querySelectorAll("[data-pg-group-hdr]"));
+  var controls = document.getElementById("pg-controls");
+  var totalPages = Math.ceil(items.length / PER_PAGE);
+
+  if (totalPages <= 1) {
+    if (controls) controls.style.display = "none";
+    return;
+  }
+
+  function getPageFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var p = parseInt(params.get("page"), 10);
+    if (!p || p < 1 || isNaN(p)) p = 1;
+    if (p > totalPages) p = totalPages;
+    return p;
+  }
+
+  function setUrl(page, push) {
+    var url = new URL(window.location.href);
+    if (page <= 1) {
+      url.searchParams.delete("page");
+    } else {
+      url.searchParams.set("page", page);
+    }
+    if (push) {
+      window.history.pushState({ pgPage: page }, "", url.toString());
+    } else {
+      window.history.replaceState({ pgPage: page }, "", url.toString());
+    }
+  }
+
+  function renderControls(page) {
+    if (!controls) return;
+    controls.innerHTML = "";
+    controls.style.display = "flex";
+
+    var prev = document.createElement("button");
+    prev.className = "pg-btn pg-prev";
+    prev.type = "button";
+    prev.textContent = "‹ Prev";
+    prev.disabled = page <= 1;
+    prev.addEventListener("click", function () { goTo(page - 1, true); });
+    controls.appendChild(prev);
+
+    var nums = document.createElement("div");
+    nums.className = "pg-pages";
+    for (var i = 1; i <= totalPages; i++) {
+      (function (n) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "pg-num" + (n === page ? " pg-active" : "");
+        btn.textContent = String(n);
+        btn.addEventListener("click", function () { goTo(n, true); });
+        nums.appendChild(btn);
+      })(i);
+    }
+    controls.appendChild(nums);
+
+    var next = document.createElement("button");
+    next.className = "pg-btn pg-next";
+    next.type = "button";
+    next.textContent = "Next ›";
+    next.disabled = page >= totalPages;
+    next.addEventListener("click", function () { goTo(page + 1, true); });
+    controls.appendChild(next);
+  }
+
+  function render(page) {
+    var start = (page - 1) * PER_PAGE;
+    var end = start + PER_PAGE;
+    var visibleGroups = {};
+
+    items.forEach(function (el, i) {
+      var show = i >= start && i < end;
+      el.style.display = show ? "" : "none";
+      if (show) {
+        var g = el.getAttribute("data-pg-group");
+        if (g) visibleGroups[g] = true;
+      }
+    });
+
+    headers.forEach(function (h) {
+      var g = h.getAttribute("data-pg-group-hdr");
+      h.style.display = visibleGroups[g] ? "" : "none";
+    });
+
+    renderControls(page);
+  }
+
+  function goTo(page, scroll) {
+    if (page < 1) page = 1;
+    if (page > totalPages) page = totalPages;
+    setUrl(page, true);
+    render(page);
+    if (scroll) {
+      var top = archive.getBoundingClientRect().top + window.pageYOffset - 90;
+      window.scrollTo({ top: top, behavior: "smooth" });
+    }
+  }
+
+  window.addEventListener("popstate", function () {
+    render(getPageFromUrl());
+  });
+
+  render(getPageFromUrl());
+})();
+</script>

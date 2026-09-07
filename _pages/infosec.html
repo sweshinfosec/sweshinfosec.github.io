@@ -54,6 +54,7 @@ title: "Info Sec"
 {% assign sections = "Pentest — Web Application|Pentest — Cloud|Pentest — Mobile|Pentest — IoT|Pentest — Network / Infrastructure|Vulnerability Assessment|Malware Analysis|Forensic Investigation|Smart Contracts|Red Teaming|Threat Modeling|Risk Assessment" | split: "|" %}
 
 {% comment %} ── Render each section (direct index assignment — Liquid's array-of-arrays-by-string-index does not reliably match, so each section's tag list is assigned explicitly instead) ── {% endcomment %}
+{% assign pg_idx = 0 %}
 {% for section_name in sections %}
   {% assign s_idx = forloop.index0 %}
   {% if s_idx == 0  %}{% assign s_tags = web_tags    %}{% endif %}
@@ -86,8 +87,8 @@ title: "Info Sec"
   {% endfor %}
 
   {% if s_posts.size > 0 %}
-    <div class="sec-section-hdr">// {{ section_name }}</div>
-    {% for post in s_posts %}{% include archive-single.html %}{% endfor %}
+    <div class="sec-section-hdr" data-pg-group-hdr="grp{{ s_idx }}">// {{ section_name }}</div>
+    {% for post in s_posts %}<div class="pg-item" data-pg-group="grp{{ s_idx }}" data-pg="{{ pg_idx }}">{% include archive-single.html %}</div>{% assign pg_idx = pg_idx | plus: 1 %}{% endfor %}
   {% endif %}
 {% endfor %}
 
@@ -133,9 +134,9 @@ title: "Info Sec"
 {% endfor %}
 
 {% if recent_others.size > 0 %}
-  <div class="bo-mv-label sec-recent-label">Recent Posts</div>
+  <div class="bo-mv-label sec-recent-label" data-pg-group-hdr="grp-recent">Recent Posts</div>
   <div class="sec-recent-grid">
-  {% for post in recent_others %}{% include archive-single.html %}{% endfor %}
+  {% for post in recent_others %}<div class="pg-item" data-pg-group="grp-recent" data-pg="{{ pg_idx }}">{% include archive-single.html %}</div>{% assign pg_idx = pg_idx | plus: 1 %}{% endfor %}
   </div>
 {% endif %}
 

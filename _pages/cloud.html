@@ -25,5 +25,5 @@ title: "Cloud Pentest"
 {% if cloud_posts.size == 0 %}
   <p style="color:#555;font-family:'Courier New',monospace;font-size:13px;">No cloud posts yet — check back soon.</p>
 {% else %}
-  {% for post in cloud_posts %}{% include archive-single.html %}{% endfor %}
+  {% for post in cloud_posts %}<div class="pg-item" data-pg="{{ forloop.index0 }}">{% include archive-single.html %}</div>{% endfor %}
 {% endif %}

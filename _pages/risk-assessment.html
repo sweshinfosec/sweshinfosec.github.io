@@ -25,5 +25,5 @@ title: "Risk Assessment"
 {% if ra_posts.size == 0 %}
   <p style="color:#555;font-family:'Courier New',monospace;font-size:13px;">No risk assessment posts yet — check back soon.</p>
 {% else %}
-  {% for post in ra_posts %}{% include archive-single.html %}{% endfor %}
+  {% for post in ra_posts %}<div class="pg-item" data-pg="{{ forloop.index0 }}">{% include archive-single.html %}</div>{% endfor %}
 {% endif %}
