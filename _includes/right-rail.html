@@ -1,5 +1,23 @@
 <div class="bo-right-rail">
 
+  <div class="bo-rail-widget bo-rail-recent">
+    <div class="bo-rail-title">Recent Posts</div>
+    <div class="bo-rail-recent-list">
+      {% assign recent_shown = 0 %}
+      {% for post in site.posts %}
+        {% unless post.categories contains "payloads" or post.url == page.url %}
+          {% if recent_shown < 5 %}
+            <a href="{{ post.url | relative_url }}" class="bo-rail-recent-item">
+              <span class="bo-rail-recent-title">{{ post.title }}</span>
+              <span class="bo-rail-recent-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+            </a>
+            {% assign recent_shown = recent_shown | plus: 1 %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+
   <div class="bo-rail-widget bo-rail-support">
     <div class="bo-rail-title">Support</div>
     <a class="bo-rail-btn bo-rail-coffee" href="https://buymeacoffee.com/sweshinfosec" target="_blank" rel="noopener">&#9749; Buy Me a Coffee</a>
@@ -30,24 +48,6 @@
   <div class="bo-rail-widget bo-rail-calendar">
     <div class="bo-rail-title">Archive</div>
     <div id="bo-cal-root" class="bo-cal-root"></div>
-  </div>
-
-  <div class="bo-rail-widget bo-rail-recent">
-    <div class="bo-rail-title">Recent Posts</div>
-    <div class="bo-rail-recent-list">
-      {% assign recent_shown = 0 %}
-      {% for post in site.posts %}
-        {% unless post.categories contains "payloads" or post.url == page.url %}
-          {% if recent_shown < 5 %}
-            <a href="{{ post.url | relative_url }}" class="bo-rail-recent-item">
-              <span class="bo-rail-recent-title">{{ post.title }}</span>
-              <span class="bo-rail-recent-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-            </a>
-            {% assign recent_shown = recent_shown | plus: 1 %}
-          {% endif %}
-        {% endunless %}
-      {% endfor %}
-    </div>
   </div>
 
   <div class="bo-rail-widget bo-rail-ad">
