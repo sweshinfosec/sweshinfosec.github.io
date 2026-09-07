@@ -52,25 +52,22 @@ title: "Info Sec"
 
 {% comment %} ── Sections config ── {% endcomment %}
 {% assign sections = "Pentest — Web Application|Pentest — Cloud|Pentest — Mobile|Pentest — IoT|Pentest — Network / Infrastructure|Vulnerability Assessment|Malware Analysis|Forensic Investigation|Smart Contracts|Red Teaming|Threat Modeling|Risk Assessment" | split: "|" %}
-{% assign section_tags_list = web_tags | join: "§" %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (cloud_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (mobile_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (iot_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (network_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (va_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (ma_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (fi_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (sc_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (rt_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (tm_tags | join: "§") %}
-{% assign section_tags_list = section_tags_list | append: "||" | append: (ra_tags | join: "§") %}
-{% assign sections_tag_arrays = section_tags_list | split: "||" %}
 
-{% comment %} ── Render each section ── {% endcomment %}
+{% comment %} ── Render each section (direct index assignment — Liquid's array-of-arrays-by-string-index does not reliably match, so each section's tag list is assigned explicitly instead) ── {% endcomment %}
 {% for section_name in sections %}
   {% assign s_idx = forloop.index0 %}
-  {% assign s_tags_str = sections_tag_arrays[s_idx] %}
-  {% assign s_tags = s_tags_str | split: "§" %}
+  {% if s_idx == 0  %}{% assign s_tags = web_tags    %}{% endif %}
+  {% if s_idx == 1  %}{% assign s_tags = cloud_tags  %}{% endif %}
+  {% if s_idx == 2  %}{% assign s_tags = mobile_tags %}{% endif %}
+  {% if s_idx == 3  %}{% assign s_tags = iot_tags    %}{% endif %}
+  {% if s_idx == 4  %}{% assign s_tags = network_tags %}{% endif %}
+  {% if s_idx == 5  %}{% assign s_tags = va_tags      %}{% endif %}
+  {% if s_idx == 6  %}{% assign s_tags = ma_tags      %}{% endif %}
+  {% if s_idx == 7  %}{% assign s_tags = fi_tags      %}{% endif %}
+  {% if s_idx == 8  %}{% assign s_tags = sc_tags      %}{% endif %}
+  {% if s_idx == 9  %}{% assign s_tags = rt_tags      %}{% endif %}
+  {% if s_idx == 10 %}{% assign s_tags = tm_tags      %}{% endif %}
+  {% if s_idx == 11 %}{% assign s_tags = ra_tags      %}{% endif %}
 
   {% assign s_posts = "" | split: "," %}
   {% for post in site.posts %}
@@ -98,8 +95,18 @@ title: "Info Sec"
 {% assign shown_urls = "" %}
 {% for section_name in sections %}
   {% assign s_idx = forloop.index0 %}
-  {% assign s_tags_str = sections_tag_arrays[s_idx] %}
-  {% assign s_tags = s_tags_str | split: "§" %}
+  {% if s_idx == 0  %}{% assign s_tags = web_tags    %}{% endif %}
+  {% if s_idx == 1  %}{% assign s_tags = cloud_tags  %}{% endif %}
+  {% if s_idx == 2  %}{% assign s_tags = mobile_tags %}{% endif %}
+  {% if s_idx == 3  %}{% assign s_tags = iot_tags    %}{% endif %}
+  {% if s_idx == 4  %}{% assign s_tags = network_tags %}{% endif %}
+  {% if s_idx == 5  %}{% assign s_tags = va_tags      %}{% endif %}
+  {% if s_idx == 6  %}{% assign s_tags = ma_tags      %}{% endif %}
+  {% if s_idx == 7  %}{% assign s_tags = fi_tags      %}{% endif %}
+  {% if s_idx == 8  %}{% assign s_tags = sc_tags      %}{% endif %}
+  {% if s_idx == 9  %}{% assign s_tags = rt_tags      %}{% endif %}
+  {% if s_idx == 10 %}{% assign s_tags = tm_tags      %}{% endif %}
+  {% if s_idx == 11 %}{% assign s_tags = ra_tags      %}{% endif %}
   {% for post in site.posts %}
     {% unless post.categories contains "payloads" %}
     {% assign matched = false %}
