@@ -35,10 +35,13 @@ layout: default
   if (!archive) return;
 
   var items = Array.prototype.slice.call(archive.querySelectorAll(".pg-item"));
-  if (items.length === 0) return;
+  var controls = document.getElementById("pg-controls");
+  if (items.length === 0) {
+    if (controls) controls.style.display = "none";
+    return;
+  }
 
   var headers = Array.prototype.slice.call(archive.querySelectorAll("[data-pg-group-hdr]"));
-  var controls = document.getElementById("pg-controls");
   var totalPages = Math.ceil(items.length / PER_PAGE);
 
   if (totalPages <= 1) {
